@@ -76,26 +76,35 @@ public class PlayerBehavior : MonoBehaviour
             }
         };
 
-        UserInput.Actions["Absorb"].started += (context) =>
-        {
-            for (int i = 0; i < Bodies.Count; i++)
-            {
-                var body = Bodies[i];
+        //UserInput.Actions["Absorb"].started += (context) =>
+        //{
+        //    for (int i = 0; i < Bodies.Count; i++)
+        //    {
+        //        var body = Bodies[i];
 
-                if (body.bodyType == RigidbodyType2D.Static) continue;
+        //        if (body.bodyType == RigidbodyType2D.Static) continue;
 
-                mass += body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z);
+        //        mass += body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z);
 
-                Destroy(body.gameObject);
-            }
-        };
+        //        Destroy(body.gameObject);
+        //    }
+        //};
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.attachedRigidbody != null)
         {
-            Bodies.Add(collider.attachedRigidbody);
+            var body = collider.attachedRigidbody;
+
+            Bodies.Add(body);
+
+            if (body.bodyType == RigidbodyType2D.Static) return;
+            if (!body.CompareTag("Mass")) return;
+
+            mass += body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z);
+
+            Destroy(body.gameObject);
         }
     }
     void OnTriggerExit2D(Collider2D collider)
