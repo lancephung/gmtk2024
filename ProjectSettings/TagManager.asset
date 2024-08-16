@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Horizontal
+  - Vertical
+  - ExpandUp
+  - ExpandDown
+  - ExpandLeft
+  - ExpandRight
   layers:
   - Default
   - TransparentFX
