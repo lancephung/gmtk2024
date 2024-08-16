@@ -47,8 +47,13 @@ public class PlayerBehavior : MonoBehaviour
             Vector3 localScale = factor * scale;
             mass = startMass - factor + 1;
 
-            if (obj.CompareTag("Horizontal")) localScale.y = scale.y;
-            if (obj.CompareTag("Vertical")) localScale.x = scale.x;
+            if (obj.CompareTag("Horizontal") || obj.CompareTag("ExpandRight") || obj.CompareTag("ExpandLeft")) localScale.y = scale.y;
+            if (obj.CompareTag("ExpandRight")) obj.position = position + (localScale.x - scale.x) * 0.5f * Vector2.right;
+            if (obj.CompareTag("ExpandLeft")) obj.position = position - (localScale.x - scale.x) * 0.5f * Vector2.right;
+
+            if (obj.CompareTag("Vertical") || obj.CompareTag("ExpandUp") || obj.CompareTag("ExpandDown")) localScale.x = scale.x;
+            if (obj.CompareTag("ExpandUp")) obj.position = position + (localScale.y - scale.y) * 0.5f * Vector2.up;
+            if (obj.CompareTag("ExpandDown")) obj.position = position - (localScale.y - scale.y) * 0.5f * Vector2.up;
             
             obj.localScale = localScale;
             line.SetPositions(new Vector3[]{position, worldMousePos});
