@@ -12,15 +12,12 @@ public class PlayerBehavior : MonoBehaviour
     Coroutine routine;
 
     [SerializeField] LineRenderer line;
-    [SerializeField] LineRenderer line1;
 
     public float mass = 0;
 
     IEnumerator ScaleLoop(Transform obj)
     {
         line.enabled = true;
-        line1.enabled = true;
-
         
         Vector2 worldMousePos = Camera.main.ScreenToWorldPoint(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
         Vector2 position = obj.position;
@@ -59,7 +56,6 @@ public class PlayerBehavior : MonoBehaviour
             line.SetPositions(new Vector3[]{position, worldMousePos});
         }
         line.enabled = false;
-        line1.enabled = false;
     }    
 
     // Start is called before the first frame update
@@ -71,16 +67,11 @@ public class PlayerBehavior : MonoBehaviour
             {
                 StopCoroutine(routine);
             }
-
-            Debug.Log(this);
-            var mousePos = Camera.main.ScreenToWorldPoint(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
-            var difference = mousePos - transform.position;
             
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, difference, Mathf.Infinity);
+            var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null)
             {
-                Debug.Log(hit.collider);
-                line1.SetPositions(new Vector3[]{hit.point, transform.position});
                 StartCoroutine(ScaleLoop(hit.collider.transform));
             }
         };
