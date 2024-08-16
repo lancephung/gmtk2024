@@ -687,7 +687,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bodies: []
   line: {fileID: 1624064649}
-  line1: {fileID: 1149378448}
   mass: 0
 --- !u!1 &519420028
 GameObject:
@@ -1000,7 +999,7 @@ GameObject:
   - component: {fileID: 794558573}
   - component: {fileID: 794558572}
   m_Layer: 0
-  m_Name: Dynamic Sprite (6)
+  m_Name: Expand Down
   m_TagString: ExpandDown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1588,7 +1587,7 @@ GameObject:
   - component: {fileID: 1640673012}
   - component: {fileID: 1640673011}
   m_Layer: 0
-  m_Name: Dynamic Sprite (4)
+  m_Name: Expand Up
   m_TagString: ExpandUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1746,7 +1745,7 @@ GameObject:
   - component: {fileID: 1867533890}
   - component: {fileID: 1867533889}
   m_Layer: 0
-  m_Name: Dynamic Sprite (5)
+  m_Name: Expand Right
   m_TagString: ExpandRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2120,7 +2119,7 @@ GameObject:
   - component: {fileID: 2093784174}
   - component: {fileID: 2093784173}
   m_Layer: 0
-  m_Name: Dynamic Sprite (3)
+  m_Name: Expand Left
   m_TagString: ExpandLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
