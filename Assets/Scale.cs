@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class PlayerBehavior : MonoBehaviour
     [SerializeField] LineRenderer line;
     [SerializeField] LineRenderer line1;
 
-    Dictionary<Transform, (Vector3, Vector3)> sizes = new();
+    public float mass = 0;
 
     IEnumerator ScaleLoop(Transform obj)
     {
@@ -24,30 +26,8 @@ public class PlayerBehavior : MonoBehaviour
         Vector2 position = obj.position;
         float distance = (worldMousePos - position).magnitude;
         Vector3 scale = obj.transform.localScale;
-        
-        Vector3 maxScale;
-        Vector3 minScale;
-        if (!sizes.ContainsKey(obj))
-        {
-            maxScale = obj.transform.localScale * 2;
-            minScale = obj.transform.localScale * 0.5f;
-            if (obj.CompareTag("Horizontal"))
-            {
-                maxScale.y = obj.transform.localScale.y;
-                minScale.y = obj.transform.localScale.y;
-            }
-            if (obj.CompareTag("Vertical"))
-            {
-                maxScale.x = obj.transform.localScale.x;
-                minScale.x = obj.transform.localScale.x;
-            }
-            sizes[obj] = (maxScale, minScale);
-        }
-        else
-        {
-            maxScale = sizes[obj].Item1;
-            minScale = sizes[obj].Item2;
-        }
+
+        float startMass = mass;
 
         while (UserInput.Actions["Attack"].IsPressed())
         {
@@ -55,8 +35,22 @@ public class PlayerBehavior : MonoBehaviour
 
             worldMousePos = Camera.main.ScreenToWorldPoint(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
             
-            obj.localScale = Vector3.Max(Vector3.Min(maxScale, (worldMousePos - position).magnitude / distance * scale), minScale);
+            float factor = (worldMousePos - position).magnitude / distance;
+            if (factor > 1)
+            {
+                factor = Mathf.Min(factor, startMass + 1);
+            }
+            else
+            {
+                factor = Mathf.Max(factor, 1 / (startMass + 1));
+            }
+            Vector3 localScale = factor * scale;
+            mass = startMass - factor + 1;
+
+            if (obj.CompareTag("Horizontal")) localScale.y = scale.y;
+            if (obj.CompareTag("Vertical")) localScale.x = scale.x;
             
+            obj.localScale = localScale;
             line.SetPositions(new Vector3[]{position, worldMousePos});
         }
         line.enabled = false;
@@ -83,6 +77,20 @@ public class PlayerBehavior : MonoBehaviour
                 Debug.Log(hit.collider);
                 line1.SetPositions(new Vector3[]{hit.point, transform.position});
                 StartCoroutine(ScaleLoop(hit.collider.transform));
+            }
+        };
+
+        UserInput.Actions["Absorb"].started += (context) =>
+        {
+            for (int i = 0; i < Bodies.Count; i++)
+            {
+                var body = Bodies[i];
+
+                if (body.bodyType == RigidbodyType2D.Static) continue;
+
+                mass += body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z);
+
+                Destroy(body.gameObject);
             }
         };
     }
