@@ -8,6 +8,7 @@ public class Arrow : MonoBehaviour
     //[SerializeField] private bool isShrink = false;
     BoxCollider2D collider;
     SpriteRenderer sprite;
+    ParticleSystem push;
 
     public Vector2 Direction = Vector2.right;
 
@@ -33,6 +34,7 @@ public class Arrow : MonoBehaviour
         float duration = 0.5f;
         float exponent = 6.0f;
 
+        push?.Play();
         while (progress < 1.0f)
         {
             yield return new WaitForEndOfFrame();
@@ -43,7 +45,9 @@ public class Arrow : MonoBehaviour
             sprite.size = collider.size;
 
             transform.position = Vector3.Lerp(initialPosition, targetPosition, easedProgress);
+            push.transform.position = transform.position;
         }
+        push?.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
         collider.size = targetSize;
         sprite.size = targetSize;
@@ -55,6 +59,7 @@ public class Arrow : MonoBehaviour
     {
         collider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
+        push = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -70,7 +75,6 @@ public class Arrow : MonoBehaviour
             transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
             Vector2 check = collider.size * Direction;
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
-
             if (currentSize != _Size)
             {
                 collider.size += (_Size - currentSize) * Direction;
