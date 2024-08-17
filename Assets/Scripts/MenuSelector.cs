@@ -13,6 +13,7 @@ public class MenuSelector : MonoBehaviour
 {
     public List<RectTransform> options;
     public GameObject icon;
+    public Vector2 goal;
     public int currentIndex = 0;
     public bool active;
     public Color activeColor;
@@ -22,6 +23,8 @@ public class MenuSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
+        goal = new Vector2(iconRectTransform.localPosition.x, 0);
         options = new List<RectTransform>();
         foreach (Transform child in transform)
         {
@@ -34,12 +37,18 @@ public class MenuSelector : MonoBehaviour
         UpdateColors();
 
         InputSystem.actions.FindAction("MenuDown").started += (context) => {
+            if (this == null) { 
+                return;
+            }
             currentIndex += 1;
             currentIndex %= options.Count;
             UpdatePosition();
         };
 
         InputSystem.actions.FindAction("MenuUp").started += (context) => {
+            if (this == null) { 
+                return;
+            }
             if (currentIndex == 0)
             {
                 currentIndex = options.Count - 1;
@@ -77,11 +86,10 @@ public class MenuSelector : MonoBehaviour
             };
             pointerClickEntry.callback.AddListener((data) =>
             {
-                currentIndex = options.IndexOf(option);
-                UpdatePosition();
                 Select();
             });
             eventTrigger.triggers.Add(pointerClickEntry);
+            Debug.Log("a");
         }
     }
 
@@ -89,7 +97,7 @@ public class MenuSelector : MonoBehaviour
     {
         RectTransform option = options[currentIndex];
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
-        iconRectTransform.localPosition = new Vector2(iconRectTransform.localPosition.x, option.localPosition.y - option.rect.size.y / 2);
+        goal = new Vector2(iconRectTransform.localPosition.x, option.localPosition.y - option.rect.size.y / 2);
     }
 
     void Select()
@@ -143,5 +151,6 @@ public class MenuSelector : MonoBehaviour
     void Update()
     {
         UpdateColors();
+        icon.GetComponent<RectTransform>().localPosition = Vector2.Lerp(icon.GetComponent<RectTransform>().localPosition, goal, 0.2f);
     }
 }

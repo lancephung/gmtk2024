@@ -130,6 +130,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MenuESC",
+                    "type": "Button",
+                    "id": "e4b50a86-1a32-47d6-9f30-131596fb2c93",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -603,6 +612,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MenuSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "13b0c08e-5255-4b16-9396-c57c96c976de",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MenuESC",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

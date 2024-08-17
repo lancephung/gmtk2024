@@ -14,8 +14,15 @@ public class Pause : MonoBehaviour
     {
         cg = gameObject.GetComponent<CanvasGroup>();
         InputSystem.actions.FindAction("MenuESC").started += (context) => {
+
+            if (this == null) { 
+                return;
+            }
+
             open = !open;
             menu.active = open;
+
+            Time.timeScale = open ? 0.0f : 1.0f;
         };
     }
 
