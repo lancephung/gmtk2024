@@ -8,8 +8,6 @@ using UnityEngine.InputSystem.Controls;
 
 public class ScaleBehavior : MonoBehaviour
 {
-    public List<Rigidbody2D> Bodies = new();
-
     public int Mass = 0;
     public int AbsorbableMass = 3;
     public int MaxExtraMass = 2;
@@ -40,7 +38,7 @@ public class ScaleBehavior : MonoBehaviour
     void Start()
     {
         _previousFloorY = transform.position.y;
-        _rigidbody = transform.parent.GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         UserInput.Actions["Attack"].started += (context) =>
         {
@@ -71,21 +69,13 @@ public class ScaleBehavior : MonoBehaviour
 
         UserInput.Actions["Absorb"].started += (context) =>
         {
-            var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            //if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && arrow.Size > 1)
-            //{
-            //    Mass += 1;
-            //    arrow.Size -= 1;
-            //    return;
-            //}
-            for (int i = 0; i < Bodies.Count; i++)
-            {
-                Debug.Log("thing");
-                Debug.Log(i);
-                var body = Bodies[i];
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
 
-                if (body.bodyType == RigidbodyType2D.Static) continue;
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                var body = colliders[i].attachedRigidbody;
+
+                if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
 
                 int possibleMass = (int)(body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z));
                 int mass = Mathf.Max(0, AbsorbableMass - Mass);
@@ -102,21 +92,5 @@ public class ScaleBehavior : MonoBehaviour
 
             }
         };
-    }
-
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.attachedRigidbody != null)
-        {
-            Bodies.Add(collider.attachedRigidbody);
-            Debug.Log("gotchu");
-        }
-    }
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.attachedRigidbody != null)
-        {
-            Bodies.Remove(collider.attachedRigidbody);
-        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -16,42 +17,38 @@ public class Arrow : MonoBehaviour
     public int Size { get { return _Size; }
         set
         {
-            if (value == _Size || value < 0) return;
+            if (value == _Size || value <= 0) return;
             StartCoroutine(UpdateSize(value - _Size));
             _Size = value;
         }
     }
 
+    float EasingFunction(float progress)
+    {
+        return -(Mathf.Cos(Mathf.PI * progress) + 1) * 0.5f;
+    }
+
     IEnumerator UpdateSize(int change)
     {
-        Vector2 initialSize = collider.size;
-        Vector2 targetSize = initialSize + new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y)) * change;
-
-        Vector3 initialPosition = transform.position;
-        Vector3 targetPosition = initialPosition + 0.5f * (transform.rotation * (Vector3)Direction) * change;
-
         float progress = 0.0f;
-        float duration = 0.5f;
-        float exponent = 6.0f;
 
-        push?.Play();
+        float duration = 0.7f;
+
+        push.Play();
         while (progress < 1.0f)
         {
             yield return new WaitForEndOfFrame();
-            progress += Time.deltaTime / duration;
-            float easedProgress = 1.0f - Mathf.Pow(1.0f - Mathf.Clamp01(progress), exponent);
-
-            collider.size = Vector2.Lerp(initialSize, targetSize, easedProgress);
+            float deltaTime = Mathf.Min(progress + Time.deltaTime / duration, 1) - progress;
+            float ease = change * (EasingFunction(progress + deltaTime) - EasingFunction(progress));
+            progress += deltaTime;
+            
+            collider.size += ease * new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
             sprite.size = collider.size;
-
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, easedProgress);
-            push.transform.position = transform.position;
+            
+            transform.position += ease * 0.5f * (transform.rotation * (Vector3) Direction);
+            push.transform.localPosition += ease * 0.5f * (transform.rotation * (Vector3) Direction);
         }
-        push?.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-
-        collider.size = targetSize;
-        sprite.size = targetSize;
-        transform.position = targetPosition;
+        push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     // Start is called before the first frame update
@@ -73,12 +70,15 @@ public class Arrow : MonoBehaviour
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
 
             transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
-            Vector2 check = collider.size * Direction;
+            var absolute = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
+            var check = collider.size * absolute;
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
+            // Debug.Log(currentSize);
             if (currentSize != _Size)
             {
-                collider.size += (_Size - currentSize) * Direction;
+                collider.size += (_Size - currentSize) * absolute;
                 transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
+                push.transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
             }
         }
 
