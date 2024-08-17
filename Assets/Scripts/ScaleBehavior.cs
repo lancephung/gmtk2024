@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class ScaleBehavior : MonoBehaviour
 {
-    public int Mass = 0;
+    public static int Mass = 0;
     public int AbsorbableMass = 3;
     public int MaxExtraMass = 2;
 
@@ -37,6 +37,7 @@ public class ScaleBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Mass = 0;
         _previousFloorY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
 
