@@ -68,17 +68,10 @@ public class ScaleBehavior : MonoBehaviour
                 //Debug.Log(body.mass - mass);
                 if (body.mass - mass == 0)
                 {
-                    //Debug.Log("bruh");
-                    Debug.Log(i);
                     Destroy(body.gameObject);
-                    Debug.Log(Bodies);
-                    Bodies.RemoveAt(i);
-                    i--;
-                    //continue;
-                } else
-                {
-                    body.mass -= mass;
+                    continue;
                 }
+                body.mass -= mass;
 
             }
         };
