@@ -83,6 +83,7 @@ public class ScaleBehavior : MonoBehaviour
         if (collider.attachedRigidbody != null)
         {
             Bodies.Add(collider.attachedRigidbody);
+            Debug.Log("gotchu");
         }
     }
     void OnTriggerExit2D(Collider2D collider)
