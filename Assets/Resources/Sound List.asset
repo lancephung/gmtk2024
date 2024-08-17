@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99b79556647d5904bbec5df661bd1d30, type: 3}
+  m_Name: Sound List
+  m_EditorClassIdentifier: 
+  AudioClips:
+  - Name: scrape
+    Clip: {fileID: 8300000, guid: 7105f7363199f5441830eb841779a17d, type: 3}
+    Pitch: 1
+    PitchVariation: 0.2
+    Volume: 1

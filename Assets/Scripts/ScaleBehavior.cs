@@ -45,7 +45,6 @@ public class ScaleBehavior : MonoBehaviour
         {
             if (this == null)
             {
-                Debug.Log("wtf");
                 return;
             }
 
@@ -53,6 +52,7 @@ public class ScaleBehavior : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
             {
+                AudioManager.PlaySound("scrape");
                 Mass -= 1;
 
                 if (!arrow) return;

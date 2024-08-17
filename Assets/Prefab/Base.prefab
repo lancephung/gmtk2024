@@ -47,6 +47,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4399478236679147138}
   - component: {fileID: 3797835252464533305}
+  - component: {fileID: 5427924626368526758}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -79,6 +80,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6421054c06fee2040a2ce02fee3f0784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5427924626368526758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329871748994311771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce5157adf5fa44409a5c88053cca890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7471843992972859142
@@ -170,15 +183,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.040528636
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1.0005323
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9202154
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
