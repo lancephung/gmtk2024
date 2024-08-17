@@ -8,7 +8,7 @@ using UnityEngine.InputSystem.Controls;
 
 public class ScaleBehavior : MonoBehaviour
 {
-    public int Mass = 0;
+    public static int Mass = 0;
     public int AbsorbableMass = 3;
     public int MaxExtraMass = 2;
 
@@ -65,6 +65,7 @@ public class ScaleBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Mass = 0;
         _previousFloorY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -72,7 +73,6 @@ public class ScaleBehavior : MonoBehaviour
         {
             if (this == null)
             {
-                Debug.Log("wtf");
                 return;
             }
 
@@ -80,6 +80,7 @@ public class ScaleBehavior : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
             {
+                AudioManager.PlaySound("scrape");
                 Mass -= 1;
 
                 if (!arrow) return;
