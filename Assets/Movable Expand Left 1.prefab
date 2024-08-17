@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1087072322933264331}
   - component: {fileID: 6831024565115096891}
   m_Layer: 0
-  m_Name: Expand Left
+  m_Name: Movable Expand Left 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
