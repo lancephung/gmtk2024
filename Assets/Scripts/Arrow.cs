@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[ExecuteAlways]
 public class Arrow : MonoBehaviour
 {
     BoxCollider2D collider;
@@ -45,6 +46,26 @@ public class Arrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        #if UNITY_EDITOR
+
+        if (!Application.isPlaying)
+        {
+            Direction.x = Mathf.Clamp(Direction.x, -1, 1);
+            Direction.y = Mathf.Clamp(Direction.y, -1, 1);
+
+            transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
+            Vector2 check = collider.size * Direction;
+            int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
+
+            if (currentSize != _Size)
+            {
+                collider.size += (_Size - currentSize) * Direction;
+                transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
+            }
+        }
+
+        #endif
+
         sprite.size = collider.size;
     }
 }
