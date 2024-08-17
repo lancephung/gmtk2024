@@ -8,9 +8,7 @@ using UnityEngine.InputSystem.Controls;
 public class ScaleBehavior : MonoBehaviour
 {
     public List<Rigidbody2D> Bodies = new();
-
-    [SerializeField] LineRenderer line;
-
+    
     public int Mass = 0;
 
     // Start is called before the first frame update
