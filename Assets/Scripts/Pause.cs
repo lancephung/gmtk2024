@@ -24,6 +24,10 @@ public class Pause : MonoBehaviour
 
             Time.timeScale = open ? 0.0f : 1.0f;
         };
+
+        Time.timeScale = 1;
+        open = false;
+        menu.active = open;
     }
 
     // Update is called once per frame
