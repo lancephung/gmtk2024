@@ -12,26 +12,25 @@ public class ScaleBehavior : MonoBehaviour
     public int Mass = 0;
 
     // Start is called before the first frame update
-    void Start()
+
+    void HandleClick(InputAction.CallbackContext context)
     {
-        UserInput.Actions["Attack"].started += (context) =>
-        {
-            if (this == null) {
-                Debug.Log("wtf");
-                return;
-            }
+        if (this == null) {
+            Debug.Log("wtf");
+            return;
+        }
 
-            var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
-            {
-                Mass -= 1;
-                arrow.Size += 1;
-            }
-        };
-
-        UserInput.Actions["Absorb"].started += (context) =>
+        var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+        if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
         {
+            Mass -= 1;
+            arrow.Size += 1;
+        }
+    }
+
+    void HandleRightClick(InputAction.CallbackContext context)
+    {
             var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && arrow.Size > 1)
@@ -51,7 +50,13 @@ public class ScaleBehavior : MonoBehaviour
 
                 Destroy(body.gameObject);
             }
-        };
+    }
+
+    void Start()
+    {
+        UserInput.Actions["Attack"].started += HandleClick;
+
+        UserInput.Actions["Absorb"].started += HandleRightClick;
     }
 
     void OnTriggerEnter2D(Collider2D collider)
