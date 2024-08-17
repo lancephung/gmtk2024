@@ -3,22 +3,24 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
+    public bool IsShrink = false;
+    //[SerializeField] private bool isShrink = false;
     BoxCollider2D collider;
     SpriteRenderer sprite;
 
     public Vector2 Direction = Vector2.right;
 
-    int _Size = 1;
+    [SerializeField] private int _Size = 1;
     public int Size { get { return _Size; }
         set
         {
-            if (value == _Size || value <= 0) return;
-            StartCoroutine(ChangeSize(value - _Size));
+            if (value == _Size || value < 0) return;
+            StartCoroutine(UpdateSize(value - _Size));
             _Size = value;
         }
     }
 
-    IEnumerator ChangeSize(int change)
+    IEnumerator UpdateSize(int change)
     {
         float progress = 0.0f;
         while (progress < 1.0f)
