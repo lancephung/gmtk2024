@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.Video;
 
 public class ScaleBehavior : MonoBehaviour
 {
@@ -59,6 +60,49 @@ public class ScaleBehavior : MonoBehaviour
         {
             transform.GetComponent<Animator>().SetBool("MassAbove", false);
         }
+
+        Absorb();
+    }
+
+    private void Absorb()
+    {
+        var absorbDistance = .25f;
+
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, absorbDistance);
+
+        bool blocked = false;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
+            {
+                blocked = true;
+                break;
+            }
+
+            var body = hit.collider.attachedRigidbody;
+
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+
+            if (blocked) continue;
+
+            int possibleMass = (int)(body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z));
+            int mass = Mathf.Max(0, AbsorbableMass - Mass);
+            if (mass == 0) continue;
+            AudioManager.PlaySound("absorb");
+
+            mass = Mathf.Min(mass, possibleMass);
+
+
+            Mass += mass;
+
+            if (body.mass - mass == 0)
+            {
+                Destroy(body.gameObject);
+                continue;
+            }
+            body.mass -= mass;
+        }
     }
 
 
@@ -96,39 +140,9 @@ public class ScaleBehavior : MonoBehaviour
             }
         };
 
-        UserInput.Actions["Absorb"].started += (context) =>
-        {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, 1);
-
-            bool blocked = false;
-
-            foreach (RaycastHit2D hit in hits)
-            {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
-                {
-                    blocked = true;
-                    break;
-                }
-
-                var body = hit.collider.attachedRigidbody;
-
-                if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
-
-                if (blocked) continue;
-
-                int possibleMass = (int)(body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z));
-                int mass = Mathf.Max(0, AbsorbableMass - Mass);
-                mass = Mathf.Min(mass, possibleMass);
-
-                Mass += mass;
-
-                if (body.mass - mass == 0)
-                {
-                    Destroy(body.gameObject);
-                    continue;
-                }
-                body.mass -= mass;
-            }
-        };
+        //UserInput.Actions["Absorb"].started += (context) =>
+        //{
+        //    Absorb();
+        //};
     }
 }
