@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 2127800668406456956}
   - component: {fileID: 4922207924229783140}
   m_Layer: 0
-  m_Name: Arrow Right
+  m_Name: Shrink Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4965,7 +4965,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1429670471, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
+  m_Sprite: {fileID: 1704707103, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5010,7 +5010,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0.5, y: 0, z: 0.4375, w: 0}
+    border: {x: 0.4375, y: 0, z: 0.5, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -5060,6 +5060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978a402c3da717e4fbbcc0a5c787999c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsShrink: 0
-  Direction: {x: 1, y: 0}
-  _Size: 1
+  IsShrink: 1
+  Direction: {x: -1, y: 0}
+  _Size: 2
