@@ -21,6 +21,8 @@ public class Pause : MonoBehaviour
 
             open = !open;
             menu.active = open;
+
+            Time.timeScale = open ? 0.0f : 1.0f;
         };
     }
 

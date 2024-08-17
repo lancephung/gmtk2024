@@ -625,17 +625,6 @@
                     "action": "MenuESC",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "48fe7856-a588-4a4b-9e03-9a08277a7c80",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MenuESC",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
