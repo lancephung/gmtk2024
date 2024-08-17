@@ -31,6 +31,34 @@ public class ScaleBehavior : MonoBehaviour
             _previousFloorY = transform.position.y;
 
         }
+
+
+
+        bool found = false;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, 1);
+
+        bool blocked = false;
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
+            {
+                blocked = true;
+                break;
+            }
+
+            var body = hit.collider.attachedRigidbody;
+
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+
+            if (blocked) continue;
+            found = true;
+            transform.GetComponent<Animator>().SetBool("MassAbove", true);
+        }
+        if (!found)
+        {
+            transform.GetComponent<Animator>().SetBool("MassAbove", false);
+        }
     }
 
 
@@ -69,27 +97,36 @@ public class ScaleBehavior : MonoBehaviour
 
         UserInput.Actions["Absorb"].started += (context) =>
         {
-            Collider2D[] colliders = Physics2D.OverlapBoxAll(transform.position, new Vector2(1, 1), 0);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, 1);
 
-            for (int i = 0; i < colliders.Length; i++)
+            bool blocked = false;
+
+            foreach (RaycastHit2D hit in hits)
             {
-                var body = colliders[i].attachedRigidbody;
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
+                {
+                    blocked = true;
+                    break;
+                }
+
+                var body = hit.collider.attachedRigidbody;
 
                 if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+
+                if (blocked) continue;
 
                 int possibleMass = (int)(body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z));
                 int mass = Mathf.Max(0, AbsorbableMass - Mass);
                 mass = Mathf.Min(mass, possibleMass);
-                //Debug.Log(mass);
+
                 Mass += mass;
-                //Debug.Log(body.mass - mass);
+
                 if (body.mass - mass == 0)
                 {
                     Destroy(body.gameObject);
                     continue;
                 }
                 body.mass -= mass;
-
             }
         };
     }
