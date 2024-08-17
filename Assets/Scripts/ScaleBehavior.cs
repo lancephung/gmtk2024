@@ -39,6 +39,7 @@ public class ScaleBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _previousFloorY = transform.position.y;
         _rigidbody = transform.parent.GetComponent<Rigidbody2D>();
 
         UserInput.Actions["Attack"].started += (context) =>
