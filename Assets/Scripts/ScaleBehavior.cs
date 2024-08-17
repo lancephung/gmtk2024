@@ -11,7 +11,7 @@ public class ScaleBehavior : MonoBehaviour
 {
     public static int Mass = 0;
     public int AbsorbableMass = 3;
-    public int MaxExtraMass = 2;
+    public int MaxMass = 5;
 
     private float _previousFloorY = 0;
 
@@ -32,8 +32,6 @@ public class ScaleBehavior : MonoBehaviour
             _previousFloorY = transform.position.y;
 
         }
-
-
 
         bool found = false;
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, 1);
@@ -61,7 +59,38 @@ public class ScaleBehavior : MonoBehaviour
             transform.GetComponent<Animator>().SetBool("MassAbove", false);
         }
 
+        //Debug.Log("Supporting a mass of: " + GetTotalMassSupportedAt(transform.position) + ", Absorbed mass of: " + Mass);
+
+        if (GetTotalMassSupportedAt(transform.position) + Mass > MaxMass)
+        {
+            // Die by being crushed
+            Debug.Log("It's Joever");
+        }
+
         Absorb();
+    }
+
+    private float GetTotalMassSupportedAt(Vector3 position, Collider2D currentCollider = null)
+    {
+        RaycastHit2D[] hits = Physics2D.RaycastAll(position, Vector2.up, 1);
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            // Prevent detecting the same mass more than once
+            if (hit.collider == currentCollider) continue;
+
+            // raycast blocked
+            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast")) return 0;
+            
+            // irrelevant hitbox
+            var body = hit.collider.attachedRigidbody;
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+
+            // mass detected
+            float mass = hit.collider.attachedRigidbody.mass;
+            return mass + GetTotalMassSupportedAt(position + Vector3.up, hit.collider);
+        }
+        return 0;
     }
 
     private void Absorb()
