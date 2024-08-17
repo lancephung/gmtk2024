@@ -8,19 +8,21 @@ using UnityEngine.InputSystem.Controls;
 public class ScaleBehavior : MonoBehaviour
 {
     public List<Rigidbody2D> Bodies = new();
-    
+
     public int Mass = 0;
     public int AbsorbableMass = 3;
     public int MaxExtraMass = 2;
 
     // Start is called before the first frame update
-
-    void HandleClick(InputAction.CallbackContext context)
+    void Start()
     {
-        if (this == null) {
-            Debug.Log("wtf");
-            return;
-        }
+        UserInput.Actions["Attack"].started += (context) =>
+        {
+            if (this == null)
+            {
+                Debug.Log("wtf");
+                return;
+            }
 
             var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
@@ -43,13 +45,6 @@ public class ScaleBehavior : MonoBehaviour
 
         UserInput.Actions["Absorb"].started += (context) =>
         {
-            Mass -= 1;
-            arrow.Size += 1;
-        }
-    }
-
-    void HandleRightClick(InputAction.CallbackContext context)
-    {
             var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             //if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && arrow.Size > 1)
@@ -80,13 +75,7 @@ public class ScaleBehavior : MonoBehaviour
                 body.mass -= mass;
 
             }
-    }
-
-    void Start()
-    {
-        UserInput.Actions["Attack"].started += HandleClick;
-
-        UserInput.Actions["Absorb"].started += HandleRightClick;
+        };
     }
 
     void OnTriggerEnter2D(Collider2D collider)
