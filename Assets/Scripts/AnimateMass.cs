@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Animate : MonoBehaviour
+public class AnimateMass : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Animator animator;
-    public bool dead = false;
+    private Rigidbody2D rb;
+    private Animator animator;
+    public bool IsDead = false;
     // Start is called before the first frame update
     void Start()
     {
-        rb = transform.GetComponent<Rigidbody2D>();
-        animator = transform.GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void Delete()
@@ -23,9 +23,9 @@ public class Animate : MonoBehaviour
     void Update()
     {
         animator.SetFloat("Mass", rb.mass);
-        if (transform.CompareTag("dying") && dead == false)
+        if (transform.CompareTag("dying") && !IsDead)
         {
-            dead = true;
+            IsDead = true;
             animator.SetTrigger("Die");
         }
 
