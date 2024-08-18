@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 2127800668406456956}
   - component: {fileID: 4922207924229783140}
   m_Layer: 0
-  m_Name: Arrow Right
+  m_Name: Expand Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

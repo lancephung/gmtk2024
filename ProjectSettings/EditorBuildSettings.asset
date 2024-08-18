@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scenes/The good ones/Tutorial1.unity
     guid: 3de2ca4ba7aeffa4ab69aa7faa2482ef
   - enabled: 1
-    path: Assets/Scenes/Levels/Level1.unity
+    path: Assets/Scenes/Levels/Level 2.unity
     guid: a40eae90933d16248beefb0e2f2b6473
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d2ef971f397d4694a89075e11cffd00b, type: 3}

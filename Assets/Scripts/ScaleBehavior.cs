@@ -29,6 +29,7 @@ public class ScaleBehavior : MonoBehaviour
         {
             if (_previousFloorY - transform.position.y > Mass + 1)
             {
+                // immediately die
                 return;
             }
             _previousFloorY = transform.position.y;
