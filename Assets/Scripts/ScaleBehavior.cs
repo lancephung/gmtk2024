@@ -16,7 +16,8 @@ public class ScaleBehavior : MonoBehaviour
     float _previousFloorY = 0;
 
     Rigidbody2D _rigidbody;
-    BoxCollider2D Collider;
+    BoxCollider2D boxCollider;
+    CapsuleCollider2D capsuleCollider;
     bool down = false;
 
     Animator animator;
@@ -29,7 +30,8 @@ public class ScaleBehavior : MonoBehaviour
         HeldMass = 0;
         _previousFloorY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
-        Collider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         animator = GetComponent<Animator>();
 
         InputSystem.actions.FindAction("Attack").started += (context) =>
@@ -59,24 +61,8 @@ public class ScaleBehavior : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // CHANGE LATER
-        // Fixed?
-        if (_rigidbody.velocity.y == 0)
-        {
-            var fallDistance = Mathf.Round(_previousFloorY - transform.position.y);
-            if (fallDistance > Mass + 1)
-            {
-                Debug.Log("Fell "  + (_previousFloorY - transform.position.y).ToString("F2"));
-                // immediately die
-                Die();
-                return;
-            }
-            _previousFloorY = transform.position.y;
-
-        }
-
         //Debug.Log("Supporting a mass of: " + GetTotalMassSupportedAt(transform.position) + ", Absorbed mass of: " + Mass);
-        int mass_ontop = GetSupportedMass(Collider);
+        int mass_ontop = GetSupportedMass(boxCollider);
         if (mass_ontop + Mass > MaxMass)
         {
             // Die by being crushed
@@ -159,12 +145,46 @@ public class ScaleBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    void OnTriggerEnter2D(Collider2D collider)
     {
         // Trigger by the small circle collider trigger between the other two colliders on the player prefab
-        if (collision.isTrigger) return;
+        if (collider.isTrigger) return;
         Debug.Log("crushed to death");
-        Time.timeScale = 0;
         Die();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
+        bool check = false;
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            var contact = collision.GetContact(i);
+
+            var normal = contact.normal;
+            // if (collision.collider != capsuleCollider) normal *= -1;
+
+            // Debug.Log((collision.otherCollider == capsuleCollider) + " " + normal);
+            if (normal.y > 0.5f)
+            {
+                check = true;
+                break;
+            }
+        }
+
+        if (!check) return;
+
+        var fallDistance = Mathf.Round(_previousFloorY - transform.position.y);
+
+        Debug.Log("Fell "  + fallDistance.ToString("F2"));
+        if (fallDistance > Mass + 1)
+        {
+            // immediately die
+            Die();
+            return;
+        }
+
+        _previousFloorY = transform.position.y;
     }
 }
