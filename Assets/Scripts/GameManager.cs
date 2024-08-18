@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public static int level;
     public static int highest_level;
     public static bool hasSave;
-  
 
     private void Awake()
     {

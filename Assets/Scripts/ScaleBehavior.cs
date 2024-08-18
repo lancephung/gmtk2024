@@ -16,6 +16,7 @@ public class ScaleBehavior : MonoBehaviour
     private float _previousFloorY = 0;
 
     private Rigidbody2D _rigidbody;
+    private bool down = false;
 
     private void FixedUpdate()
     {
@@ -33,41 +34,20 @@ public class ScaleBehavior : MonoBehaviour
 
         }
 
-        bool found = false;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, 1);
-
-        bool blocked = false;
-
-        foreach (RaycastHit2D hit in hits)
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
-            {
-                blocked = true;
-                break;
-            }
-
-            var body = hit.collider.attachedRigidbody;
-
-            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
-
-            if (blocked) continue;
-            found = true;
-            transform.GetComponent<Animator>().SetBool("MassAbove", true);
-        }
-        if (!found)
-        {
-            transform.GetComponent<Animator>().SetBool("MassAbove", false);
-        }
-
         //Debug.Log("Supporting a mass of: " + GetTotalMassSupportedAt(transform.position) + ", Absorbed mass of: " + Mass);
-
-        if (GetTotalMassSupportedAt(transform.position) + Mass > MaxMass)
+        float mass_ontop = GetTotalMassSupportedAt(transform.position);
+        if (mass_ontop + Mass > MaxMass)
         {
             // Die by being crushed
             Debug.Log("It's Joever");
         }
+        if (mass_ontop > 0 && !down)
+        {
+            transform.GetComponent<Animator>().SetTrigger("MassLanded");
+            down = true;
+        }
 
-        Absorb();
+
     }
 
     private float GetTotalMassSupportedAt(Vector3 position, Collider2D currentCollider = null)
@@ -84,7 +64,7 @@ public class ScaleBehavior : MonoBehaviour
             
             // irrelevant hitbox
             var body = hit.collider.attachedRigidbody;
-            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static || body.CompareTag("dying")) continue;
 
             // mass detected
             float mass = hit.collider.attachedRigidbody.mass;
@@ -93,7 +73,7 @@ public class ScaleBehavior : MonoBehaviour
         return 0;
     }
 
-    private void Absorb()
+    public void Absorb()
     {
         var absorbDistance = .25f;
 
@@ -124,10 +104,13 @@ public class ScaleBehavior : MonoBehaviour
 
 
             Mass += mass;
-
+            transform.GetComponent<Animator>().SetTrigger("Absorb");
+            body.tag = "dying";
+            down = false;
             if (body.mass - mass == 0)
             {
-                Destroy(body.gameObject);
+                //body.GetComponent<Animator>().SetTrigger("Die");
+                //Destroy(body.gameObject);
                 continue;
             }
             body.mass -= mass;
@@ -169,9 +152,9 @@ public class ScaleBehavior : MonoBehaviour
             }
         };
 
-        //UserInput.Actions["Absorb"].started += (context) =>
-        //{
-        //    Absorb();
-        //};
+        UserInput.Actions["Absorb"].started += (context) =>
+        {
+            Absorb();
+        };
     }
 }

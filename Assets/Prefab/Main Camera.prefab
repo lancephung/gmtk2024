@@ -63,9 +63,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.0067114094
+    y: 0.0057670125
     width: 1
-    height: 0.9862043
+    height: 0.9880815
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
-  m_StopNaN: 0
+  m_StopNaN: 1
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1

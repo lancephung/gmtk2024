@@ -19,12 +19,13 @@ public class MenuSelector : MonoBehaviour
     public Color activeColor;
     public Color inactiveColor;
     public Color lockedColor;
+    public float x;
 
     // Start is called before the first frame update
     void Start()
     {
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
-        goal = new Vector2(iconRectTransform.localPosition.x, 0);
+        x = iconRectTransform.localPosition.x;
         options = new List<RectTransform>();
         foreach (Transform child in transform)
         {
@@ -89,7 +90,6 @@ public class MenuSelector : MonoBehaviour
                 Select();
             });
             eventTrigger.triggers.Add(pointerClickEntry);
-            Debug.Log("a");
         }
     }
 
@@ -97,7 +97,7 @@ public class MenuSelector : MonoBehaviour
     {
         RectTransform option = options[currentIndex];
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
-        goal = new Vector2(iconRectTransform.localPosition.x, option.localPosition.y - option.rect.size.y / 2);
+        goal = new Vector2(x, option.localPosition.y - option.rect.size.y / 2);
     }
 
     void Select()
@@ -106,10 +106,37 @@ public class MenuSelector : MonoBehaviour
         {
             return;
         }
+        Debug.Log(options[currentIndex].name);
+        Debug.Log(transform.parent.name);
 
         if (options[currentIndex].name == "new game")
         {
+            if (!GameManager.hasSave)
+            {
+                GameManager.hasSave = true;
+                GameManager.level = 1;
+                GameManager.highest_level = 1;
+            }
             SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+        }
+
+        if (options[currentIndex].name == "continue")
+        {
+            if (!GameManager.hasSave)
+            {
+                return;
+            }
+
+            SceneManager.LoadScene("Level" + GameManager.level.ToString(), LoadSceneMode.Single);
+        }
+
+        if (options[currentIndex].name == "level select")
+        {
+            this.active = false;
+            transform.parent.parent.GetComponentInChildren<CanvasGroup>().alpha = 0.0f;
+            GameObject menu = GameObject.Find("level select");
+            menu.GetComponent<CanvasGroup>().alpha = 1;
+            menu.GetComponentInChildren<MenuSelector>().active = true;
         }
 
         if (options[currentIndex].name == "resume")
@@ -141,9 +168,13 @@ public class MenuSelector : MonoBehaviour
                 option.GetComponent<TMP_Text>().color = inactiveColor;
             }
 
-            if (option.name == "continue" && !GameManager.hasSave || option.name == "level select" && !GameManager.hasSave)
+            if (option.name == "continue" && !GameManager.hasSave)
             {
                 option.GetComponent<TMP_Text>().color = lockedColor;
+            }
+            else if (option.name == "continue" && GameManager.hasSave)
+            {
+                option.GetComponent<TMP_Text>().text = "continue | level " + GameManager.level.ToString();
             }
         }
     }
@@ -151,6 +182,9 @@ public class MenuSelector : MonoBehaviour
     void Update()
     {
         UpdateColors();
-        icon.GetComponent<RectTransform>().localPosition = Vector2.Lerp(icon.GetComponent<RectTransform>().localPosition, goal, 0.2f);
+        if (goal != Vector2.zero)
+        {
+            icon.GetComponent<RectTransform>().localPosition = Vector2.Lerp(icon.GetComponent<RectTransform>().localPosition, goal, 0.2f);
+        }
     }
 }
