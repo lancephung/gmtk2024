@@ -570,7 +570,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.18263239}
+  m_Size: {x: 0.95, y: 0.18263239}
   m_EdgeRadius: 0
 --- !u!50 &4024193080268100821
 Rigidbody2D:
@@ -611,7 +611,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0a3c0d4616aa24bbf7dbeefd6cd2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AbsorbableMass: 3
 --- !u!95 &7975835506803841130
 Animator:
   serializedVersion: 5
@@ -665,6 +664,6 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.000000058485796, y: -0.49061447}
-  m_Size: {x: 1.0000007, y: 0.023941044}
+  m_Offset: {x: 0, y: -0.49}
+  m_Size: {x: 0.95, y: 0.02}
   m_Direction: 1
