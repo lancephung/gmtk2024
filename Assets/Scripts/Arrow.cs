@@ -17,6 +17,7 @@ public class Arrow : MonoBehaviour
         set
         {
             if (value == _Size || value <= 0) return;
+            if (this == null) return;
             StartCoroutine(UpdateSize(value - _Size));
             _Size = value;
         }
@@ -49,6 +50,7 @@ public class Arrow : MonoBehaviour
         while (progress < 1.0f)
         {
             yield return new WaitForEndOfFrame();
+            if (this == null) yield break;
             float deltaTime = Mathf.Min(progress + Time.deltaTime / duration, 1) - progress;
             float ease = change * (EasingFunction(progress + deltaTime) - EasingFunction(progress));
             progress += deltaTime;

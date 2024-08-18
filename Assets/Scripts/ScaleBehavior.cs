@@ -1,9 +1,11 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class ScaleBehavior : MonoBehaviour
 {
@@ -79,6 +81,19 @@ public class ScaleBehavior : MonoBehaviour
 
         Absorb();
 
+        if (crushers.Count == 0)
+        {
+            crushTime = 0;
+        }
+        else
+        {
+            if (crushTime > 0.2f)
+            {
+                Debug.Log("crushed to death");
+                Die();
+            }
+            crushTime += Time.fixedDeltaTime;
+        }
     }
 
 
@@ -149,13 +164,20 @@ public class ScaleBehavior : MonoBehaviour
         }
     }
 
+    List<Collider2D> crushers = new();
+    float crushTime = 0;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         // Trigger by the small circle collider trigger between the other two colliders on the player prefab
         if (collider.isTrigger) return;
-        Debug.Log("crushed to death");
-        Die();
+        crushers.Add(collider);
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        crushers.Remove(collider);
+        // Debug.Log("crushed to death");
+        // Die();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -189,6 +211,30 @@ public class ScaleBehavior : MonoBehaviour
             return;
         }
 
+        _previousFloorY = transform.position.y;
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
+        bool check = false;
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            var contact = collision.GetContact(i);
+
+            var normal = contact.normal;
+            // if (collision.collider != capsuleCollider) normal *= -1;
+
+            // Debug.Log((collision.otherCollider == capsuleCollider) + " " + normal);
+            if (normal.y > 0.5f)
+            {
+                check = true;
+                break;
+            }
+        }
+
+        if (!check) return;
+        
         _previousFloorY = transform.position.y;
     }
 }
