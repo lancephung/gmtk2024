@@ -881,15 +881,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.6704805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.8635779
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.85303843
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
@@ -906,6 +906,18 @@ PrefabInstance:
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197422628476999270, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.1403546
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197422628476999270, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.57626843
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197422628476999270, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.04504
       objectReference: {fileID: 0}
     - target: {fileID: 7278367161137909382, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
@@ -978,6 +990,10 @@ PrefabInstance:
     - target: {fileID: 9065045485551825620, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9152933473368501634, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: Offset.y
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

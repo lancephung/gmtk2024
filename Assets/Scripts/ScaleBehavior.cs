@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 public class ScaleBehavior : MonoBehaviour
 {
     public static int Mass = 0;
-    public int AbsorbableMass = 3;
+    public static int AbsorbableMass = 3;
     public static int MaxMass = 5;
+
+    public static int HeldMass = 0;
 
     float _previousFloorY = 0;
 
@@ -16,6 +18,43 @@ public class ScaleBehavior : MonoBehaviour
     bool down = false;
 
     Animator animator;
+    
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Mass = 0;
+        HeldMass = 0;
+        _previousFloorY = transform.position.y;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
+
+        InputSystem.actions.FindAction("Attack").started += (context) =>
+        {
+            var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+            if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
+            {
+                AudioManager.PlaySound("scrape");
+                Mass -= 1;
+
+                if (arrow.IsShrink)
+                {
+                    arrow.Size -= 1;
+                }
+                else
+                {
+                    arrow.Size += 1;
+                }
+            }
+        };
+
+        //InputSystem.actions.FindAction("Absorb").started += (context) =>
+        //{
+        //    Absorb();
+        //};
+    }
 
     void Die()
     {
@@ -45,6 +84,7 @@ public class ScaleBehavior : MonoBehaviour
         }
 
         down = mass_ontop > 0;
+        HeldMass = mass_ontop;
         animator.SetBool("Down", down);
 
         Absorb();
@@ -58,7 +98,7 @@ public class ScaleBehavior : MonoBehaviour
 
         int total = 0;
         Rigidbody2D body = collider.attachedRigidbody;
-        if (body == null || check >= 10) return 0;
+        if (body == null || check >= 10 || body.CompareTag("dying") || body.bodyType == RigidbodyType2D.Static || body.isKinematic || !body.simulated) return 0;
         if (body != _rigidbody && !bodies.Contains(body)) 
         {
             total += (int) body.mass;
@@ -77,7 +117,7 @@ public class ScaleBehavior : MonoBehaviour
 
             var otherCollider = contact.collider == collider ? contact.otherCollider : contact.collider;
 
-            if (normal.y < 0.1f || colliders.Contains(otherCollider) || body.CompareTag("dying")) continue;
+            if (normal.y < 0.1f || colliders.Contains(otherCollider)) continue;
 
             total += GetSupportedMass(otherCollider, check + 1,bodies);
         }
@@ -117,40 +157,5 @@ public class ScaleBehavior : MonoBehaviour
             }
             body.mass -= mass;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Mass = 0;
-        _previousFloorY = transform.position.y;
-        _rigidbody = GetComponent<Rigidbody2D>();
-        Collider = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
-
-        InputSystem.actions.FindAction("Attack").started += (context) =>
-        {
-            var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
-            {
-                AudioManager.PlaySound("scrape");
-                Mass -= 1;
-
-                if (arrow.IsShrink)
-                {
-                    arrow.Size -= 1;
-                }
-                else
-                {
-                    arrow.Size += 1;
-                }
-            }
-        };
-
-        //InputSystem.actions.FindAction("Absorb").started += (context) =>
-        //{
-        //    Absorb();
-        //};
     }
 }
