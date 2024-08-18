@@ -18,3 +18,18 @@ MonoBehaviour:
     Pitch: 1
     PitchVariation: 0.2
     Volume: 1
+  - Name: absorb
+    Clip: {fileID: 8300000, guid: 53abb5d05bb06b04a871000a84d27ae9, type: 3}
+    Pitch: 1
+    PitchVariation: 0.2
+    Volume: 1
+  - Name: death
+    Clip: {fileID: 8300000, guid: b93c829b8bd90e54e899e6a23bbe102d, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: win
+    Clip: {fileID: 8300000, guid: eade255db3385094699f8e2578bd418e, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1

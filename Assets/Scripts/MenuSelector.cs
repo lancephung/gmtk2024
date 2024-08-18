@@ -143,11 +143,11 @@ public class MenuSelector : MonoBehaviour
                 GameManager.hasSave = true;
                 GameManager.level = 1;
                 GameManager.highest_level = 1;
-                SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+                SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
                 break;
             case "continue":
                 if (!GameManager.hasSave) return;
-                SceneManager.LoadScene("Level" + GameManager.level.ToString(), LoadSceneMode.Single);
+                SceneManager.LoadScene("Level " + GameManager.level.ToString(), LoadSceneMode.Single);
                 break;
             case "level select":
                 SwitchTo("level screen");
@@ -176,6 +176,7 @@ public class MenuSelector : MonoBehaviour
                 {
                     if (int.Parse(selected.Substring(selected.Length - 2)) <= GameManager.highest_level)
                     {
+                        Debug.Log(selected);
                         SceneManager.LoadScene(selected.Substring(1), LoadSceneMode.Single);
                     }
                 }

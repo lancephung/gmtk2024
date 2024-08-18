@@ -59,6 +59,7 @@ public class ScaleBehavior : MonoBehaviour
     void Die()
     {
         enabled = false;
+        AudioManager.PlaySound("death");
     }
 
     private void FixedUpdate()
