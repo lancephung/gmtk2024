@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -36,17 +37,10 @@ public class ScaleBehavior : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
             {
-                AudioManager.PlaySound("scrape");
-                Mass -= 1;
-
-                if (arrow.IsShrink)
-                {
-                    arrow.Size -= 1;
-                }
-                else
-                {
-                    arrow.Size += 1;
-                }
+                //Debug.Log(hit.rigidbody.mass);
+                if (arrow.IsShrink && arrow.Size <= 1) return;
+                Mass--;
+                arrow.Activate();
             }
         };
 
