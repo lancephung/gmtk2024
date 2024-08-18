@@ -14,6 +14,13 @@ public class MassText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = ScaleBehavior.Mass.ToString() + "+" + ScaleBehavior.HeldMass + "/" + ScaleBehavior.MaxMass;
+        if (ScaleBehavior.HeldMass > 0)
+        {
+            text.text = ScaleBehavior.Mass.ToString() + "+" + ScaleBehavior.HeldMass + " / 3";
+        }
+        else
+        {
+            text.text = ScaleBehavior.Mass.ToString() + " /3";
+        }
     }
 }
