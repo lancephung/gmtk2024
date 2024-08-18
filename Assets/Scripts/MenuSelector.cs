@@ -4,23 +4,27 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuSelector : MonoBehaviour
 {
     public List<RectTransform> options;
     public GameObject icon;
     public Vector2 goal;
-    public int currentIndex = 0;
+    public int currentIndex;
     public bool active;
     public Color activeColor;
     public Color inactiveColor;
     public Color lockedColor;
     public CanvasGroup cg;
     public float x;
+    public bool autoX;
+    public float fresh;
 
     // Start is called before the first frame update
     void Start()
     {
+        fresh = 0;
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
         x = iconRectTransform.localPosition.x;
         options = new List<RectTransform>();
@@ -34,7 +38,7 @@ public class MenuSelector : MonoBehaviour
 
         UpdateColors();
 
-        InputSystem.actions.FindAction("MenuDown").started += (context) => {
+        InputSystem.actions.FindAction("MenuDown").performed += (context) => {
             if (this == null || !active) { 
                 return;
             }
@@ -43,7 +47,7 @@ public class MenuSelector : MonoBehaviour
             UpdatePosition();
         };
 
-        InputSystem.actions.FindAction("MenuUp").started += (context) => {
+        InputSystem.actions.FindAction("MenuUp").performed += (context) => {
             if (this == null || !active) { 
                 return;
             }
@@ -60,6 +64,13 @@ public class MenuSelector : MonoBehaviour
         };
 
         InputSystem.actions.FindAction("MenuSelect").started += (context) => {
+            if (this == null || !active || fresh < 100)
+            {
+                return;
+            } else
+            {
+                Debug.Log("Hit");
+            }
             Select();
         };
 
@@ -73,6 +84,7 @@ public class MenuSelector : MonoBehaviour
             };
             pointerEnterEntry.callback.AddListener((data) =>
             {
+                if (!active) return;
                 currentIndex = options.IndexOf(option);
                 UpdatePosition();
             });
@@ -84,6 +96,7 @@ public class MenuSelector : MonoBehaviour
             };
             pointerClickEntry.callback.AddListener((data) =>
             {
+                if (!active) return;
                 Select();
             });
             eventTrigger.triggers.Add(pointerClickEntry);
@@ -94,105 +107,125 @@ public class MenuSelector : MonoBehaviour
     {
         RectTransform option = options[currentIndex];
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
+
+        if (autoX)
+        {
+            x = option.localPosition.x - 50;
+        }
+
         goal = new Vector2(x, option.localPosition.y - option.rect.size.y / 2);
+
+    }
+
+    public void SwitchTo(string MenuName)
+    {
+        cg.alpha = 0;
+        active = false;
+        MenuSelector menu = GameObject.Find(MenuName).GetComponentInChildren<MenuSelector>();
+        menu.cg.alpha = 1;
+        menu.active = true;
+        menu.fresh = 0;
+        menu.currentIndex = 0;
+        menu.UpdatePosition();
     }
 
     void Select()
     {
-        if (!active)
+        if (!active || fresh < 100)
         {
             return;
         }
-
-        Debug.Log(currentIndex);
-
-        if (options[currentIndex].name == "new game")
+        string selected = options[currentIndex].name;
+        //Debug.Log(currentIndex, this);
+        switch (selected)
         {
-            if (!GameManager.hasSave)
-            {
+            case "new game":
                 GameManager.hasSave = true;
                 GameManager.level = 1;
                 GameManager.highest_level = 1;
-            }
-            SceneManager.LoadScene("Level1", LoadSceneMode.Single);
-        }
-
-        if (options[currentIndex].name == "continue")
-        {
-            if (!GameManager.hasSave)
-            {
+                SceneManager.LoadScene("Level1", LoadSceneMode.Single);
+                break;
+            case "continue":
+                if (!GameManager.hasSave) return;
+                SceneManager.LoadScene("Level" + GameManager.level.ToString(), LoadSceneMode.Single);
+                break;
+            case "level select":
+                SwitchTo("level screen");
                 return;
-            }
+            case "settings":
+                SwitchTo("settings screen");
+                break;
+            case "credits":
+                SwitchTo("credits screen");
+                break;
+            case "main menu":
+                SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+                break;
+            case "back":
+                SwitchTo("main screen");
+                return;
+            case "retry":
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+                break;
+            case "resume":
+                transform.GetComponentInParent<Pause>().open = false;
+                break;
+            default:
 
-            SceneManager.LoadScene("Level" + GameManager.level.ToString(), LoadSceneMode.Single);
+                if (selected.StartsWith("PLevel"))
+                {
+                    if (int.Parse(selected.Substring(selected.Length - 2)) <= GameManager.highest_level)
+                    {
+                        SceneManager.LoadScene(selected.Substring(1), LoadSceneMode.Single);
+                    }
+                }
+                break;
         }
 
-        if (options[currentIndex].name == "level select")
-        {
-            active = false;
-            cg.alpha = 0;
-            
-            GameObject menu = GameObject.Find("level select");
-            menu.GetComponentInChildren<MenuSelector>().active = true;
-            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
-        }
-
-        if (options[currentIndex].name == "credits")
-        {
-            active = false;
-            cg.alpha = 0;
-
-            GameObject menu = GameObject.Find("credits");
-            menu.GetComponentInChildren<MenuSelector>().active = true;
-            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
-        }
-
-        if (options[currentIndex].name == "back")
-        {
-            active = false;
-            cg.alpha = 0;
-
-            GameObject menu = GameObject.Find("Main");
-            menu.GetComponentInChildren<MenuSelector>().active = true;
-            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
-        }
-
-        if (options[currentIndex].name == "resume")
-        {
-            transform.GetComponentInParent<Pause>().open = false;
-        }
-
-        if (options[currentIndex].name == "retry")
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-        }
-
-        if (options[currentIndex].name == "main menu")
-        {
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-        }
     }
 
     void UpdateColors()
     {
+        if (!active) return;
         foreach (RectTransform option in options)
         {
+            if (option.name.StartsWith("PLevel"))
+            {
+                if (int.Parse(option.name.Substring(option.name.Length - 2)) > GameManager.highest_level)
+                {
+                    Debug.Log(option.name);
+                    option.GetComponentInChildren<Image>().color = lockedColor;
+                    continue;
+                }
+            }
+
             if (options[currentIndex].name == option.name)
             {
-                option.GetComponent<TMP_Text>().color = activeColor;
+                if (options[currentIndex].name.StartsWith("PLevel"))
+                {
+                    option.GetComponentInChildren<Image>().color = activeColor;
+                    continue;
+                }
+                option.GetComponentInChildren<TMP_Text>().color = activeColor;
+
             }
             else
             {
-                option.GetComponent<TMP_Text>().color = inactiveColor;
+                if (option.name.StartsWith("PLevel"))
+                {
+                    option.GetComponentInChildren<Image>().color = inactiveColor;
+                    continue;
+                }
+                option.GetComponentInChildren<TMP_Text>().color = inactiveColor;
             }
 
             if (option.name == "continue" && !GameManager.hasSave)
             {
-                option.GetComponent<TMP_Text>().color = lockedColor;
+                option.GetComponentInChildren<TMP_Text>().color = lockedColor;
             }
             else if (option.name == "continue" && GameManager.hasSave)
             {
-                option.GetComponent<TMP_Text>().text = "continue | level " + GameManager.level.ToString();
+                option.GetComponentInChildren<TMP_Text>().text = "continue | level " + GameManager.level.ToString();
             }
         }
     }
@@ -203,6 +236,11 @@ public class MenuSelector : MonoBehaviour
         if (goal != Vector2.zero)
         {
             icon.GetComponent<RectTransform>().localPosition = Vector2.Lerp(icon.GetComponent<RectTransform>().localPosition, goal, 0.2f);
+        }
+
+        if (active && fresh <= 100)
+        {
+            fresh += 1.0f;
         }
     }
 }
