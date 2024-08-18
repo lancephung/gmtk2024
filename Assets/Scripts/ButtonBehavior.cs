@@ -5,40 +5,42 @@ public class ButtonBehavior : MonoBehaviour
 {
     [SerializeField] private List<Arrow> _targets = new();
     private Animator _animator;
-    private bool _isActive = false;
+    private int _touching = 0;
+    //public bool Loggabble = false; // for debug messages
+    public bool IsActive => _touching > 0;
 
     // Start is called before the first frame update
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _touching = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (!Loggabble) return;
+        //Debug.Log("button touching: " + _touching);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_isActive) return;
-
-        if (collision.TryGetComponent(out Rigidbody2D rigidbody))
+        if (!collision.attachedRigidbody) return;
+        if (!IsActive)
         {
-            _isActive = true;
             _animator.SetBool("Press", true);
-            // activate anim
-            foreach (var target in _targets)
-            {
-                // do the thing
-                target.Activate();
+            _targets.ForEach(t => t.Activate());
 
-            }
         }
+        _touching++;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (!collision.attachedRigidbody) return;
+        _touching--;
+        if (IsActive) return;
         _animator.SetBool("Press", false);
+        _targets.ForEach(t => t.Deactivate());
     }
 }
