@@ -162,6 +162,7 @@ public class ScaleBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Trigger by the small circle collider trigger between the other two colliders on the player prefab
+        if (collision.isTrigger) return;
         Debug.Log("crushed to death");
         Die();
     }
