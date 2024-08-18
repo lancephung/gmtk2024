@@ -57,6 +57,10 @@ public class ScaleBehavior : MonoBehaviour
     {
         enabled = false;
         AudioManager.PlaySound("death");
+        foreach (var particle in GetComponentsInChildren<ParticleSystem>())
+        {
+            particle.Play();
+        }
     }
 
     private void FixedUpdate()
