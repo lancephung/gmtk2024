@@ -7,7 +7,7 @@ public class ScaleBehavior : MonoBehaviour
 {
     public static int Mass = 0;
     public int AbsorbableMass = 3;
-    public int MaxMass = 5;
+    public static int MaxMass = 5;
 
     float _previousFloorY = 0;
 
@@ -43,7 +43,6 @@ public class ScaleBehavior : MonoBehaviour
             Die();
         }
 
-        Debug.Log("Mass on top " + mass_ontop);
         down = mass_ontop > 0;
         animator.SetBool("Down", down);
 
