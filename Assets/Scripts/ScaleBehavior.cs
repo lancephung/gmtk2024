@@ -5,6 +5,7 @@ using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class ScaleBehavior : MonoBehaviour
 {
@@ -210,6 +211,30 @@ public class ScaleBehavior : MonoBehaviour
             return;
         }
 
+        _previousFloorY = transform.position.y;
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
+        bool check = false;
+        for (int i = 0; i < collision.contactCount; i++)
+        {
+            var contact = collision.GetContact(i);
+
+            var normal = contact.normal;
+            // if (collision.collider != capsuleCollider) normal *= -1;
+
+            // Debug.Log((collision.otherCollider == capsuleCollider) + " " + normal);
+            if (normal.y > 0.5f)
+            {
+                check = true;
+                break;
+            }
+        }
+
+        if (!check) return;
+        
         _previousFloorY = transform.position.y;
     }
 }
