@@ -46,6 +46,9 @@ public class ScaleBehavior : MonoBehaviour
         Debug.Log("Mass on top " + mass_ontop);
         down = mass_ontop > 0;
         animator.SetBool("Down", down);
+
+        Absorb();
+
     }
 
 
@@ -94,20 +97,22 @@ public class ScaleBehavior : MonoBehaviour
             var body = hit.collider.attachedRigidbody;
 
             if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+            if (body.CompareTag("dying")) continue;
 
             int mass = Mathf.Max(0, AbsorbableMass - Mass);
             if (mass == 0) continue;
             AudioManager.PlaySound("absorb");
 
             mass = Mathf.Min(mass, (int) body.mass);
-
+            //Debug.Log("Mass");
             Mass += mass;
-            body.tag = "dying";
             down = false;
             if (body.mass - mass == 0)
             {
                 //body.GetComponent<Animator>().SetTrigger("Die");
                 //Destroy(body.gameObject);
+                body.tag = "dying";
+
                 continue;
             }
             body.mass -= mass;
@@ -143,9 +148,9 @@ public class ScaleBehavior : MonoBehaviour
             }
         };
 
-        InputSystem.actions.FindAction("Absorb").started += (context) =>
-        {
-            Absorb();
-        };
+        //InputSystem.actions.FindAction("Absorb").started += (context) =>
+        //{
+        //    Absorb();
+        //};
     }
 }
