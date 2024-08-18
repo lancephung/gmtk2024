@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.Video;
 
 public class ScaleBehavior : MonoBehaviour
 {
@@ -13,21 +9,26 @@ public class ScaleBehavior : MonoBehaviour
     public int AbsorbableMass = 3;
     public int MaxMass = 5;
 
-    private float _previousFloorY = 0;
+    float _previousFloorY = 0;
 
-    private Rigidbody2D _rigidbody;
-    private bool down = false;
+    Rigidbody2D _rigidbody;
+    BoxCollider2D Collider;
+    bool down = false;
+
+    Animator animator;
+
+    void Die()
+    {
+        enabled = false;
+    }
 
     private void FixedUpdate()
     {
-        // Detect fall damage
+        // CHANGE LATER
         if (_rigidbody.velocity.y == 0)
         {
             if (_previousFloorY - transform.position.y > Mass + 1)
             {
-                // player fell too much
-                // die
-                Debug.Log("It's Joever");
                 return;
             }
             _previousFloorY = transform.position.y;
@@ -35,76 +36,72 @@ public class ScaleBehavior : MonoBehaviour
         }
 
         //Debug.Log("Supporting a mass of: " + GetTotalMassSupportedAt(transform.position) + ", Absorbed mass of: " + Mass);
-        float mass_ontop = GetTotalMassSupportedAt(transform.position);
+        int mass_ontop = GetSupportedMass(Collider);
         if (mass_ontop + Mass > MaxMass)
         {
             // Die by being crushed
-            Debug.Log("It's Joever");
-        }
-        if (mass_ontop > 0 && !down)
-        {
-            transform.GetComponent<Animator>().SetTrigger("MassLanded");
-            down = true;
+            Die();
         }
 
-
+        Debug.Log("Mass on top " + mass_ontop);
+        down = mass_ontop > 0;
+        animator.SetBool("Down", down);
     }
 
-    private float GetTotalMassSupportedAt(Vector3 position, Collider2D currentCollider = null)
+
+    int GetSupportedMass(Collider2D collider, int check = 0, List<Rigidbody2D> bodies = null)
     {
-        RaycastHit2D[] hits = Physics2D.RaycastAll(position, Vector2.up, 1);
+        bodies ??= new();
 
-        foreach (RaycastHit2D hit in hits)
+        int total = 0;
+        Rigidbody2D body = collider.attachedRigidbody;
+        if (body == null || check >= 10) return 0;
+        if (body != _rigidbody && !bodies.Contains(body)) 
         {
-            // Prevent detecting the same mass more than once
-            if (hit.collider == currentCollider) continue;
+            total += (int) body.mass;
+            bodies.Add(body);
+        } 
 
-            // raycast blocked
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast")) return 0;
-            
-            // irrelevant hitbox
-            var body = hit.collider.attachedRigidbody;
-            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static || body.CompareTag("dying")) continue;
+        ContactPoint2D[] contacts = new ContactPoint2D[8];
+        
+        List<Collider2D> colliders = new();
+        for (int i = 0; i < body.GetContacts(contacts); i++)
+        {
+            var contact = contacts[i];
 
-            // mass detected
-            float mass = hit.collider.attachedRigidbody.mass;
-            return mass + GetTotalMassSupportedAt(position + Vector3.up, hit.collider);
+            var normal = contact.normal;
+            if (contact.collider != collider) normal *= -1;
+
+            var otherCollider = contact.collider == collider ? contact.otherCollider : contact.collider;
+
+            if (normal.y < 0.1f || colliders.Contains(otherCollider) || body.CompareTag("dying")) continue;
+
+            total += GetSupportedMass(otherCollider, check + 1,bodies);
         }
-        return 0;
+
+        return total;
     }
 
-    public void Absorb()
+    void Absorb()
     {
+        if (this == null) return;
         var absorbDistance = .25f;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, absorbDistance);
 
-        bool blocked = false;
-
         foreach (RaycastHit2D hit in hits)
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Block-Raycast"))
-            {
-                blocked = true;
-                break;
-            }
-
             var body = hit.collider.attachedRigidbody;
 
             if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
 
-            if (blocked) continue;
-
-            int possibleMass = (int)(body.mass * Mathf.Max(body.gameObject.transform.localScale.x, body.gameObject.transform.localScale.z));
             int mass = Mathf.Max(0, AbsorbableMass - Mass);
             if (mass == 0) continue;
             AudioManager.PlaySound("absorb");
 
-            mass = Mathf.Min(mass, possibleMass);
-
+            mass = Mathf.Min(mass, (int) body.mass);
 
             Mass += mass;
-            transform.GetComponent<Animator>().SetTrigger("Absorb");
             body.tag = "dying";
             down = false;
             if (body.mass - mass == 0)
@@ -117,29 +114,23 @@ public class ScaleBehavior : MonoBehaviour
         }
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         Mass = 0;
         _previousFloorY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
 
-        UserInput.Actions["Attack"].started += (context) =>
+        InputSystem.actions.FindAction("Attack").started += (context) =>
         {
-            if (this == null)
-            {
-                return;
-            }
-
-            var ray = Camera.main.ScreenPointToRay(UserInput.Actions["MousePosition"].ReadValue<Vector2>());
+            var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
             {
                 AudioManager.PlaySound("scrape");
                 Mass -= 1;
-
-                if (!arrow) return;
 
                 if (arrow.IsShrink)
                 {
@@ -152,7 +143,7 @@ public class ScaleBehavior : MonoBehaviour
             }
         };
 
-        UserInput.Actions["Absorb"].started += (context) =>
+        InputSystem.actions.FindAction("Absorb").started += (context) =>
         {
             Absorb();
         };
