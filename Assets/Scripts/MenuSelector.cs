@@ -19,6 +19,7 @@ public class MenuSelector : MonoBehaviour
     public Color activeColor;
     public Color inactiveColor;
     public Color lockedColor;
+    public CanvasGroup cg;
     public float x;
 
     // Start is called before the first frame update
@@ -38,7 +39,7 @@ public class MenuSelector : MonoBehaviour
         UpdateColors();
 
         InputSystem.actions.FindAction("MenuDown").started += (context) => {
-            if (this == null) { 
+            if (this == null || !active) { 
                 return;
             }
             currentIndex += 1;
@@ -47,7 +48,7 @@ public class MenuSelector : MonoBehaviour
         };
 
         InputSystem.actions.FindAction("MenuUp").started += (context) => {
-            if (this == null) { 
+            if (this == null || !active) { 
                 return;
             }
             if (currentIndex == 0)
@@ -106,8 +107,8 @@ public class MenuSelector : MonoBehaviour
         {
             return;
         }
-        Debug.Log(options[currentIndex].name);
-        Debug.Log(transform.parent.name);
+
+        Debug.Log(currentIndex);
 
         if (options[currentIndex].name == "new game")
         {
@@ -132,11 +133,32 @@ public class MenuSelector : MonoBehaviour
 
         if (options[currentIndex].name == "level select")
         {
-            this.active = false;
-            transform.parent.parent.GetComponentInChildren<CanvasGroup>().alpha = 0.0f;
+            active = false;
+            cg.alpha = 0;
+            
             GameObject menu = GameObject.Find("level select");
-            menu.GetComponent<CanvasGroup>().alpha = 1;
             menu.GetComponentInChildren<MenuSelector>().active = true;
+            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
+        }
+
+        if (options[currentIndex].name == "credits")
+        {
+            active = false;
+            cg.alpha = 0;
+
+            GameObject menu = GameObject.Find("credits");
+            menu.GetComponentInChildren<MenuSelector>().active = true;
+            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
+        }
+
+        if (options[currentIndex].name == "back")
+        {
+            active = false;
+            cg.alpha = 0;
+
+            GameObject menu = GameObject.Find("Main");
+            menu.GetComponentInChildren<MenuSelector>().active = true;
+            menu.GetComponentInChildren<MenuSelector>().cg.alpha = 1;
         }
 
         if (options[currentIndex].name == "resume")
