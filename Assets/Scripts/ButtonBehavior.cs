@@ -26,6 +26,7 @@ public class ButtonBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.attachedRigidbody) return;
+        if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
         if (!IsActive)
         {
             _animator.SetBool("Press", true);
@@ -38,6 +39,7 @@ public class ButtonBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.attachedRigidbody) return;
+        if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
         _touching--;
         if (IsActive) return;
         _animator.SetBool("Press", false);
