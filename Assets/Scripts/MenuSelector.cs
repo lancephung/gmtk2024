@@ -97,6 +97,7 @@ public class MenuSelector : MonoBehaviour
             pointerClickEntry.callback.AddListener((data) =>
             {
                 if (!active) return;
+
                 Select();
             });
             eventTrigger.triggers.Add(pointerClickEntry);
@@ -120,9 +121,11 @@ public class MenuSelector : MonoBehaviour
     public void SwitchTo(string MenuName)
     {
         cg.alpha = 0;
+        cg.GetComponentInParent<Canvas>().sortingOrder = -1;
         active = false;
         MenuSelector menu = GameObject.Find(MenuName).GetComponentInChildren<MenuSelector>();
         menu.cg.alpha = 1;
+        menu.cg.GetComponentInParent<Canvas>().sortingOrder = 10;
         menu.active = true;
         menu.fresh = 0;
         menu.currentIndex = 0;
