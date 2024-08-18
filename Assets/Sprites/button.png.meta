@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 005435fd7d640814884e71b3d44d6a7d
+guid: 06cc4f639a5b42e439a00695f055ee4b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arrow_blocks_0
+      name: button_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 0, z: 7, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2c17e9f42be5f4418ce82a844a083b2
-      internalID: 1429670471
+      spriteID: 29f486b3477e5b7468c3a6a524dde255
+      internalID: 1089321282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrow_blocks_1
+      name: button_1
       rect:
         serializedVersion: 2
         x: 16
@@ -126,20 +126,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 0, z: 8, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f43101cd2066ae439c975e723e26e34
-      internalID: 1704707103
+      spriteID: c4a6b3459cb1aee4b959eefb6731bcb0
+      internalID: -440961036
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrow_blocks_2
+      name: button_2
       rect:
         serializedVersion: 2
         x: 32
@@ -147,20 +147,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 7, y: 0, z: 8, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f7559243346dbd64aa9d977020a80868
-      internalID: -1119458416
+      spriteID: 52118fc5be5373341adc6e9a0aacea63
+      internalID: 1490798183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arrow_blocks_3
+      name: button_3
       rect:
         serializedVersion: 2
         x: 48
@@ -168,98 +168,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 0, z: 7, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0b00f92e85cc7f4184bc0165d248312
-      internalID: 1449111340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrow_blocks_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 8, z: 0, w: 7}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1eb95660d3e287e42a0787c6d1db6326
-      internalID: -696899177
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrow_blocks_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 7, z: 0, w: 8}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f68ce5598fd359746b58c5e3a1715787
-      internalID: -1615323249
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrow_blocks_6
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 8, z: 0, w: 7}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ee9c5bb0c239bd4ca23fd10f55716cc
-      internalID: -1855652440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: arrow_blocks_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 9, z: 0, w: 6}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13e1c1a15fce2a54989639a2b9dc3305
-      internalID: -1842514570
+      spriteID: 03bebb6a688f367488be461a2bb0a058
+      internalID: -761847348
       vertices: []
       indices: 
       edges: []
@@ -275,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      arrow_blocks_0: 1429670471
-      arrow_blocks_1: 1704707103
-      arrow_blocks_2: -1119458416
-      arrow_blocks_3: 1449111340
-      arrow_blocks_4: -696899177
-      arrow_blocks_5: -1615323249
-      arrow_blocks_6: -1855652440
-      arrow_blocks_7: -1842514570
+      button_0: 1089321282
+      button_1: -440961036
+      button_2: 1490798183
+      button_3: -761847348
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
