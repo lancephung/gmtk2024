@@ -22,6 +22,12 @@ public class Arrow : MonoBehaviour
         }
     }
 
+    public void Activate()
+    {
+        AudioManager.PlaySound("scrape");
+        Size += IsShrink ? -1 : 1;
+    }
+
     float EasingFunction(float progress)
     {
         return -(Mathf.Cos(Mathf.PI * progress) + 1) * 0.5f;

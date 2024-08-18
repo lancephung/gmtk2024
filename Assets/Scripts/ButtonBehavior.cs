@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class ButtonBehavior : MonoBehaviour
 {
-    [SerializeField] private List<Rigidbody2D> _targets = new();
+    [SerializeField] private List<Arrow> _targets = new();
     private Animator _animator;
+    private bool _isActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,25 +21,24 @@ public class ButtonBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (_isActive) return;
+
         if (collision.TryGetComponent(out Rigidbody2D rigidbody))
         {
-            //Debug.Log("deez nuts");
-            _animator.ResetTrigger("Release");
-            _animator.SetTrigger("Press");
+            _isActive = true;
+            _animator.SetBool("Press", true);
             // activate anim
             foreach (var target in _targets)
             {
                 // do the thing
+                target.Activate();
 
             }
-
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _animator.ResetTrigger("Press");
-        _animator.SetTrigger("Release");
-
+        _animator.SetBool("Press", false);
     }
 }
