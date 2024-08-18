@@ -157,4 +157,11 @@ public class ScaleBehavior : MonoBehaviour
             body.mass -= mass;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Trigger by the small circle collider trigger between the other two colliders on the player prefab
+        Debug.Log("crushed to death");
+        Die();
+    }
 }
