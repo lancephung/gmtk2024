@@ -8,6 +8,7 @@ public class SoundBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         IEnumerator DestroyEmitter()
         {
             float time = Time.time + 10.0f;

@@ -66,7 +66,7 @@ public class ScaleBehavior : MonoBehaviour
             var fallDistance = Mathf.Round(_previousFloorY - transform.position.y);
             if (fallDistance > Mass + 1)
             {
-                //Debug.Log(_previousFloorY - transform.position.y);
+                Debug.Log("Fell "  + (_previousFloorY - transform.position.y).ToString("F2"));
                 // immediately die
                 Die();
                 return;
@@ -164,6 +164,7 @@ public class ScaleBehavior : MonoBehaviour
         // Trigger by the small circle collider trigger between the other two colliders on the player prefab
         if (collision.isTrigger) return;
         Debug.Log("crushed to death");
+        Time.timeScale = 0;
         Die();
     }
 }
