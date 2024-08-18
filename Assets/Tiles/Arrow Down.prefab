@@ -27,7 +27,11 @@ PrefabInstance:
     - target: {fileID: 3610908183929603851, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 2dc290fd330b3584d8a9b51f5d1c79d5, type: 3}
+      objectReference: {fileID: -1855652440, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
+    - target: {fileID: 3610908183929603851, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3767193391704673733, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -82,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6541789684563193738, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_Name
-      value: Arrow Down Variant
+      value: Arrow Down
       objectReference: {fileID: 0}
     - target: {fileID: 6541789684563193738, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_IsActive
