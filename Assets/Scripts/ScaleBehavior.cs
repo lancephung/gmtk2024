@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -79,6 +80,19 @@ public class ScaleBehavior : MonoBehaviour
 
         Absorb();
 
+        if (crushers.Count == 0)
+        {
+            crushTime = 0;
+        }
+        else
+        {
+            if (crushTime > 0.2f)
+            {
+                Debug.Log("crushed to death");
+                Die();
+            }
+            crushTime += Time.fixedDeltaTime;
+        }
     }
 
 
@@ -149,13 +163,20 @@ public class ScaleBehavior : MonoBehaviour
         }
     }
 
+    List<Collider2D> crushers = new();
+    float crushTime = 0;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         // Trigger by the small circle collider trigger between the other two colliders on the player prefab
         if (collider.isTrigger) return;
-        Debug.Log("crushed to death");
-        Die();
+        crushers.Add(collider);
+    }
+    void OnTriggerExit2D(Collider2D collider)
+    {
+        crushers.Remove(collider);
+        // Debug.Log("crushed to death");
+        // Die();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
