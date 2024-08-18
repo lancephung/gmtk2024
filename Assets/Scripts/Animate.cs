@@ -14,9 +14,9 @@ public class Animate : MonoBehaviour
         animator = transform.GetComponent<Animator>();
     }
 
-    void Delete()
+    public void Delete()
     {
-        GameObject.Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
