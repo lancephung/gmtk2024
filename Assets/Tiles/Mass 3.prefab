@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7124150341119055105}
   - component: {fileID: 6954854770121457162}
   m_Layer: 0
-  m_Name: Mass
+  m_Name: Mass 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 620182476, guid: 3b5564d420e84cf4f80cd0a737ede133, type: 3}
+  m_Sprite: {fileID: 1518322858, guid: 3b5564d420e84cf4f80cd0a737ede133, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
