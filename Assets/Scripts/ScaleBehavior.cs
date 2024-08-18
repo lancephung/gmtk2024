@@ -65,11 +65,15 @@ public class ScaleBehavior : MonoBehaviour
     private void FixedUpdate()
     {
         // CHANGE LATER
+        // Fixed?
         if (_rigidbody.velocity.y == 0)
         {
-            if (_previousFloorY - transform.position.y > Mass + 1)
+            var fallDistance = Mathf.Round(_previousFloorY - transform.position.y);
+            if (fallDistance > Mass + 1)
             {
+                //Debug.Log(_previousFloorY - transform.position.y);
                 // immediately die
+                Die();
                 return;
             }
             _previousFloorY = transform.position.y;
