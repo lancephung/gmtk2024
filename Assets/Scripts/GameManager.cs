@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
     public static GameManager Instance { get; private set; }
     public static int level;
     public static int highest_level;
@@ -18,6 +19,12 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+
+        if (!hasSave)
+        {
+            highest_level = 1;
+        }
+
         DontDestroyOnLoad(gameObject);
     }
 }
