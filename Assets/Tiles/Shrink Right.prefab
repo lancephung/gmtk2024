@@ -173,6 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShrink: 1
+  UseLinear: 1
+  boost: 0
   Direction: {x: -1, y: 0}
   _Size: 2
 --- !u!1 &8240397307551902832
