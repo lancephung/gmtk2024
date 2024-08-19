@@ -13,10 +13,10 @@ public class PhysicsSound : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rb.velocity.y != 0)
-        {
-            AudioManager.PlaySound("thump");
-        }
+        //if (rb.velocity.y != 0 && collision.otherCollider.GetComponentInParent<ScaleBehavior>() != null)
+        //{
+        //    AudioManager.PlaySound("thump");
+        //}
     }
 
     private void Update()
