@@ -46,7 +46,7 @@ public class CursorManager : MonoBehaviour
 
         InputSystem.actions.FindAction("Attack").canceled += (context) =>
         {
-            Debug.Log("stop");
+            //Debug.Log("stop");
             UpdateCursor();
             pause = false;
         };
