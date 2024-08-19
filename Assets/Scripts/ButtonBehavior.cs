@@ -28,6 +28,9 @@ public class ButtonBehavior : MonoBehaviour
     {
         if (!collision.attachedRigidbody) return;
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
+        if (collision.TryGetComponent(out Arrow arrow)) return;
+        Debug.Log("triggered");
+
         if (!IsActive)
         {
             _animator.SetBool("Press", true);
@@ -41,6 +44,7 @@ public class ButtonBehavior : MonoBehaviour
     {
         if (!collision.attachedRigidbody) return;
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
+        if (collision.TryGetComponent(out Arrow arrow)) return;
         _touching--;
         if (IsActive) return;
         IEnumerator Delay()
