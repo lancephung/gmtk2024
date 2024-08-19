@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -41,6 +42,7 @@ public class AudioManager : MonoBehaviour
         audio.clip = descriptor.Clip;
         audio.volume = descriptor.Volume * GameManager.volume;
         audio.pitch = descriptor.Pitch + descriptor.PitchVariation * (Random.value - 0.5f);
+        // audio.outputAudioMixerGroup = Resources.Load<AudioMixer>("Audio Mixer").outputAudioMixerGroup;
 
         audio.Play();
 

@@ -3,7 +3,13 @@ using UnityEngine;
 
 public class SoundBehavior : MonoBehaviour
 {
-    AudioSource sound;
+    AudioSource _sound;
+    public AudioSource Sound { get
+    {
+        if (_sound == null) _sound = GetComponent<AudioSource>();
+        return _sound;
+    }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -12,34 +18,44 @@ public class SoundBehavior : MonoBehaviour
         IEnumerator DestroyEmitter()
         {
             float time = Time.time + 10.0f;
-            yield return new WaitUntil(() => sound.isPlaying || Time.time > time);
-            yield return new WaitUntil(() => !sound.isPlaying && Application.isFocused);
+            yield return new WaitUntil(() => Sound.isPlaying || Time.time > time);
+            yield return new WaitUntil(() => !Sound.isPlaying && Application.isFocused);
 
             if (this != null)
             Destroy(gameObject);
         }
 
-        sound = GetComponent<AudioSource>();
+        _sound = GetComponent<AudioSource>();
 
         StartCoroutine(DestroyEmitter());
     }
 
-
-    IEnumerator Fade(float duration)
-    {
-        float start = sound.volume;
-        while (sound.volume > 0)
-        {
-            yield return new WaitForEndOfFrame();
-            sound.volume -= start / duration * Time.deltaTime;
-        }
-        Destroy(gameObject);
-    }
-
     public void FadeOut(float duration)
     {
-        sound = GetComponent<AudioSource>();
-        Debug.Log(sound);
+        IEnumerator Fade(float duration)
+        {
+            float start = Sound.volume;
+            while (Sound.volume > 0)
+            {
+                yield return new WaitForEndOfFrame();
+                Sound.volume -= start / duration * Time.deltaTime;
+            }
+            Destroy(gameObject);
+        }
+        StartCoroutine(Fade(duration));
+    }
+
+    public void FadeIn(float duration)
+    {
+        IEnumerator Fade(float duration)
+        {
+            while (Sound.volume < 1)
+            {
+                yield return new WaitForEndOfFrame();
+                Sound.volume += Time.deltaTime / duration;
+            }
+        }
+        Sound.volume = 0;
         StartCoroutine(Fade(duration));
     }
 }

@@ -170,7 +170,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.7543171
+      value: 0.49730787
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -178,11 +178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.500157
+      value: 0.43524227
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.49372384
+      value: 0.4092792
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -347,6 +347,14 @@ PrefabInstance:
     - target: {fileID: 2519428286571064455, guid: 9804f728a31cf9849875953f629e8181, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336242371759050298, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841435682008763024, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5866162224517517308, guid: 9804f728a31cf9849875953f629e8181, type: 3}
       propertyPath: m_Pivot.x
