@@ -33,7 +33,7 @@ public class CursorManager : MonoBehaviour
 
         InputSystem.actions.FindAction("Attack").started += (context) =>
         {
-            if (!CanActivateArrow()) return;
+            if (this == null || !CanActivateArrow()) return;
             pause = true;
             ShowCursor(AttackCursor);
             _particleSystem.Emit(15);
