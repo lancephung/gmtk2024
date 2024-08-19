@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,8 +36,10 @@ public class CursorManager : MonoBehaviour
     private void Update()
     {
         //Debug.Log("Is this even working");
-        var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()), Vector2.zero);
-        if (CanAttack && hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow))
+
+        //if (CanAttack) { }
+        //if (CanAttack && hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow))
+        if (CanActivateArrow())
         {
             //Debug.Log("Detection");
             ShowCursor(AttackCursor);
@@ -48,6 +51,14 @@ public class CursorManager : MonoBehaviour
             ShowCursor(DefaultCursor);
             _particleSystem.Stop();
         }
+    }
+
+    public bool CanActivateArrow()
+    {
+        if (!CanAttack) return false;
+        var mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        var hits = Physics2D.RaycastAll(mouseWorldPos, Vector2.zero);
+        return hits.Any(hit => hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow));
     }
 
 }
