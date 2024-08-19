@@ -1369,7 +1369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.003539823
+      value: 0.004518072
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -1377,7 +1377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9927969
+      value: 0.99187446
       objectReference: {fileID: 0}
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1449,7 +1449,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8080758160732395694, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_text
-      value: Level 9
+      value: Level 12
       objectReference: {fileID: 0}
     - target: {fileID: 8080758160732395694, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_fontSize
