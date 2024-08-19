@@ -4985,6 +4985,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4922207924229783140, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
+      propertyPath: UseLinear
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922207924229783140, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
       propertyPath: Direction.x
       value: 0
       objectReference: {fileID: 0}
