@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,7 +43,13 @@ public class ButtonBehavior : MonoBehaviour
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
         _touching--;
         if (IsActive) return;
-        _animator.SetBool("Press", false);
-        _targets.ForEach(t => t.Deactivate());
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(0.25f);
+            _animator.SetBool("Press", false);
+            _targets.ForEach(t => t.Deactivate());
+        }
+
+        StartCoroutine(Delay());
     }
 }

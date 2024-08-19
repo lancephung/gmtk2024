@@ -4901,7 +4901,7 @@ GameObject:
   - component: {fileID: 3497239472920162691}
   - component: {fileID: 2127800668406456956}
   - component: {fileID: 4922207924229783140}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Expand Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5061,5 +5061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsShrink: 0
+  UseLinear: 0
+  boost: 0
   Direction: {x: 1, y: 0}
   _Size: 1
