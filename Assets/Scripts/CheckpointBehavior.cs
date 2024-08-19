@@ -24,7 +24,7 @@ public class CheckpointBehavior : MonoBehaviour
         if (collision.GetComponent<ScaleBehavior>() == null) return;
         if (!collision.isTrigger) return; // trigger only when the player trigger collides to avoid multiple triggers
         // The player (scale) has reached the checkpoint
-        AudioManager.PlaySound("win");
+        AudioManager.PlaySound("success");
         
         if (GameManager.level < 13)
         {
