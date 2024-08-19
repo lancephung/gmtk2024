@@ -28,7 +28,6 @@ public class SoundBehavior : MonoBehaviour
     {
         IEnumerator Loop()
         {
-            float time = Time.time + duration;
             float start = audio.volume;
             while (audio.volume > 0)
             {
@@ -37,5 +36,7 @@ public class SoundBehavior : MonoBehaviour
             }
             Destroy(gameObject);
         }
+
+        StartCoroutine(Loop());
     }
 }
