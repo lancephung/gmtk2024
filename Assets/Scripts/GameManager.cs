@@ -1,6 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static bool hasSave;
 
     static float _volume = 1.0f;
-    public static float volume { get { return _volume; } set { _volume = value; music.Sound.volume = value; } }
+    public static float volume { get { return _volume; } set { _volume = value; if (music == null) return; music.Sound.volume = value; } }
 
     public static SoundBehavior music;
 
