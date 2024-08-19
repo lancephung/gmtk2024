@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1.0f;
             }
+
+            GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+            GetComponentInChildren<Animator>().SetTrigger("Entry");
 
 
             if (this == null || old == current) return;
