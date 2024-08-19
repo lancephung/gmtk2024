@@ -49,6 +49,11 @@ public class ScaleBehavior : MonoBehaviour
             }
         };
 
+        InputSystem.actions.FindAction("Reset").started += (context) =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        };
+
         //InputSystem.actions.FindAction("Absorb").started += (context) =>
         //{
         //    Absorb();
