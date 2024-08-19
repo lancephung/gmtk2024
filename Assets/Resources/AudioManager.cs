@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
         SoundDescriptor descriptor = descriptors[name];
 
         audio.clip = descriptor.Clip;
-        audio.volume = descriptor.Volume;
+        audio.volume = descriptor.Volume * GameManager.volume;
         audio.pitch = descriptor.Pitch + descriptor.PitchVariation * (Random.value - 0.5f);
 
         audio.Play();

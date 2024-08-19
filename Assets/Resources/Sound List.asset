@@ -33,3 +33,23 @@ MonoBehaviour:
     Pitch: 1
     PitchVariation: 0
     Volume: 1
+  - Name: blip
+    Clip: {fileID: 8300000, guid: 465d549231cdc964b9299b9c454e00ff, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: success
+    Clip: {fileID: 8300000, guid: 3833a76073b5c8e4e90b5ae9ca41503d, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: switch
+    Clip: {fileID: 8300000, guid: 83dd236ee66cb3e4999fb5939d8d76b2, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: thump
+    Clip: {fileID: 8300000, guid: 1649f9a5c056e7c4abc8db0eb53e0242, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1

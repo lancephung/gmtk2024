@@ -116,6 +116,8 @@ public class MenuSelector : MonoBehaviour
 
         goal = new Vector2(x, option.localPosition.y - option.rect.size.y / 2);
 
+        AudioManager.PlaySound("switch");
+
     }
 
     public void SwitchTo(string MenuName)
@@ -147,10 +149,12 @@ public class MenuSelector : MonoBehaviour
                 GameManager.level = 1;
                 GameManager.highest_level = 1;
                 SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
+                AudioManager.PlaySound("some sort of positive jingle");
                 break;
             case "continue":
                 if (!GameManager.hasSave) return;
                 SceneManager.LoadScene("Level " + GameManager.level.ToString(), LoadSceneMode.Single);
+                AudioManager.PlaySound("CORRECT");
                 break;
             case "level select":
                 SwitchTo("level screen");
