@@ -16,12 +16,12 @@ MonoBehaviour:
   - Name: scrape
     Clip: {fileID: 8300000, guid: 7105f7363199f5441830eb841779a17d, type: 3}
     Pitch: 1
-    PitchVariation: 0.2
+    PitchVariation: 0.4
     Volume: 1
   - Name: absorb
     Clip: {fileID: 8300000, guid: 53abb5d05bb06b04a871000a84d27ae9, type: 3}
     Pitch: 1
-    PitchVariation: 0.2
+    PitchVariation: 0.4
     Volume: 1
   - Name: death
     Clip: {fileID: 8300000, guid: b93c829b8bd90e54e899e6a23bbe102d, type: 3}
@@ -80,6 +80,11 @@ MonoBehaviour:
     Volume: 1
   - Name: some sort of positive jingle
     Clip: {fileID: 8300000, guid: c4df16f97dfd59944af32cd9338369ab, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: knock loud
+    Clip: {fileID: 8300000, guid: 4bd9cb43d8fa3624296ccd95da0b8c35, type: 3}
     Pitch: 1
     PitchVariation: 0
     Volume: 1
