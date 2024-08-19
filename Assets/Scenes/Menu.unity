@@ -934,8 +934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a75b22a50c75c4d94458e03bcb7d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultCursor: {fileID: 2800000, guid: e12b12709aeb4a84e85f36cdb7b6c362, type: 3}
-  _attackCursor: {fileID: 2800000, guid: 35ddecaa062d692448710b2dd6e15233, type: 3}
+  _defaultCursor: {fileID: 2800000, guid: ac021102a79dea941a794e43e570dae4, type: 3}
+  _attackCursor: {fileID: 2800000, guid: 2ef3314d43ebe7f47b7c552d47ca2d3f, type: 3}
   _cursorOffset: {x: 0, y: 0}
 --- !u!1 &307379439
 GameObject:
@@ -3265,7 +3265,6 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
-  music: {fileID: 0}
 --- !u!1 &1122557110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,7 +4199,6 @@ MonoBehaviour:
   x: 0
   autoX: 1
   fresh: 0
-  music: {fileID: 0}
 --- !u!114 &1288022810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4503,7 +4501,6 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
-  music: {fileID: 0}
 --- !u!114 &1362713336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5043,7 +5040,6 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
-  music: {fileID: 0}
 --- !u!114 &1441210567
 MonoBehaviour:
   m_ObjectHideFlags: 0

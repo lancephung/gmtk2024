@@ -13,6 +13,8 @@ public class CursorManager : MonoBehaviour
     public static Texture2D AttackCursor;
     private static Vector2 CursorOffset;
 
+    public static bool CanAttack = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +33,7 @@ public class CursorManager : MonoBehaviour
     {
         //Debug.Log("Is this even working");
         var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue()), Vector2.zero);
-        if (hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow))
+        if (CanAttack && hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow))
         {
             //Debug.Log("Detection");
             ShowCursor(AttackCursor);
