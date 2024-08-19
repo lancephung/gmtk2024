@@ -37,7 +37,7 @@ public class CursorManager : MonoBehaviour
             ShowCursor(AttackCursor);
         } else
         {
-            Debug.Log("Nor");
+            //Debug.Log("Nor");
             ShowCursor(DefaultCursor);
         }
     }
