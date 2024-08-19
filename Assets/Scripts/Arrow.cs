@@ -68,6 +68,7 @@ public class Arrow : MonoBehaviour
             
             transform.position += ease * 0.5f * (transform.rotation * (Vector3) Direction);
             push.transform.localPosition += ease * 0.5f * (transform.rotation * (Vector3) Direction);
+            Physics2D.SyncTransforms();
         }
         push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
