@@ -9,6 +9,8 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private Texture2D _attackCursor; // cursor for when hovering over arrow tiles
     [SerializeField] private Vector2 _cursorOffset;
 
+    private ParticleSystem _particleSystem;
+
     public static Texture2D DefaultCursor;
     public static Texture2D AttackCursor;
     private static Vector2 CursorOffset;
@@ -22,6 +24,7 @@ public class CursorManager : MonoBehaviour
         AttackCursor = _attackCursor;
         CursorOffset = _cursorOffset;
         ShowCursor(_defaultCursor);
+        _particleSystem = GetComponent<ParticleSystem>();
     }
 
     public static void ShowCursor(Texture2D texture)
@@ -37,10 +40,13 @@ public class CursorManager : MonoBehaviour
         {
             //Debug.Log("Detection");
             ShowCursor(AttackCursor);
-        } else
+            _particleSystem.Play();
+        }
+        else
         {
             //Debug.Log("Nor");
             ShowCursor(DefaultCursor);
+            _particleSystem.Stop();
         }
     }
 
