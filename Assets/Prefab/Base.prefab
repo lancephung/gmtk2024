@@ -170,7 +170,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.49730787
+      value: 0.7543171
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -178,11 +178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.43524227
+      value: 0.500157
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.4092792
+      value: 0.49372384
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -324,6 +324,10 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1907821075841809948, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: DeathScreen
+      value: 
+      objectReference: {fileID: 7204194508958624949}
     - target: {fileID: 1913670842507546878, guid: 9804f728a31cf9849875953f629e8181, type: 3}
       propertyPath: m_fontSize
       value: 43.95
@@ -433,6 +437,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+--- !u!1 &7204194508958624949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4841435682008763024, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+  m_PrefabInstance: {fileID: 2362785232677299749}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8188256400093899225 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5866162224517517308, guid: 9804f728a31cf9849875953f629e8181, type: 3}
