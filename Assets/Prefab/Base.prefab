@@ -169,16 +169,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 9065045485551825620}
     m_Modifications:
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.49730787
+      objectReference: {fileID: 0}
+    - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.43524227
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.4092792
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -304,6 +308,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9065045485551825620}
     m_Modifications:
+    - target: {fileID: 97282777305406963, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_fontSize
+      value: 19.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 97282777305406963, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
+    - target: {fileID: 97282777305406963, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8074957869198351286, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
+    - target: {fileID: 97282777305406963, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913670842507546878, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_fontSize
+      value: 43.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913670842507546878, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
+    - target: {fileID: 1913670842507546878, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8074957869198351286, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
+    - target: {fileID: 1913670842507546878, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2519428286571064455, guid: 9804f728a31cf9849875953f629e8181, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -386,6 +422,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5866162224517517308, guid: 9804f728a31cf9849875953f629e8181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440851304435066451, guid: 9804f728a31cf9849875953f629e8181, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

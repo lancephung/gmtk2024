@@ -22,12 +22,15 @@ public class ScaleBehavior : MonoBehaviour
     CapsuleCollider2D capsuleCollider;
     bool down = false;
 
+    public static bool Dead = false;
+
     Animator animator;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        Dead = false;
         Mass = 0;
         HeldMass = 0;
         _previousFloorY = transform.position.y;
@@ -62,6 +65,7 @@ public class ScaleBehavior : MonoBehaviour
 
     void Die()
     {
+        Dead = true;
         enabled = false;
         AudioManager.PlaySound("death");
         foreach (var particle in GetComponentsInChildren<ParticleSystem>())

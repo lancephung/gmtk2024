@@ -5,6 +5,7 @@ public class MassText : MonoBehaviour
 {
 
     TMP_Text text;
+    [SerializeField] GameObject DeathScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,11 @@ public class MassText : MonoBehaviour
         else
         {
             text.text = ScaleBehavior.Mass.ToString() + " /3";
+        }
+
+        if (ScaleBehavior.Dead && !DeathScreen.activeSelf)
+        {
+            DeathScreen.SetActive(true);
         }
     }
 }
