@@ -7,25 +7,49 @@ using UnityEngine.InputSystem;
 public class CursorManager : MonoBehaviour
 {
     [SerializeField] private Texture2D _defaultCursor;
-    [SerializeField] private Texture2D _attackCursor; // cursor for when hovering over arrow tiles
-    [SerializeField] private Vector2 _cursorOffset;
+    [SerializeField] private Texture2D _hoverCursor; // cursor for when hovering over arrow tiles
+    [SerializeField] private Texture2D _attackCursor; // onactivation
+    [SerializeField] private static Vector2 _cursorOffset;
 
     private ParticleSystem _particleSystem;
 
     public static Texture2D DefaultCursor;
+    public static Texture2D HoverCursor;
     public static Texture2D AttackCursor;
     private static Vector2 CursorOffset;
 
     public static bool CanAttack = false;
+    private bool pause = false;
 
     // Start is called before the first frame update
     void Start()
     {
         DefaultCursor = _defaultCursor;
+        HoverCursor = _hoverCursor;
         AttackCursor = _attackCursor;
         CursorOffset = _cursorOffset;
-        ShowCursor(_defaultCursor);
+        ShowCursor(DefaultCursor);
         _particleSystem = GetComponent<ParticleSystem>();
+
+        InputSystem.actions.FindAction("Attack").started += (context) =>
+        {
+            if (!CanActivateArrow()) return;
+            pause = true;
+            ShowCursor(AttackCursor);
+            _particleSystem.Emit(15);
+        };
+
+        InputSystem.actions.FindAction("MousePosition").performed += (context) =>
+        {
+            UpdateCursor();
+        };
+
+        InputSystem.actions.FindAction("Attack").canceled += (context) =>
+        {
+            Debug.Log("stop");
+            UpdateCursor();
+            pause = false;
+        };
     }
 
     public static void ShowCursor(Texture2D texture)
@@ -33,23 +57,22 @@ public class CursorManager : MonoBehaviour
         Cursor.SetCursor(texture, CursorOffset, CursorMode.Auto);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        //Debug.Log("Is this even working");
-
-        //if (CanAttack) { }
-        //if (CanAttack && hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow))
+        if (CanActivateArrow() && !pause)
+        {
+            UpdateCursor();
+        }
+    }
+    public void UpdateCursor()
+    {
         if (CanActivateArrow())
         {
-            //Debug.Log("Detection");
-            ShowCursor(AttackCursor);
-            _particleSystem.Play();
+            ShowCursor(HoverCursor);
         }
         else
         {
-            //Debug.Log("Nor");
             ShowCursor(DefaultCursor);
-            _particleSystem.Stop();
         }
     }
 

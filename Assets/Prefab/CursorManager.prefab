@@ -28,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3290971869831723452}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &8940130422865260007
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -50,9 +50,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -666,7 +666,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 2
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -867,7 +867,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
   EmissionModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 4
     rateOverTime:
       serializedVersion: 2
@@ -4856,6 +4856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a75b22a50c75c4d94458e03bcb7d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultCursor: {fileID: 2800000, guid: ac021102a79dea941a794e43e570dae4, type: 3}
-  _attackCursor: {fileID: 2800000, guid: 2ef3314d43ebe7f47b7c552d47ca2d3f, type: 3}
-  _cursorOffset: {x: 0, y: 0}
+  _defaultCursor: {fileID: 2800000, guid: c11b5a0bd9a4f7d4c92b5699701aee66, type: 3}
+  _hoverCursor: {fileID: 2800000, guid: 7e3da7a073f3b4c428b5798e6f1ab81c, type: 3}
+  _attackCursor: {fileID: 2800000, guid: 5457e9e785e689d459cef5f1e8476e76, type: 3}

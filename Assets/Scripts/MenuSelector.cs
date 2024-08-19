@@ -201,7 +201,6 @@ public class MenuSelector : MonoBehaviour
             {
                 if (int.Parse(option.name.Substring(option.name.Length - 2)) > GameManager.highest_level)
                 {
-                    Debug.Log(option.name);
                     option.GetComponentInChildren<Image>().color = lockedColor;
                     continue;
                 }
