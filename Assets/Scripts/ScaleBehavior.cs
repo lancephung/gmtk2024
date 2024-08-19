@@ -96,7 +96,7 @@ public class ScaleBehavior : MonoBehaviour
         }
         else
         {
-            if (crushTime > 0.2f)
+            if (crushTime > 0.5f)
             {
                 Debug.Log("crushed to death");
                 Die();

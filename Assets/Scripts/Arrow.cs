@@ -5,6 +5,8 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     public bool IsShrink = false;
+    public bool UseLinear;
+    public int boost;
     //[SerializeField] private bool isShrink = false;
     BoxCollider2D collider;
     SpriteRenderer sprite;
@@ -37,8 +39,14 @@ public class Arrow : MonoBehaviour
 
     float EasingFunction(float progress)
     {
-        return 1 - Mathf.Pow(1 - progress, 3);
-        //return -(Mathf.Cos(Mathf.PI * progress) + 1) * 0.5f;
+        if (UseLinear)
+        {
+            return -(Mathf.Cos(Mathf.PI * progress) + 1) * 0.5f;
+        }
+        else
+        {
+            return 1 - Mathf.Pow(1 - progress, 3);
+        }
     }
 
     IEnumerator UpdateSize(int change)
