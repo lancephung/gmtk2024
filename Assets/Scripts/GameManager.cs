@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
                     {
                         yield return new WaitForSeconds(2);
                         music = AudioManager.PlaySound(musicName);
+                        music.Sound.loop = true;
                         music.FadeIn(3);
                     }
                     StartCoroutine(Delay());
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
             }
 
             music = AudioManager.PlaySound(musicName);
+            music.Sound.loop = true;
         };
     }
 }
