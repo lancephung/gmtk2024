@@ -43,6 +43,12 @@ public class GameManager : MonoBehaviour
         {
             string musicName = current.name == "Menu" ? "antares" : "assembled with chair";
 
+            if (current.name == "Menu")
+            {
+                Time.timeScale = 1.0f;
+            }
+
+
             if (this == null || old == current) return;
             Debug.Log("changing music to " + musicName);
             if (music != null)

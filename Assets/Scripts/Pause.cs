@@ -15,16 +15,20 @@ public class Pause : MonoBehaviour
             if (this == null) { 
                 return;
             }
-
-            open = !open;
+            TogglePause();
             menu.active = open;
 
-            Time.timeScale = open ? 0.0f : 1.0f;
         };
 
         Time.timeScale = 1;
         open = false;
         menu.active = open;
+    }
+
+    void TogglePause()
+    {
+        open = !open;
+        Time.timeScale = open ? 0.0f : 1.0f;
     }
 
     // Update is called once per frame
