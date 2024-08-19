@@ -54,8 +54,6 @@ AnimationClip:
       value: {fileID: 1643502960, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
     - time: 1
       value: {fileID: -277450451, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
-    - time: 2
-      value: {fileID: -277450451, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
     attribute: m_Sprite
     path: button
     classID: 114
@@ -109,7 +107,6 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 1643502960, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
     - {fileID: -277450451, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
-    - {fileID: -277450451, guid: 953c657f9c79f9d47ae92da3c97eb065, type: 3}
     - {fileID: 63597065, guid: 41d23619330dfb94e8b7f9cfd72c605e, type: 3}
     - {fileID: 423235108, guid: 41d23619330dfb94e8b7f9cfd72c605e, type: 3}
   m_AnimationClipSettings:
@@ -117,7 +114,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 3
+    m_StopTime: 2
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
