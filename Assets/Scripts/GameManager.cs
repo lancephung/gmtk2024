@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     public static int highest_level;
     public static bool hasSave;
     public static float volume;
+
+    public static SoundBehavior music;
 
     public void ChangeVolume(float avolume)
     {
@@ -31,5 +34,14 @@ public class GameManager : MonoBehaviour
         }
         volume = 0.5f;
         DontDestroyOnLoad(gameObject);
+
+        SceneManager.activeSceneChanged += (old, current) => 
+        {
+            if (music != null) music.FadeOut(3);
+            if (current.name == "Menu")
+            {
+                music = AudioManager.PlaySound("antares-9996");
+            }
+        };
     }
 }

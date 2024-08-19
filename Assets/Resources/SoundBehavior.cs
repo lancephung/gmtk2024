@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SoundBehavior : MonoBehaviour
 {
-    AudioSource baudio;
+    AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
@@ -12,32 +12,34 @@ public class SoundBehavior : MonoBehaviour
         IEnumerator DestroyEmitter()
         {
             float time = Time.time + 10.0f;
-            yield return new WaitUntil(() => baudio.isPlaying || Time.time > time);
-            yield return new WaitUntil(() => !baudio.isPlaying);
+            yield return new WaitUntil(() => sound.isPlaying || Time.time > time);
+            yield return new WaitUntil(() => !sound.isPlaying && Application.isFocused);
 
             if (this != null)
             Destroy(gameObject);
         }
 
-        baudio = GetComponent<AudioSource>();
+        sound = GetComponent<AudioSource>();
 
         StartCoroutine(DestroyEmitter());
     }
 
+
+    IEnumerator Fade(float duration)
+    {
+        float start = sound.volume;
+        while (sound.volume > 0)
+        {
+            yield return new WaitForEndOfFrame();
+            sound.volume -= start / duration * Time.deltaTime;
+        }
+        Destroy(gameObject);
+    }
+
     public void FadeOut(float duration)
     {
-        IEnumerator Loop()
-        {
-            float start = baudio.volume;
-            while (baudio.volume > 0)
-            {
-                yield return new WaitForEndOfFrame();
-                baudio.volume -= start / duration * Time.deltaTime;
-                Debug.Log(baudio.volume);
-            }
-            Destroy(gameObject);
-        }
-
-        StartCoroutine(Loop());
+        sound = GetComponent<AudioSource>();
+        Debug.Log(sound);
+        StartCoroutine(Fade(duration));
     }
 }
