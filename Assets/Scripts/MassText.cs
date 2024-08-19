@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MassText : MonoBehaviour
 {
@@ -28,5 +29,11 @@ public class MassText : MonoBehaviour
         {
             DeathScreen.SetActive(true);
         }
+    }
+
+    public void Reset()
+    {
+        Debug.Log("bb");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
