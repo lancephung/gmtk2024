@@ -1,4 +1,8 @@
+using System.Collections;
+using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +11,11 @@ public class GameManager : MonoBehaviour
     public static int level;
     public static int highest_level;
     public static bool hasSave;
-    public static float volume;
+
+    static float _volume = 1.0f;
+    public static float volume { get { return _volume; } set { _volume = value; music.Sound.volume = value; } }
+
+    public static SoundBehavior music;
 
     public void ChangeVolume(float avolume)
     {
@@ -29,7 +37,34 @@ public class GameManager : MonoBehaviour
         {
             highest_level = 1;
         }
-        volume = 0.5f;
         DontDestroyOnLoad(gameObject);
+
+        SceneManager.activeSceneChanged += (old, current) => 
+        {
+            string musicName = current.name == "Menu" ? "antares" : "assembled with chair";
+
+            if (this == null || old == current) return;
+            Debug.Log("changing music to " + musicName);
+            if (music != null)
+            {
+                if (musicName == music.Sound.clip.name) return;
+                else
+                {
+                    music.FadeOut(3);
+                    IEnumerator Delay()
+                    {
+                        yield return new WaitForSeconds(2);
+                        music = AudioManager.PlaySound(musicName);
+                        music.Sound.loop = true;
+                        music.FadeIn(3);
+                    }
+                    StartCoroutine(Delay());
+                    return;
+                }
+            }
+
+            music = AudioManager.PlaySound(musicName);
+            music.Sound.loop = true;
+        };
     }
 }

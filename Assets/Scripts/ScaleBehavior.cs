@@ -105,6 +105,11 @@ public class ScaleBehavior : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        CursorManager.CanAttack = Mass > 0;
+    }
+
 
     int GetSupportedMass(Collider2D collider, int check = 0, List<Rigidbody2D> bodies = null)
     {

@@ -21,18 +21,9 @@ public class MenuSelector : MonoBehaviour
     public bool autoX;
     public float fresh;
 
-    public SoundBehavior music;
-
     // Start is called before the first frame update
     void Start()
     {
-
-        if (SceneManager.GetActiveScene().name == "Menu")
-        {
-            music = AudioManager.PlaySound("antares-9996");
-        }
-
-
         fresh = 0;
         RectTransform iconRectTransform = icon.GetComponent<RectTransform>();
         x = iconRectTransform.localPosition.x;
@@ -159,13 +150,11 @@ public class MenuSelector : MonoBehaviour
                 GameManager.highest_level = 1;
                 SceneManager.LoadScene("Level 1", LoadSceneMode.Single);
                 AudioManager.PlaySound("some sort of positive jingle");
-                music.FadeOut(0.5f);
                 break;
             case "continue":
                 if (!GameManager.hasSave) return;
                 SceneManager.LoadScene("Level " + GameManager.level.ToString(), LoadSceneMode.Single);
                 AudioManager.PlaySound("CORRECT");
-                music.FadeOut(0.5f);
                 break;
             case "level select":
                 SwitchTo("level screen");
@@ -178,14 +167,12 @@ public class MenuSelector : MonoBehaviour
                 break;
             case "main menu":
                 SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-                music.FadeOut(0.5f);
                 break;
             case "back":
                 SwitchTo("main screen");
                 return;
             case "retry":
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
-                music.FadeOut(0.5f);
                 break;
             case "resume":
                 transform.GetComponentInParent<Pause>().open = false;
@@ -198,7 +185,6 @@ public class MenuSelector : MonoBehaviour
                     {
                         Debug.Log(selected);
                         SceneManager.LoadScene(selected.Substring(1), LoadSceneMode.Single);
-                        music.FadeOut(0.5f);
                     }
                 }
                 break;

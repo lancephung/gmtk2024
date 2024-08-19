@@ -53,3 +53,33 @@ MonoBehaviour:
     Pitch: 1
     PitchVariation: 0
     Volume: 1
+  - Name: antares
+    Clip: {fileID: 8300000, guid: 52ed529953846fa4c94c651ca552bb6a, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: assembled with chair
+    Clip: {fileID: 8300000, guid: 3c74d4778ad717c4f96d3ff5158057b8, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: bloop
+    Clip: {fileID: 8300000, guid: 20d4cd012966105449575a9d8f7f4691, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: blop
+    Clip: {fileID: 8300000, guid: c920394d369bcdb4db52199ea372d7ec, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: CORRECT
+    Clip: {fileID: 8300000, guid: 1dbc1fc13592d9045b1808f9c0b9c042, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
+  - Name: some sort of positive jingle
+    Clip: {fileID: 8300000, guid: c4df16f97dfd59944af32cd9338369ab, type: 3}
+    Pitch: 1
+    PitchVariation: 0
+    Volume: 1
