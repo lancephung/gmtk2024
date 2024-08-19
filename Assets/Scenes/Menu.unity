@@ -1710,14 +1710,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'nullishew - concept, code
+  m_text: 'nullishew - design, code
 
-    jera - code
+    jera - game code and effects
 
-    squeegs - art and
+    squeegs
+    - art and audio
 
-    auyease
-    - code
+    auyease - ui code
 
 
     >++(''>'
