@@ -7,6 +7,13 @@ public class GameManager : MonoBehaviour
     public static int level;
     public static int highest_level;
     public static bool hasSave;
+    public static float volume;
+
+    public void ChangeVolume(float avolume)
+    {
+        Debug.Log(avolume);
+        volume = avolume;
+    }
 
     private void Awake()
     {
@@ -22,7 +29,7 @@ public class GameManager : MonoBehaviour
         {
             highest_level = 1;
         }
-
+        volume = 0.5f;
         DontDestroyOnLoad(gameObject);
     }
 }
