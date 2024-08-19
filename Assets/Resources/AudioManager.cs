@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public static void PlaySound(string name)
+    public static SoundBehavior PlaySound(string name)
     {
         GameObject emitter = GameObject.Instantiate(prefab);
         AudioSource audio = emitter.GetComponent<AudioSource>();
@@ -43,5 +43,7 @@ public class AudioManager : MonoBehaviour
         audio.pitch = descriptor.Pitch + descriptor.PitchVariation * (Random.value - 0.5f);
 
         audio.Play();
+
+        return emitter.GetComponent<SoundBehavior>();
     }
 }
