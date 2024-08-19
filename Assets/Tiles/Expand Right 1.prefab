@@ -4901,8 +4901,8 @@ GameObject:
   - component: {fileID: 3497239472920162691}
   - component: {fileID: 2127800668406456956}
   - component: {fileID: 4922207924229783140}
-  m_Layer: 6
-  m_Name: Expand Right
+  m_Layer: 0
+  m_Name: Expand Right 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

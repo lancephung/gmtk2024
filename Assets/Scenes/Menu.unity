@@ -1522,14 +1522,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'nullishew - concept, code
+  m_text: 'nullishew - design, code
 
-    jera - code
+    jera - game code and effects
 
-    squeegs - art and
+    squeegs
+    - art and audio
 
-    auyease
-    - code
+    auyease - ui code
 
 
     >++(''>'
@@ -7275,7 +7275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.0059701493
+      value: 0.037520394
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -7283,7 +7283,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9883914
+      value: 0.92622805
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x

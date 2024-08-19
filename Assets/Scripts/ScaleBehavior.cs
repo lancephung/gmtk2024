@@ -15,7 +15,9 @@ public class ScaleBehavior : MonoBehaviour
 
     public static int HeldMass = 0;
 
-    float _previousFloorY = 0;
+    [SerializeField] int _StartingMass = 0;
+
+    float _previousFloorY = Mathf.NegativeInfinity;
 
     Rigidbody2D _rigidbody;
     BoxCollider2D boxCollider;
@@ -25,15 +27,13 @@ public class ScaleBehavior : MonoBehaviour
     public static bool Dead = false;
 
     Animator animator;
-    
 
     // Start is called before the first frame update
     void Start()
     {
         Dead = false;
-        Mass = 0;
+        Mass = _StartingMass;
         HeldMass = 0;
-        _previousFloorY = transform.position.y;
         _rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -146,7 +146,7 @@ public class ScaleBehavior : MonoBehaviour
 
     void Absorb()
     {
-        if (this == null) return;
+        if (this == null || gameObject.layer == LayerMask.NameToLayer("Intangible")) return;
         var absorbDistance = .25f;
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, absorbDistance);
@@ -217,7 +217,8 @@ public class ScaleBehavior : MonoBehaviour
 
         var fallDistance = Mathf.Round(_previousFloorY - transform.position.y);
 
-        Debug.Log("Fell "  + fallDistance.ToString("F2"));
+        // Debug.Log("Fell "  + fallDistance.ToString("F2"));
+        gameObject.layer = LayerMask.NameToLayer("Default");
         if (fallDistance > Mass + 1)
         {
             // immediately die
