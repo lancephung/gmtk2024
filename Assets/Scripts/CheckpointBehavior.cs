@@ -30,7 +30,9 @@ public class CheckpointBehavior : MonoBehaviour
 
         IEnumerator Delay()
         {
-            yield return new WaitForSeconds(0.5f);
+            GameObject.Find("Transition").GetComponent<Animator>().SetTrigger("Exit");
+
+            yield return new WaitForSeconds(0.65f);
         
             if (GameManager.level < 13)
             {
