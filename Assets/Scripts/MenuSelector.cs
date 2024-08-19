@@ -64,7 +64,7 @@ public class MenuSelector : MonoBehaviour
         };
 
         InputSystem.actions.FindAction("MenuSelect").started += (context) => {
-            if (this == null || !active || fresh < 100)
+            if (this == null || !active || fresh < 5)
             {
                 return;
             } else
@@ -136,7 +136,7 @@ public class MenuSelector : MonoBehaviour
 
     void Select()
     {
-        if (!active || fresh < 100)
+        if (!active || fresh < 5)
         {
             return;
         }
@@ -245,7 +245,7 @@ public class MenuSelector : MonoBehaviour
             icon.GetComponent<RectTransform>().localPosition = Vector2.Lerp(icon.GetComponent<RectTransform>().localPosition, goal, 0.2f);
         }
 
-        if (active && fresh <= 100)
+        if (active && fresh <= 5)
         {
             fresh += 1.0f;
         }

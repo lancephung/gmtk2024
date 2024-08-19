@@ -136,7 +136,7 @@ public class ScaleBehavior : MonoBehaviour
 
             var otherCollider = contact.collider == collider ? contact.otherCollider : contact.collider;
 
-            if (normal.y < 0.1f || colliders.Contains(otherCollider)) continue;
+            if (normal.y < 0.7f || colliders.Contains(otherCollider)) continue;
 
             total += GetSupportedMass(otherCollider, check + 1,bodies);
         }
