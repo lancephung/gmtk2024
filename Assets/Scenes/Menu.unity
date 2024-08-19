@@ -887,6 +887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224166223}
   - component: {fileID: 224166222}
+  - component: {fileID: 224166224}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -921,6 +922,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &224166224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224166221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9a75b22a50c75c4d94458e03bcb7d8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultCursor: {fileID: 2800000, guid: e12b12709aeb4a84e85f36cdb7b6c362, type: 3}
+  _attackCursor: {fileID: 2800000, guid: 35ddecaa062d692448710b2dd6e15233, type: 3}
+  _cursorOffset: {x: 0, y: 0}
 --- !u!1 &307379439
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,6 +3265,7 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
+  music: {fileID: 0}
 --- !u!1 &1122557110
 GameObject:
   m_ObjectHideFlags: 0
@@ -4183,6 +4200,7 @@ MonoBehaviour:
   x: 0
   autoX: 1
   fresh: 0
+  music: {fileID: 0}
 --- !u!114 &1288022810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4485,6 +4503,7 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
+  music: {fileID: 0}
 --- !u!114 &1362713336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5024,6 +5043,7 @@ MonoBehaviour:
   x: 0
   autoX: 0
   fresh: 0
+  music: {fileID: 0}
 --- !u!114 &1441210567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7218,7 +7238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.005037783
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -7226,7 +7246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9879653
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
