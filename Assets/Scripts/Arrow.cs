@@ -55,8 +55,7 @@ public class Arrow : MonoBehaviour
             float ease = change * (EasingFunction(progress + deltaTime) - EasingFunction(progress));
             progress += deltaTime;
             
-            collider.size += ease * new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            sprite.size = collider.size;
+            sprite.size += ease * new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
             
             transform.position += ease * 0.5f * (transform.rotation * (Vector3) Direction);
             push.transform.localPosition += ease * 0.5f * (transform.rotation * (Vector3) Direction);
@@ -70,6 +69,8 @@ public class Arrow : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         push = GetComponentInChildren<ParticleSystem>();
+
+        collider.edgeRadius = 0.1f;
     }
 
     // Update is called once per frame
@@ -84,12 +85,12 @@ public class Arrow : MonoBehaviour
 
             transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
             var absolute = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            var check = collider.size * absolute;
+            var check = sprite.size * absolute;
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
             // Debug.Log(currentSize);
             if (currentSize != _Size)
             {
-                collider.size += (_Size - currentSize) * absolute;
+                sprite.size += (_Size - currentSize) * absolute;
                 transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
                 push.transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
             }
@@ -97,6 +98,6 @@ public class Arrow : MonoBehaviour
 
         #endif
 
-        sprite.size = collider.size;
+        collider.size = sprite.size - 0.2f * Vector2.one;
     }
 }

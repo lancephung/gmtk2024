@@ -26,13 +26,13 @@ public class CheckpointBehavior : MonoBehaviour
         // The player (scale) has reached the checkpoint
         AudioManager.PlaySound("win");
         
-        if (GameManager.level < 10)
+        if (GameManager.level < 13)
         {
             SceneManager.LoadScene("Level " + (GameManager.level + 1), LoadSceneMode.Single);
         }
         else
         {
-            SceneManager.LoadScene("Main Menu", LoadSceneMode.Single);
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         }
 
         enabled = false;
