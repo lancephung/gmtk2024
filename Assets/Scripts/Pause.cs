@@ -16,7 +16,6 @@ public class Pause : MonoBehaviour
                 return;
             }
             TogglePause();
-            menu.active = open;
 
         };
 
@@ -25,10 +24,11 @@ public class Pause : MonoBehaviour
         menu.active = open;
     }
 
-    void TogglePause()
+    public void TogglePause()
     {
         open = !open;
         Time.timeScale = open ? 0.0f : 1.0f;
+        menu.active = open;
     }
 
     // Update is called once per frame
