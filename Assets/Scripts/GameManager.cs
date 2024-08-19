@@ -48,26 +48,29 @@ public class GameManager : MonoBehaviour
 
 
             if (this == null || old == current) return;
-            Debug.Log("changing music to " + musicName);
+            // Debug.Log("changing music to " + musicName);
             if (music != null)
             {
                 if (musicName == music.Sound.clip.name) return;
                 else
                 {
                     music.FadeOut(3);
+                    music = AudioManager.PlaySound(musicName);
+                    music.Sound.playOnAwake = false;
+                    music.Sound.Stop();
                     IEnumerator Delay()
                     {
                         yield return new WaitForSeconds(2);
-                        music = AudioManager.PlaySound(musicName);
-                        music.Sound.loop = true;
                         music.FadeIn(3);
+                        music.Sound.Play();
                     }
                     StartCoroutine(Delay());
-                    return;
                 }
             }
-
-            music = AudioManager.PlaySound(musicName);
+            else
+            {
+                music = AudioManager.PlaySound(musicName);
+            }
             music.Sound.loop = true;
         };
     }
