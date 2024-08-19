@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,16 +27,21 @@ public class CheckpointBehavior : MonoBehaviour
         if (!collision.isTrigger) return; // trigger only when the player trigger collides to avoid multiple triggers
         // The player (scale) has reached the checkpoint
         AudioManager.PlaySound("success");
-        
-        if (GameManager.level < 13)
-        {
-            SceneManager.LoadScene("Level " + (GameManager.level + 1), LoadSceneMode.Single);
-        }
-        else
-        {
-            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
-        }
 
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(0.5f);
+        
+            if (GameManager.level < 13)
+            {
+                SceneManager.LoadScene("Level " + (GameManager.level + 1), LoadSceneMode.Single);
+            }
+            else
+            {
+                SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+            }
+        }
+        StartCoroutine(Delay());
         enabled = false;
     }
 }
