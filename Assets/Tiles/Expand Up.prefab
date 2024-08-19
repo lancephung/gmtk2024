@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5471285365581865467, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
       propertyPath: m_Name
-      value: Arrow Up
+      value: Expand Up
       objectReference: {fileID: 0}
     - target: {fileID: 7042081067424966265, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
       propertyPath: ShapeModule.m_Scale.x
