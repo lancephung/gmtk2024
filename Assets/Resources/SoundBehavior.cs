@@ -15,11 +15,27 @@ public class SoundBehavior : MonoBehaviour
             yield return new WaitUntil(() => audio.isPlaying || Time.time > time);
             yield return new WaitUntil(() => !audio.isPlaying);
 
+            if (this != null)
             Destroy(gameObject);
         }
 
         audio = GetComponent<AudioSource>();
 
         StartCoroutine(DestroyEmitter());
+    }
+
+    public void FadeOut(float duration)
+    {
+        IEnumerator Loop()
+        {
+            float time = Time.time + duration;
+            float start = audio.volume;
+            while (audio.volume > 0)
+            {
+                yield return new WaitForEndOfFrame();
+                audio.volume -= start / duration * Time.deltaTime;
+            }
+            Destroy(gameObject);
+        }
     }
 }
