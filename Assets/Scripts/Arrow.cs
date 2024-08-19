@@ -12,10 +12,13 @@ public class Arrow : MonoBehaviour
     SpriteRenderer sprite;
     ParticleSystem push;
 
-    public Vector2 Direction = Vector2.right;
+    public bool ButtonToggle = false; // for arrows that are toggled by a button like the escalator in level 11
 
-    [SerializeField] private int _Size = 1;
-    public int Size { get { return _Size; }
+    public Vector2 Direction = Vector2.right;
+    private Rigidbody2D _rigidbody;
+
+    [SerializeField] private float _Size = 1;
+    public float Size { get { return _Size; }
         set
         {
             if (value == _Size || value <= 0) return;
@@ -28,13 +31,17 @@ public class Arrow : MonoBehaviour
     public void Activate()
     {
         AudioManager.PlaySound("scrape");
-        Size += IsShrink ? -1 : 1;
+        var dist = ButtonToggle ? 1.5f : 1;
+        var dir = IsShrink ? -1 : 1;
+        Size += dist * dir;
     }
 
     public void Deactivate()
     {
         AudioManager.PlaySound("scrape");
-        Size += IsShrink ? 1 : -1;
+        var dist = ButtonToggle ? 1.5f : 1;
+        var dir = IsShrink ? 1 : -1;
+        Size += dist * dir;
     }
 
     float EasingFunction(float progress)
@@ -49,7 +56,7 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateSize(int change)
+    IEnumerator UpdateSize(float change)
     {
         float progress = 0.0f;
 
@@ -65,10 +72,9 @@ public class Arrow : MonoBehaviour
             progress += deltaTime;
             
             sprite.size += ease * new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            
-            transform.position += ease * 0.5f * (transform.rotation * (Vector3) Direction);
-            push.transform.localPosition += ease * 0.5f * (transform.rotation * (Vector3) Direction);
-            Physics2D.SyncTransforms();
+            var dist = ease * 0.5f * (transform.rotation * (Vector3)Direction);
+            transform.position += dist;
+            push.transform.localPosition += dist;
         }
         push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
@@ -79,6 +85,7 @@ public class Arrow : MonoBehaviour
         collider = GetComponent<BoxCollider2D>();
         sprite = GetComponent<SpriteRenderer>();
         push = GetComponentInChildren<ParticleSystem>();
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         collider.edgeRadius = 0.1f;
     }

@@ -11,6 +11,8 @@ public class SoundBehavior : MonoBehaviour
     }
     }
 
+    Coroutine coroutine;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class SoundBehavior : MonoBehaviour
 
     public void FadeOut(float duration)
     {
+        if (coroutine != null) StopCoroutine(coroutine);
         IEnumerator Fade(float duration)
         {
             float start = Sound.volume;
@@ -47,6 +50,7 @@ public class SoundBehavior : MonoBehaviour
 
     public void FadeIn(float duration)
     {
+        if (coroutine != null) StopCoroutine(coroutine);
         IEnumerator Fade(float duration)
         {
             while (Sound.volume < 1)
@@ -56,6 +60,6 @@ public class SoundBehavior : MonoBehaviour
             }
         }
         Sound.volume = 0;
-        StartCoroutine(Fade(duration));
+        coroutine = StartCoroutine(Fade(duration));
     }
 }

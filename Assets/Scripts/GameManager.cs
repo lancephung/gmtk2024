@@ -1,6 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool hasSave;
 
     static float _volume = 1.0f;
-    public static float volume { get { return _volume; } set { _volume = value; music.Sound.volume = value; } }
+    public static float volume { get { return _volume; } set { _volume = value; if (music == null) return; music.Sound.volume = value; } }
 
     public static SoundBehavior music;
 
@@ -54,26 +52,29 @@ public class GameManager : MonoBehaviour
 
 
             if (this == null || old == current) return;
-            Debug.Log("changing music to " + musicName);
+            // Debug.Log("changing music to " + musicName);
             if (music != null)
             {
                 if (musicName == music.Sound.clip.name) return;
                 else
                 {
                     music.FadeOut(3);
+                    music = AudioManager.PlaySound(musicName);
+                    music.Sound.playOnAwake = false;
+                    music.Sound.Stop();
                     IEnumerator Delay()
                     {
                         yield return new WaitForSeconds(2);
-                        music = AudioManager.PlaySound(musicName);
-                        music.Sound.loop = true;
                         music.FadeIn(3);
+                        music.Sound.Play();
                     }
                     StartCoroutine(Delay());
-                    return;
                 }
             }
-
-            music = AudioManager.PlaySound(musicName);
+            else
+            {
+                music = AudioManager.PlaySound(musicName);
+            }
             music.Sound.loop = true;
         };
     }
