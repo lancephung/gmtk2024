@@ -31,6 +31,8 @@ public class MassText : MonoBehaviour
         {
             DeathScreen.SetActive(true);
             GameObject.Find("randomtext").GetComponent<TMP_Text>().text = DeathMsgs[Random.Range(0, DeathMsgs.Length)];
+            GameObject.Find("deathcausetext").GetComponent<TMP_Text>().text = ScaleBehavior.CauseOfDeathStr;
+
         }
     }
 

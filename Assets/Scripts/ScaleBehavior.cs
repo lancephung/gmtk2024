@@ -21,6 +21,7 @@ public class ScaleBehavior : MonoBehaviour
     bool down = false;
 
     public static bool Dead = false;
+    public static string CauseOfDeathStr = "";
 
     Animator animator;
 
@@ -60,8 +61,9 @@ public class ScaleBehavior : MonoBehaviour
         //};
     }
 
-    void Die()
+    void Die(string deathStr)
     {
+        CauseOfDeathStr = deathStr;
         Dead = true;
         enabled = false;
         AudioManager.PlaySound("thump");
@@ -78,7 +80,7 @@ public class ScaleBehavior : MonoBehaviour
         if (mass_ontop + Mass > MaxMass)
         {
             // Die by being crushed
-            Die();
+            Die("crushed by weight");
         }
 
         down = mass_ontop > 0;
@@ -95,8 +97,8 @@ public class ScaleBehavior : MonoBehaviour
         {
             if (crushTime > 0.5f)
             {
-                Debug.Log("crushed to death");
-                Die();
+                //Debug.Log("crushed to death");
+                Die("crushed to death");
             }
             crushTime += Time.fixedDeltaTime;
         }
@@ -219,7 +221,7 @@ public class ScaleBehavior : MonoBehaviour
         if (fallDistance > Mass + 1)
         {
             // immediately die
-            Die();
+            Die("died to fall damage");
             return;
         }
 
