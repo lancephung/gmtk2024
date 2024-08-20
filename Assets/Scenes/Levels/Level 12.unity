@@ -2886,15 +2886,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.0045454544
+      value: 0.0040650405
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9919661
+      value: 0.99149173
       objectReference: {fileID: 0}
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2972,7 +2972,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8080758160732395694, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_fontSize
-      value: 23.75
+      value: 32.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080758160732395694, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: m_margin.x
+      value: -169.40813
+      objectReference: {fileID: 0}
+    - target: {fileID: 8080758160732395694, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 32.9
       objectReference: {fileID: 0}
     - target: {fileID: 9065045485551825620, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_LocalPosition.x
