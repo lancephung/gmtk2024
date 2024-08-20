@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4820543296920061874}
-  - {fileID: 9029767317451747699}
   - {fileID: 2874602335892886938}
   - {fileID: 1159979312997292149}
+  - {fileID: 9029767317451747699}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1890267343312841665
@@ -89,7 +89,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7390521650192111044, guid: 4c45c3a460391a746aeb0746b9165955, type: 3}
       propertyPath: m_Name
-      value: Mass 1
+      value: Compact Clock Mass 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -151,7 +151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6541789684563193738, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_Name
-      value: Expand Up
+      value: Compact Clock Expand Up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -184,7 +184,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
-      value: Shrink Down
+      value: Compact Clock Starter
       objectReference: {fileID: 0}
     - target: {fileID: 8122189821208145769, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,7 +294,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7390521650192111044, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Compact Clock Button
       objectReference: {fileID: 0}
     - target: {fileID: 8838911066710632218, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
       propertyPath: m_Size.y

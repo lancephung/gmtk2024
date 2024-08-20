@@ -26,8 +26,9 @@ public class Arrow : MonoBehaviour
         {
             if (value == _Size || value <= 0) return;
             if (this == null) return;
-            StartCoroutine(UpdateSize(value - _Size));
-            _Size = value;
+            float target = Mathf.Max(1, value);
+            StartCoroutine(UpdateSize(target - _Size));
+            _Size = target;
         }
     }
 
