@@ -455,7 +455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d69a2065f9424b74a951ac9c6c3b7ab3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -746,6 +746,10 @@ MonoBehaviour:
   activeColor: {r: 0.61960787, g: 0.8470589, b: 1, a: 1}
   inactiveColor: {r: 1, g: 1, b: 1, a: 1}
   lockedColor: {r: 1, g: 1, b: 1, a: 1}
+  cg: {fileID: 0}
+  x: 0
+  autoX: 0
+  fresh: 0
 --- !u!1 &7465763165104494008
 GameObject:
   m_ObjectHideFlags: 0
