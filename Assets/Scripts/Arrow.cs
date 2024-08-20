@@ -14,6 +14,9 @@ public class Arrow : MonoBehaviour
 
     public bool ButtonToggle = false; // for arrows that are toggled by a button like the escalator in level 11
 
+    public float DistPerActivation => ButtonToggle ? 1.5f : 1;
+    public int ActivateDir => IsShrink ? -1 : 1;
+
     public Vector2 Direction = Vector2.right;
     private Rigidbody2D _rigidbody;
 
@@ -31,17 +34,13 @@ public class Arrow : MonoBehaviour
     public void Activate()
     {
         AudioManager.PlaySound("scrape");
-        var dist = ButtonToggle ? 1.5f : 1;
-        var dir = IsShrink ? -1 : 1;
-        Size += dist * dir;
+        Size += DistPerActivation * ActivateDir;
     }
 
     public void Deactivate()
     {
         AudioManager.PlaySound("scrape");
-        var dist = ButtonToggle ? 1.5f : 1;
-        var dir = IsShrink ? 1 : -1;
-        Size += dist * dir;
+        Size -= DistPerActivation * ActivateDir;
     }
 
     float EasingFunction(float progress)
