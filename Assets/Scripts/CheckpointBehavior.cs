@@ -33,7 +33,7 @@ public class CheckpointBehavior : MonoBehaviour
 
             yield return new WaitForSeconds(0.65f);
         
-            if (GameManager.level < 15)
+            if (GameManager.level < 16)
             {
                 SceneManager.LoadScene("Level " + (GameManager.level + 1), LoadSceneMode.Single);
             }
