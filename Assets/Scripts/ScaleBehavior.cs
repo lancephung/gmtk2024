@@ -37,6 +37,7 @@ public class ScaleBehavior : MonoBehaviour
 
         InputSystem.actions.FindAction("Attack").started += (context) =>
         {
+            if (Dead) return;
             var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
             if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
