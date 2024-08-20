@@ -370,7 +370,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.67263424
+      value: 0.026636226
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
@@ -378,11 +378,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1.7401533
+      value: 1.069863
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1.7181817
+      value: 1.0568335
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -836,7 +836,7 @@ PrefabInstance:
     - target: {fileID: 3618672383747122171, guid: 593c9a8bc565b2d42bd588464b492987, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 63a1cbaf030cd13429438300152d904d, type: 3}
+      objectReference: {fileID: 21300000, guid: d69a2065f9424b74a951ac9c6c3b7ab3, type: 3}
     - target: {fileID: 4789902685279454222, guid: 593c9a8bc565b2d42bd588464b492987, type: 3}
       propertyPath: m_fontSize
       value: 20

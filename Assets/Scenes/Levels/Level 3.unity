@@ -936,8 +936,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -384.06, y: -174.58}
-  m_SizeDelta: {x: 157.7, y: 266.1324}
+  m_AnchoredPosition: {x: -401.9, y: -168.8}
+  m_SizeDelta: {x: 141.4464, y: 238.703}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836590584
 MonoBehaviour:
@@ -3186,7 +3186,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 23
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 2
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3196,7 +3196,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 21
-      m_TileSpriteIndex: 20
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 2
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3435,12 +3435,12 @@ Tilemap:
     m_Data: {fileID: -1136487966, guid: 9deb3fa0f2dc80c4ca6ad98c1b1e6002, type: 3}
   - m_RefCount: 5
     m_Data: {fileID: 2018795308, guid: f8e3d3c5ac7743b4a82439719c974b2f, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -156091119, guid: f8e3d3c5ac7743b4a82439719c974b2f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 1774261129, guid: f8e3d3c5ac7743b4a82439719c974b2f, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -966065992, guid: f8e3d3c5ac7743b4a82439719c974b2f, type: 3}
   m_TileMatrixArray:
@@ -3543,15 +3543,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.0060975607
+      value: 0.0054127197
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.9869015
+      value: 0.98782134
       objectReference: {fileID: 0}
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
