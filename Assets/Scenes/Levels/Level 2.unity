@@ -276,6 +276,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -814839595385810316, guid: 43da1fcd53006334da35bda89dff20c8, type: 3}
+      propertyPath: FreezeX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5248527206853269892, guid: 43da1fcd53006334da35bda89dff20c8, type: 3}
       propertyPath: m_SortingOrder
       value: 155
