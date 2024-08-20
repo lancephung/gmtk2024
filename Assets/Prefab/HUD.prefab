@@ -282,7 +282,7 @@ GameObject:
   - component: {fileID: 3751783376219366395}
   - component: {fileID: 1907821075841809948}
   m_Layer: 5
-  m_Name: mass
+  m_Name: mass text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1023,7 +1023,7 @@ GameObject:
   - component: {fileID: 6635672853137081939}
   - component: {fileID: 5831829590763372171}
   m_Layer: 5
-  m_Name: f
+  m_Name: level text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
