@@ -1844,17 +1844,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'nullishew - design, code
-
-    jera - game code and effects
-
-    squeegs
-    - art and audio
-
-    auyease - ui code
-
-
-    >++(''>'
+  m_text: "\r@jjera - code\r\n\r@auyease - code\r\n@nullishew - idea, puzzle design,
+    code\r\n@squeegs - art, level design\n\n>++('>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
   m_sharedMaterial: {fileID: 8074957869198351286, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
@@ -8775,15 +8766,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0.0066225166
+      value: 0.0060975607
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
-      value: 1
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 663941343171025108, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.98601913
+      value: 0.9869015
       objectReference: {fileID: 0}
     - target: {fileID: 2436316679288839286, guid: 01773732b6c27d94a92764a2d9f8c0ca, type: 3}
       propertyPath: m_LocalPosition.x
