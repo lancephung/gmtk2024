@@ -426,7 +426,6 @@ MonoBehaviour:
   - a heavy defeat, indeed.
   - balance lost, life cost.
   - flattened by your own ambition.
-  - ur so fat u broke the scale
   - the scales were tipped... on you
   - mass destruction
 --- !u!1 &2519428286571064455
@@ -489,7 +488,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
