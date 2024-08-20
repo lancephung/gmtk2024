@@ -46,10 +46,11 @@ public class GameManager : MonoBehaviour
             {
                 Time.timeScale = 1.0f;
             }
-
-            GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
-            GetComponentInChildren<Animator>().SetTrigger("Entry");
-
+            else
+            {
+                GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                GetComponentInChildren<Animator>().SetTrigger("Entry");
+            }
 
             if (this == null || old == current) return;
             // Debug.Log("changing music to " + musicName);
