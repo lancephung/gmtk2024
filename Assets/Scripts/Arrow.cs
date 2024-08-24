@@ -19,6 +19,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float _animationDuration = .2f;
     [SerializeField] private AnimationCurve _activationAnimationCurve;
 
+    private Coroutine _animationRoutine;
 
     public bool ButtonToggle = false; // for arrows that are toggled by a button like the escalator in level 11
 
@@ -35,7 +36,12 @@ public class Arrow : MonoBehaviour
             if (value == _Size || value <= 0) return;
             if (this == null) return;
             float target = Mathf.Max(1, value);
-            StartCoroutine(UpdateSize(_Size, target));
+
+            if (_animationRoutine != null)
+            {
+                StopCoroutine(_animationRoutine);
+            }
+            _animationRoutine = StartCoroutine(UpdateSize(target));
 
             _Size = target;
         }
@@ -65,15 +71,16 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateSize(float startSize, float endSize)
+    IEnumerator UpdateSize(float endSize)
     {
-        var startOffset = (Vector3)Direction * (startSize - 1);
-        var changeOffset = (Vector3)Direction * (endSize - startSize);
-        var changeSizeOffset = new Vector3(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y)) * (endSize - startSize);
-        var startSizeOffset = new Vector3(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y)) * (startSize - 1);
+        var startPos = _frontRB.transform.position;
+        var endPos = transform.position + (Vector3)Direction * (endSize - 1);
 
+        var startSpritePos = _middleRB.transform.position;
+        var endSpritePos = transform.position + .5f * (Vector3)Direction * (endSize - 1);
 
-        var defaultSize = Vector3.Max(new Vector3(1, 1), new Vector3(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y)));
+        var startSpriteSize = _spriteRenderer.size;
+        var endSpriteSize = (new Vector3(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y)) * endSize) + (Direction.x == 0 ? new Vector3(1, 0) : new Vector3(0, 1));
 
         float animationProgress = 0.0f;
         //push.Play();
@@ -85,14 +92,14 @@ public class Arrow : MonoBehaviour
             animationProgress += deltaTime;
 
             float progress = _activationAnimationCurve.Evaluate(animationProgress);
-            _frontRB.MovePosition(transform.position + startOffset + (changeOffset * progress));
-            _middleRB.MovePosition(transform.position + .5f * (startOffset + (changeOffset * progress)));
-            _spriteRenderer.size = defaultSize + startSizeOffset + (changeSizeOffset * progress);
+            _frontRB.MovePosition(startPos + ((endPos - startPos) * progress));
+            _middleRB.transform.position = startSpritePos + ((endSpritePos - startSpritePos) * progress);
+            _spriteRenderer.size = startSpriteSize + (((Vector2)endSpriteSize - startSpriteSize) * progress);
 
             //push.transform.localPosition += dist;
         }
-        _frontRB.MovePosition(transform.position + startOffset + changeOffset);
-        _middleRB.MovePosition(transform.position + .5f * (startOffset + changeOffset));
+        _frontRB.MovePosition(startPos + (endPos - startPos));
+        _middleRB.transform.position = endSpritePos;
 
         //push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
