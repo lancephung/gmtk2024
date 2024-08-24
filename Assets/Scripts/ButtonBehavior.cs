@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonBehavior : MonoBehaviour
 {
     [SerializeField] private List<Arrow> _targets = new();
+    [SerializeField] private float _deactivationDelay = .25f;
     private Animator _animator;
     private int _touching = 0;
     //public bool Loggabble = false; // for debug messages
@@ -27,9 +28,9 @@ public class ButtonBehavior : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.attachedRigidbody) return;
+        if (collision.attachedRigidbody.isKinematic) return;
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
-        if (collision.TryGetComponent(out Arrow arrow)) return;
-        Debug.Log("triggered");
+        //Debug.Log("triggered");
 
         if (!IsActive)
         {
@@ -43,13 +44,13 @@ public class ButtonBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (!collision.attachedRigidbody) return;
+        if (collision.attachedRigidbody.isKinematic) return;
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
-        if (collision.TryGetComponent(out Arrow arrow)) return;
         _touching--;
         if (IsActive) return;
         IEnumerator Delay()
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(_deactivationDelay);
             _animator.SetBool("Press", false);
             _targets.ForEach(t => t.Deactivate());
         }
