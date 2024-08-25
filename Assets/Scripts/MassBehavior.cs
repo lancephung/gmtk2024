@@ -51,7 +51,13 @@ public class MassBehavior : MonoBehaviour
         // reset velocity when stop colliding with arrow
         if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
         {
-            _rigidbody.velocity *= 0;
+            // only reset velocity in the direction the arrow is pushing
+            if (collision.transform.parent.TryGetComponent(out Arrow arrow))
+            {
+                var reverse = new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
+                _rigidbody.velocity *= reverse;
+            }
+
         }
     }
 }
