@@ -46,7 +46,9 @@ public class MassBehavior : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // reset velocity when by arrow
+        // problem occurs where stacked masses get pulled along with the bottom one, likely due to friction
+
+        // reset velocity when stop colliding with arrow
         if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
         {
             _rigidbody.velocity *= 0;
