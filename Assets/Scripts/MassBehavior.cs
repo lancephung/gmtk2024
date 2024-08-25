@@ -43,4 +43,13 @@ public class MassBehavior : MonoBehaviour
             _rigidbody.velocity *= new Vector2(0, 1);
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // reset velocity when by arrow
+        if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
+        {
+            _rigidbody.velocity *= 0;
+        }
+    }
 }

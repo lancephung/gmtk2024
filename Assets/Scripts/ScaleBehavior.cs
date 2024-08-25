@@ -262,7 +262,24 @@ public class ScaleBehavior : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
-        _rigidbody.velocity *= 0;
+        // reset horizontal velocity when pushed horizontally by mass?
+        // resetting vertical velocity appears to give player the ability to fly when pushed by masses
+        if (!collision.rigidbody.isKinematic || !collision.otherRigidbody.isKinematic)
+        {
+            _rigidbody.velocity *= Vector2.up;
+        }
+
+        // reset vertical velocity when pushed horizontally by arrow
+        if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
+        {
+            _rigidbody.velocity *= Vector2.up;
+        }
+
+        // reset horizontal velocity when pushed vertically by arrow
+        if (collision.collider == capsuleCollider || collision.otherCollider == capsuleCollider)
+        {
+            _rigidbody.velocity *= Vector2.right;
+
+        }
     }
 }
