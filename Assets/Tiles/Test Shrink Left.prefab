@@ -5100,6 +5100,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 1642171372585392096}
   _frontRB: {fileID: 5236250378602728862}
   _middleRB: {fileID: 8326604398217820307}
+  _middleCollider: {fileID: 1329832696613102932}
   _animationDuration: 0.5
   _activationAnimationCurve:
     serializedVersion: 2

@@ -16,6 +16,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Rigidbody2D _frontRB;
     [SerializeField] private Rigidbody2D _middleRB;
+    [SerializeField] private BoxCollider2D _middleCollider;
     [SerializeField] private float _animationDuration = .2f;
     [SerializeField] private AnimationCurve _activationAnimationCurve;
 
@@ -95,6 +96,8 @@ public class Arrow : MonoBehaviour
             _frontRB.MovePosition(startPos + ((endPos - startPos) * progress));
             _middleRB.transform.position = startSpritePos + ((endSpritePos - startSpritePos) * progress);
             _spriteRenderer.size = startSpriteSize + (((Vector2)endSpriteSize - startSpriteSize) * progress);
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(.8f, _spriteRenderer.size.y - 1) : new Vector2(_spriteRenderer.size.x - 1, .8f));
+
 
             //push.transform.localPosition += dist;
         }
@@ -124,6 +127,7 @@ public class Arrow : MonoBehaviour
         {
             Direction.x = Mathf.Clamp(Direction.x, -1, 1);
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(.8f, _Size - 1) : new Vector2(_Size - 1, .8f));
 
             var absDir = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
             var check = _spriteRenderer.size * absDir + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
