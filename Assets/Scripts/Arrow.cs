@@ -125,15 +125,15 @@ public class Arrow : MonoBehaviour
             Direction.x = Mathf.Clamp(Direction.x, -1, 1);
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
 
-            transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
-            var absolute = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            var check = _spriteRenderer.size * absolute;
+            var absDir = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
+            var check = _spriteRenderer.size * absDir + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
             // Debug.Log(currentSize);
             if (currentSize != _Size)
             {
-                _spriteRenderer.size += (_Size - currentSize) * absolute;
-                transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
+                _spriteRenderer.size = _Size * absDir + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
+                _frontRB.transform.localPosition = (_Size - 1) * (Vector3)Direction;
+                _middleRB.transform.localPosition = (_Size - 1) * (Vector3)Direction * .5f;
                 //push.transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
             }
         }

@@ -79,7 +79,7 @@ public class CursorManager : MonoBehaviour
         if (!CanAttack) return false;
         var mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         var hits = Physics2D.RaycastAll(mouseWorldPos, Vector2.zero);
-        return hits.Any(hit => hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow));
+        return hits.Any(hit => hit.collider && hit.collider.transform.parent.TryGetComponent(out Arrow arrow));
     }
 
 }

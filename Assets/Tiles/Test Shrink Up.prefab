@@ -4956,7 +4956,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0.5, z: 0, w: 0.4375}
+    border: {x: 0, y: 0.4375, z: 0, w: 0.5}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -4965,7 +4965,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.8}
+  m_Size: {x: 0.8, y: 0.5}
   m_EdgeRadius: 0.1
 --- !u!50 &8326604398217820307
 Rigidbody2D:
@@ -5035,7 +5035,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1855652440, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
+  m_Sprite: {fileID: -1615323249, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5057,7 +5057,7 @@ GameObject:
   - component: {fileID: 2694050249075934132}
   - component: {fileID: 4922207924229783140}
   m_Layer: 8
-  m_Name: testGrowDown
+  m_Name: Test Shrink Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5094,7 +5094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978a402c3da717e4fbbcc0a5c787999c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsShrink: 0
+  IsShrink: 1
   UseLinear: 0
   boost: 0
   _spriteRenderer: {fileID: 1642171372585392096}
@@ -5139,7 +5139,7 @@ GameObject:
   - component: {fileID: 4007297829717440361}
   - component: {fileID: 5348368669342705126}
   - component: {fileID: 5236250378602728862}
-  - component: {fileID: 4927786204891743076}
+  - component: {fileID: 1856573806822991517}
   m_Layer: 8
   m_Name: Front Hitbox
   m_TagString: Untagged
@@ -5196,7 +5196,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0.5, z: 0, w: 0.4375}
+    border: {x: 0, y: 0.4375, z: 0, w: 0.5}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -5234,7 +5234,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 5
---- !u!212 &4927786204891743076
+--- !u!212 &1856573806822991517
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5275,7 +5275,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1855652440, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
+  m_Sprite: {fileID: -1615323249, guid: 005435fd7d640814884e71b3d44d6a7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
