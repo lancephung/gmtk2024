@@ -107,6 +107,7 @@ public class ScaleBehavior : MonoBehaviour
 
         if (_freezeX)
         {
+            // dont freeze x when on a slope
             _rigidbody.velocity *= Vector3.up;
         }
     }
@@ -257,5 +258,11 @@ public class ScaleBehavior : MonoBehaviour
         if (!check) return;
         
         _previousFloorY = transform.position.y;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
+        _rigidbody.velocity *= 0;
     }
 }
