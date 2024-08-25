@@ -108,6 +108,10 @@ PrefabInstance:
       propertyPath: Direction.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6461636389729564348, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7042081067424966265, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
       propertyPath: ShapeModule.m_Scale.x
       value: 1
@@ -163,6 +167,10 @@ PrefabInstance:
     - target: {fileID: 8225309726879563956, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
       propertyPath: m_SpriteTilingProperty.border.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8946533135136068822, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

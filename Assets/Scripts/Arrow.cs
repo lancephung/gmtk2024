@@ -104,7 +104,7 @@ public class Arrow : MonoBehaviour
 
             //push.transform.localPosition += dist;
         }
-        _frontRB.MovePosition(startPos + (endPos - startPos));
+        _frontRB.MovePosition(endPos);
         _middleRB.transform.position = endSpritePos;
 
         //push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
