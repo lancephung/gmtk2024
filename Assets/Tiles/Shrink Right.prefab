@@ -175,6 +175,17 @@ MonoBehaviour:
   IsShrink: 1
   UseLinear: 1
   boost: 0
+  _spriteRenderer: {fileID: 0}
+  _frontRB: {fileID: 0}
+  _middleRB: {fileID: 0}
+  _middleCollider: {fileID: 0}
+  _animationDuration: 0.2
+  _activationAnimationCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   ButtonToggle: 0
   Direction: {x: -1, y: 0}
   _Size: 2
