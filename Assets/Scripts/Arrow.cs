@@ -132,8 +132,7 @@ public class Arrow : MonoBehaviour
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
             _Size = Mathf.Max(1, _Size);
 
-            var colliderSize = AbsoluteDirection.x == 0 ? .8f : .75f;
-            _middleCollider.size = (Direction.x == 0 ? new Vector2(colliderSize, _Size - .5f) : new Vector2(_Size - .5f, colliderSize));
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(_middleCollider.size.x, _Size - .5f) : new Vector2(_Size - .5f, _middleCollider.size.y));
 
             var check = _spriteRenderer.size * AbsoluteDirection + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));

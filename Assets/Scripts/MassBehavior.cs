@@ -6,6 +6,7 @@ public class MassBehavior : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
     public bool FreezeX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +64,10 @@ public class MassBehavior : MonoBehaviour
                     _rigidbody.velocity *= reverse;
                 }
                 
+            }
+            if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
+            {
+                _rigidbody.velocity *= Vector2.up;
             }
 
         }
