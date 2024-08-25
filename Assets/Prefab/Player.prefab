@@ -10486,7 +10486,7 @@ Rigidbody2D:
   m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 1c3e686f275658546af98a79c15f9c9a, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -10510,6 +10510,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _StartingMass: 0
+  _isDebugging: 0
+  _freezeX: 0
+  _groundPhysicsMaterial: {fileID: 6200000, guid: 5e8b472071b5992459d2adde1daad87a, type: 2}
+  _frictionlessPhysicsMaterial: {fileID: 6200000, guid: 3d82a6f91a98a9945add8dbb3f08527a, type: 2}
 --- !u!95 &7975835506803841130
 Animator:
   serializedVersion: 5
@@ -10540,7 +10544,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 6885095950228208726}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: eef1b2514e8e3b3478965fde01a488ea, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

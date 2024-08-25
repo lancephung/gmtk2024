@@ -99,7 +99,7 @@ public class Arrow : MonoBehaviour
             _frontRB.MovePosition(startPos + ((endPos - startPos) * progress));
             _middleRB.transform.position = startSpritePos + ((endSpritePos - startSpritePos) * progress);
             _spriteRenderer.size = startSpriteSize + (((Vector2)endSpriteSize - startSpriteSize) * progress);
-            _middleCollider.size = (Direction.x == 0 ? new Vector2(.8f, _spriteRenderer.size.y - 1) : new Vector2(_spriteRenderer.size.x - 1, .8f));
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(_middleCollider.size.x, _spriteRenderer.size.y - .5f) : new Vector2(_spriteRenderer.size.x - .5f, _middleCollider.size.y));
 
 
             //push.transform.localPosition += dist;
@@ -130,7 +130,10 @@ public class Arrow : MonoBehaviour
         {
             Direction.x = Mathf.Clamp(Direction.x, -1, 1);
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
-            _middleCollider.size = (Direction.x == 0 ? new Vector2(.8f, _Size - 1) : new Vector2(_Size - 1, .8f));
+            _Size = Mathf.Max(1, _Size);
+
+            var colliderSize = AbsoluteDirection.x == 0 ? .8f : .75f;
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(colliderSize, _Size - .5f) : new Vector2(_Size - .5f, colliderSize));
 
             var check = _spriteRenderer.size * AbsoluteDirection + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));

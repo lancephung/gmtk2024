@@ -13,6 +13,8 @@ public class ScaleBehavior : MonoBehaviour
 
     [SerializeField] int _StartingMass = 0;
 
+    [SerializeField] private bool _isDebugging = false;
+
     float _previousFloorY = Mathf.NegativeInfinity;
 
     Rigidbody2D _rigidbody;
@@ -24,6 +26,10 @@ public class ScaleBehavior : MonoBehaviour
     public static string CauseOfDeathStr = "";
 
     [SerializeField] private bool _freezeX = false;
+
+    [SerializeField] private PhysicsMaterial2D _groundPhysicsMaterial; // to be applied when on the ground and slope to prevent unintended sliding
+    [SerializeField] private PhysicsMaterial2D _frictionlessPhysicsMaterial; // to be applied when player is sitting on a mass or arrow block to avoid being dragged
+
 
     Animator animator;
 
@@ -203,6 +209,38 @@ public class ScaleBehavior : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        
+        if (collision.collider == capsuleCollider)
+        {
+            if (collision?.otherRigidbody?.isKinematic == true)
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                Debug.Log("sitting on a mass or arrow");
+            }
+            else
+            {
+                // Change material to have friction on ground/slope
+                _rigidbody.sharedMaterial = _groundPhysicsMaterial;
+                Debug.Log("found some ground");
+            }
+        }
+        if (collision.otherCollider == capsuleCollider)
+        {
+            if (collision?.rigidbody?.isKinematic == true)
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                Debug.Log("sitting on a mass or arrow");
+            }
+            else
+            {
+                // Change material to have friction on ground/slope
+                _rigidbody.sharedMaterial = _groundPhysicsMaterial;
+                Debug.Log("found some ground");
+            }
+        }
+
         if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
         bool check = false;
         for (int i = 0; i < collision.contactCount; i++)
@@ -264,21 +302,26 @@ public class ScaleBehavior : MonoBehaviour
     {
         // reset horizontal velocity when pushed horizontally by mass?
         // resetting vertical velocity appears to give player the ability to fly when pushed by masses
-        if (!collision.rigidbody.isKinematic || !collision.otherRigidbody.isKinematic)
+        if (collision?.rigidbody?.isKinematic != true || collision?.otherRigidbody?.isKinematic != true)
         {
             _rigidbody.velocity *= Vector2.up;
+            Debug.Log("stopped 1");
+
         }
 
         // reset vertical velocity when pushed horizontally by arrow
-        if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
+        if (collision?.rigidbody?.isKinematic == true || collision?.otherRigidbody?.isKinematic == true)
         {
             _rigidbody.velocity *= Vector2.up;
+            Debug.Log("stopped 2");
+
         }
 
         // reset horizontal velocity when pushed vertically by arrow
         if (collision.collider == capsuleCollider || collision.otherCollider == capsuleCollider)
         {
             _rigidbody.velocity *= Vector2.right;
+            Debug.Log("stopped 3");
 
         }
     }

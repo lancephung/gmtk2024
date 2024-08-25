@@ -4965,7 +4965,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.8}
+  m_Size: {x: 0.5, y: 0.75}
   m_EdgeRadius: 0.1
 --- !u!50 &8326604398217820307
 Rigidbody2D:
@@ -4983,7 +4983,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d82a6f91a98a9945add8dbb3f08527a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5224,7 +5224,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d82a6f91a98a9945add8dbb3f08527a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -5381,7 +5381,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 3d82a6f91a98a9945add8dbb3f08527a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

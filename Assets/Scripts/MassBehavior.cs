@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MassBehavior : MonoBehaviour
@@ -49,13 +50,19 @@ public class MassBehavior : MonoBehaviour
         // problem occurs where stacked masses get pulled along with the bottom one, likely due to friction
 
         // reset velocity when stop colliding with arrow
+        if (!collision.rigidbody || !collision.otherRigidbody) return;
         if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
         {
             // only reset velocity in the direction the arrow is pushing
             if (collision.transform.parent.TryGetComponent(out Arrow arrow))
             {
-                var reverse = new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
-                _rigidbody.velocity *= reverse;
+                // dont reset velocity when being pushed down (and likely falling)
+                if (arrow.Direction.y != -1)
+                {
+                    var reverse = new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
+                    _rigidbody.velocity *= reverse;
+                }
+                
             }
 
         }
