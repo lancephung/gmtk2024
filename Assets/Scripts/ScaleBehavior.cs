@@ -23,6 +23,8 @@ public class ScaleBehavior : MonoBehaviour
     public static bool Dead = false;
     public static string CauseOfDeathStr = "";
 
+    [SerializeField] private bool _freezeX = false;
+
     Animator animator;
 
     // Start is called before the first frame update
@@ -101,6 +103,11 @@ public class ScaleBehavior : MonoBehaviour
                 Die("crushed to death");
             }
             crushTime += Time.fixedDeltaTime;
+        }
+
+        if (_freezeX)
+        {
+            _rigidbody.velocity *= Vector3.up;
         }
     }
 
