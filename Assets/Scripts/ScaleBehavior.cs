@@ -212,7 +212,7 @@ public class ScaleBehavior : MonoBehaviour
         
         if (collision.collider == capsuleCollider)
         {
-            if (collision?.otherRigidbody?.isKinematic == true)
+            if (collision?.otherRigidbody?.isKinematic == true || collision?.otherRigidbody?.TryGetComponent(out MassBehavior mass) != null)
             {
                 // Change material to be frictionless on mass / arrow
                 _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
@@ -227,7 +227,7 @@ public class ScaleBehavior : MonoBehaviour
         }
         if (collision.otherCollider == capsuleCollider)
         {
-            if (collision?.rigidbody?.isKinematic == true)
+            if (collision?.rigidbody?.isKinematic == true || collision?.rigidbody?.TryGetComponent(out MassBehavior mass) != null)
             {
                 // Change material to be frictionless on mass / arrow
                 _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
@@ -240,6 +240,7 @@ public class ScaleBehavior : MonoBehaviour
                 Debug.Log("found some ground");
             }
         }
+
 
         if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
         bool check = false;
