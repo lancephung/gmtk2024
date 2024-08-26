@@ -5910,6 +5910,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Expand Right (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5645958669251219995, guid: eac9577dae1a51e46a969c41a45e3aeb, type: 3}
+      propertyPath: _animationDuration
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
