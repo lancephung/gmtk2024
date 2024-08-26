@@ -74,6 +74,9 @@ public class ScaleBehavior : MonoBehaviour
         //{
         //    Absorb();
         //};
+
+        MoveCounter.Instance.IndicateMoves(Mass);
+
     }
 
     void Die(string deathStr)

@@ -15,10 +15,9 @@ public class MoveCounter : MonoBehaviour
     private Coroutine _animation;
 
     // Update is called once per frame
-    private void Start()
+    private void Awake()
     {
         Instance = this;
-        IndicateMoves(0);
     }
 
     public void IndicateMoves(int moves, bool isWarning = false)
