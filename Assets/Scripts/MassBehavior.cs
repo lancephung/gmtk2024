@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MassBehavior : MonoBehaviour
@@ -5,6 +6,7 @@ public class MassBehavior : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private BoxCollider2D _collider;
     public bool FreezeX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,42 @@ public class MassBehavior : MonoBehaviour
         if (FreezeX)
         {
             _rigidbody.velocity *= new Vector2(0, 1);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // reset velocity when stop colliding with arrow
+        if (!collision.rigidbody || !collision.otherRigidbody) return;
+        if (collision.rigidbody.bodyType == RigidbodyType2D.Kinematic || collision.otherRigidbody.bodyType == RigidbodyType2D.Kinematic)
+        {
+            // only reset velocity in the direction the arrow is pushing
+            if (collision.transform.parent.TryGetComponent(out Arrow arrow))
+            {
+                // dont reset velocity when being pushed down (and likely falling)
+                if (arrow.Direction.y != -1)
+                {
+                    _rigidbody.velocity *= new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
+                }
+                
+            }
+            
+
+        }
+        if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
+        {
+            _rigidbody.velocity *= Vector2.up;
+        }
+
+        // detect mass getting flung upwards
+        if (collision.rigidbody.bodyType == RigidbodyType2D.Dynamic && collision.otherRigidbody.bodyType == RigidbodyType2D.Dynamic)
+        {
+            // reset y velocity if being shot upwards up
+            if (_rigidbody.velocity.y > .1f)
+            {
+                _rigidbody.velocity *= Vector2.right;
+            }
+
         }
     }
 }

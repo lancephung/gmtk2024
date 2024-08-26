@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -8,17 +9,29 @@ public class Arrow : MonoBehaviour
     public bool UseLinear;
     public int boost;
     //[SerializeField] private bool isShrink = false;
-    BoxCollider2D collider;
-    SpriteRenderer sprite;
-    ParticleSystem push;
+    //BoxCollider2D collider;
+    //SpriteRenderer sprite;
+    //ParticleSystem push;
+
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Rigidbody2D _frontRB;
+    [SerializeField] private Rigidbody2D _middleRB;
+    [SerializeField] private BoxCollider2D _middleCollider;
+    [SerializeField] private float _animationDuration = .2f;
+    [SerializeField] private AnimationCurve _activationAnimationCurve;
+
+    private Coroutine _animationRoutine;
 
     public bool ButtonToggle = false; // for arrows that are toggled by a button like the escalator in level 11
 
     public float DistPerActivation => ButtonToggle ? 1.5f : 1;
     public int ActivateDir => IsShrink ? -1 : 1;
 
+    public Vector2 AbsoluteDirection => new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
+
     public Vector2 Direction = Vector2.right;
-    private Rigidbody2D _rigidbody;
+
+    //private Rigidbody2D _rigidbody;
 
     [SerializeField] private float _Size = 1;
     public float Size { get { return _Size; }
@@ -27,7 +40,13 @@ public class Arrow : MonoBehaviour
             if (value == _Size || value <= 0) return;
             if (this == null) return;
             float target = Mathf.Max(1, value);
-            StartCoroutine(UpdateSize(target - _Size));
+
+            if (_animationRoutine != null)
+            {
+                StopCoroutine(_animationRoutine);
+            }
+            _animationRoutine = StartCoroutine(UpdateSize(target));
+
             _Size = target;
         }
     }
@@ -56,38 +75,50 @@ public class Arrow : MonoBehaviour
         }
     }
 
-    IEnumerator UpdateSize(float change)
+    IEnumerator UpdateSize(float endSize)
     {
-        float progress = 0.0f;
+        var startPos = _frontRB.transform.position;
+        var endPos = transform.position + (Vector3)Direction * (endSize - 1);
 
-        float duration = 0.7f;
+        var startSpritePos = _middleRB.transform.position;
+        var endSpritePos = transform.position + .5f * (Vector3)Direction * (endSize - 1);
 
-        push.Play();
-        while (progress < 1.0f)
+        var startSpriteSize = _spriteRenderer.size;
+        var endSpriteSize = ((Vector3)AbsoluteDirection * endSize) + (Direction.x == 0 ? new Vector3(1, 0) : new Vector3(0, 1));
+
+        float animationProgress = 0.0f;
+        //push.Play();
+        while (animationProgress < 1.0f)
         {
             yield return new WaitForEndOfFrame();
             if (this == null) yield break;
-            float deltaTime = Mathf.Min(progress + Time.deltaTime / duration, 1) - progress;
-            float ease = change * (EasingFunction(progress + deltaTime) - EasingFunction(progress));
-            progress += deltaTime;
-            
-            sprite.size += ease * new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            var dist = ease * 0.5f * (transform.rotation * (Vector3)Direction);
-            transform.position += dist;
-            push.transform.localPosition += dist;
+            float deltaTime = Mathf.Min(animationProgress + Time.deltaTime / _animationDuration, 1) - animationProgress;
+            animationProgress += deltaTime;
+
+            float progress = _activationAnimationCurve.Evaluate(animationProgress);
+            _frontRB.MovePosition(startPos + ((endPos - startPos) * progress));
+            _middleRB.transform.position = startSpritePos + ((endSpritePos - startSpritePos) * progress);
+            _spriteRenderer.size = startSpriteSize + (((Vector2)endSpriteSize - startSpriteSize) * progress);
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(_middleCollider.size.x, _spriteRenderer.size.y - .5f) : new Vector2(_spriteRenderer.size.x - .5f, _middleCollider.size.y));
+
+
+            //push.transform.localPosition += dist;
         }
-        push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        _frontRB.MovePosition(endPos);
+        _middleRB.transform.position = endSpritePos;
+
+        //push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
-        sprite = GetComponent<SpriteRenderer>();
-        push = GetComponentInChildren<ParticleSystem>();
-        _rigidbody = GetComponent<Rigidbody2D>();
+        //collider = GetComponent<BoxCollider2D>();
+        //sprite = _middleObj.GetComponent<SpriteRenderer>();
+        //push = GetComponentInChildren<ParticleSystem>();
+        //_rigidbody = GetComponent<Rigidbody2D>();
 
-        collider.edgeRadius = 0.1f;
+        //collider.edgeRadius = 0.1f;
     }
 
     // Update is called once per frame
@@ -99,22 +130,24 @@ public class Arrow : MonoBehaviour
         {
             Direction.x = Mathf.Clamp(Direction.x, -1, 1);
             Direction.y = Mathf.Clamp(Direction.y, -1, 1);
+            _Size = Mathf.Max(1, _Size);
 
-            transform.position = new Vector2(Mathf.Round(transform.position.x * 2) * 0.5f, Mathf.Round(transform.position.y * 2) * 0.5f);
-            var absolute = new Vector2(Mathf.Abs(Direction.x), Mathf.Abs(Direction.y));
-            var check = sprite.size * absolute;
+            _middleCollider.size = (Direction.x == 0 ? new Vector2(_middleCollider.size.x, _Size - .5f) : new Vector2(_Size - .5f, _middleCollider.size.y));
+
+            var check = _spriteRenderer.size * AbsoluteDirection + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
             int currentSize = Mathf.RoundToInt(Mathf.Max(check.x, check.y));
             // Debug.Log(currentSize);
             if (currentSize != _Size)
             {
-                sprite.size += (_Size - currentSize) * absolute;
-                transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
-                push.transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
+                _spriteRenderer.size = _Size * AbsoluteDirection + (Direction.x == 0 ? new Vector2(1, 0) : new Vector2(0, 1));
+                _frontRB.transform.localPosition = (_Size - 1) * (Vector3)Direction;
+                _middleRB.transform.localPosition = (_Size - 1) * (Vector3)Direction * .5f;
+                //push.transform.position += (_Size - currentSize) * 0.5f * (Vector3) Direction;
             }
         }
 
         #endif
 
-        collider.size = sprite.size - 0.2f * Vector2.one;
+        //collider.size = sprite.size - 0.2f * Vector2.one;
     }
 }

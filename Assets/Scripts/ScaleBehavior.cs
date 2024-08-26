@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,8 @@ public class ScaleBehavior : MonoBehaviour
 
     [SerializeField] int _StartingMass = 0;
 
+    [SerializeField] private bool _isDebugging = false;
+
     float _previousFloorY = Mathf.NegativeInfinity;
 
     Rigidbody2D _rigidbody;
@@ -22,6 +25,12 @@ public class ScaleBehavior : MonoBehaviour
 
     public static bool Dead = false;
     public static string CauseOfDeathStr = "";
+
+    [SerializeField] private bool _freezeX = false;
+
+    [SerializeField] private PhysicsMaterial2D _groundPhysicsMaterial; // to be applied when on the ground and slope to prevent unintended sliding
+    [SerializeField] private PhysicsMaterial2D _frictionlessPhysicsMaterial; // to be applied when player is sitting on a mass or arrow block to avoid being dragged
+
 
     Animator animator;
 
@@ -41,7 +50,7 @@ public class ScaleBehavior : MonoBehaviour
             if (Dead) return;
             var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null && hit.collider.TryGetComponent(out Arrow arrow) && Mass > 0)
+            if (hit.collider != null && hit.collider.transform.parent.TryGetComponent(out Arrow arrow) && Mass > 0)
             {
                 //Debug.Log(hit.rigidbody.mass);
                 if (arrow.IsShrink && arrow.Size <= 1) return;
@@ -82,9 +91,12 @@ public class ScaleBehavior : MonoBehaviour
             // Die by being crushed
             Die("crushed by weight");
         }
-
-        down = mass_ontop > 0;
         HeldMass = mass_ontop;
+
+        var detectMassDistance = 1f; // seems to make absorbing multiple masses smoother but also appears to break one of the absorb particle animations
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, detectMassDistance);
+        var detectMass = hits.Any(hit => hit.collider.attachedRigidbody && hit.collider.attachedRigidbody != _rigidbody && hit.collider.attachedRigidbody.bodyType == RigidbodyType2D.Dynamic);
+        down = mass_ontop > 0 || detectMass;
         animator.SetBool("Down", down);
 
         Absorb();
@@ -95,12 +107,18 @@ public class ScaleBehavior : MonoBehaviour
         }
         else
         {
-            if (crushTime > 0.5f)
+            if (crushTime > 0.25f)
             {
                 //Debug.Log("crushed to death");
                 Die("crushed to death");
             }
             crushTime += Time.fixedDeltaTime;
+        }
+
+        if (_freezeX)
+        {
+            // dont freeze x when on a slope
+            _rigidbody.velocity *= Vector3.up;
         }
     }
 
@@ -154,7 +172,7 @@ public class ScaleBehavior : MonoBehaviour
         {
             var body = hit.collider.attachedRigidbody;
 
-            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Kinematic || body.bodyType == RigidbodyType2D.Static) continue;
             if (body.CompareTag("dying")) continue;
 
             int mass = Mathf.Max(0, AbsorbableMass - Mass);
@@ -195,6 +213,39 @@ public class ScaleBehavior : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        
+        if (collision.collider == capsuleCollider)
+        {
+            if (collision?.otherRigidbody?.bodyType == RigidbodyType2D.Static)
+            {
+                // Change material to have friction on ground/slope
+                _rigidbody.sharedMaterial = _groundPhysicsMaterial;
+                //Debug.Log("found some ground");
+            }
+            else
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                //Debug.Log("sitting on a mass or arrow");
+            }
+        }
+        if (collision.otherCollider == capsuleCollider)
+        {
+            if (collision?.otherRigidbody?.bodyType == RigidbodyType2D.Static)
+            {
+                // Change material to have friction on ground/slope
+                _rigidbody.sharedMaterial = _groundPhysicsMaterial;
+                //Debug.Log("found some ground");
+            }
+            else
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                //Debug.Log("sitting on a mass or arrow");
+            }
+        }
+
+
         if (collision.collider != capsuleCollider && collision.otherCollider != capsuleCollider) return;
         bool check = false;
         for (int i = 0; i < collision.contactCount; i++)
@@ -250,5 +301,36 @@ public class ScaleBehavior : MonoBehaviour
         if (!check) return;
         
         _previousFloorY = transform.position.y;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // reset horizontal velocity when pushed horizontally by mass?
+        // resetting vertical velocity appears to give player the ability to fly when pushed by masses
+        if (collision?.rigidbody?.isKinematic != true || collision?.otherRigidbody?.isKinematic != true)
+        {
+            _rigidbody.velocity *= Vector2.up;
+            //Debug.Log("stopped 1");
+        }
+
+        // reset vertical velocity when pushed horizontally by arrow
+        if (collision?.rigidbody?.bodyType == RigidbodyType2D.Kinematic || collision?.otherRigidbody?.bodyType == RigidbodyType2D.Kinematic)
+        {
+            _rigidbody.velocity *= Vector2.up;
+            //Debug.Log("stopped 2");
+        }
+
+        // reset vertical velocity when pushed upwards
+        if (collision.collider == capsuleCollider || collision.otherCollider == capsuleCollider)
+        {
+            // apparently this code also catches when a mass underneath the player starts falling and then the player starts falling
+            // also catches when a mass is pushed into the player from above or the side for the purpose of absorbing mass while falling
+            // fix these issues by only resetting y velocity if going upwards
+            if (_rigidbody.velocity.y > .05f)
+            {
+                _rigidbody.velocity *= Vector2.right;
+            }
+            //Debug.Log("stopped 3");
+        }
     }
 }

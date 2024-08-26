@@ -7,7 +7,7 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private Texture2D _defaultCursor;
     [SerializeField] private Texture2D _hoverCursor; // cursor for when hovering over arrow tiles
     [SerializeField] private Texture2D _attackCursor; // onactivation
-    [SerializeField] private static Vector2 _cursorOffset;
+    [SerializeField] private Vector2 _cursorOffset;
 
     private ParticleSystem _particleSystem;
 
@@ -26,6 +26,7 @@ public class CursorManager : MonoBehaviour
         HoverCursor = _hoverCursor;
         AttackCursor = _attackCursor;
         CursorOffset = _cursorOffset;
+        Debug.Log(CursorOffset);
         ShowCursor(DefaultCursor);
         _particleSystem = GetComponent<ParticleSystem>();
 
@@ -79,7 +80,7 @@ public class CursorManager : MonoBehaviour
         if (!CanAttack) return false;
         var mouseWorldPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         var hits = Physics2D.RaycastAll(mouseWorldPos, Vector2.zero);
-        return hits.Any(hit => hit.collider && hit.collider.gameObject.TryGetComponent(out Arrow arrow));
+        return hits.Any(hit => hit.collider.transform?.parent?.TryGetComponent(out Arrow arrow) == true);
     }
 
 }
