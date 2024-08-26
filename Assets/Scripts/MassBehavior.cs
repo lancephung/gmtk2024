@@ -48,11 +48,9 @@ public class MassBehavior : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        // problem occurs where stacked masses get pulled along with the bottom one, likely due to friction
-
         // reset velocity when stop colliding with arrow
         if (!collision.rigidbody || !collision.otherRigidbody) return;
-        if (collision.rigidbody.isKinematic || collision.otherRigidbody.isKinematic)
+        if (collision.rigidbody.bodyType == RigidbodyType2D.Kinematic || collision.otherRigidbody.bodyType == RigidbodyType2D.Kinematic)
         {
             // only reset velocity in the direction the arrow is pushing
             if (collision.transform.parent.TryGetComponent(out Arrow arrow))
@@ -60,15 +58,14 @@ public class MassBehavior : MonoBehaviour
                 // dont reset velocity when being pushed down (and likely falling)
                 if (arrow.Direction.y != -1)
                 {
-                    var reverse = new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
-                    _rigidbody.velocity *= reverse;
+                    _rigidbody.velocity *= new Vector2(arrow.AbsoluteDirection.y, arrow.AbsoluteDirection.x);
                 }
                 
             }
-            if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
-            {
-                _rigidbody.velocity *= Vector2.up;
-            }
+            //if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
+            //{
+            //    _rigidbody.velocity *= Vector2.up;
+            //}
 
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ButtonBehavior : MonoBehaviour
 {
     [SerializeField] private List<Arrow> _targets = new();
+    [SerializeField] private float _activationDelay = 0;
     [SerializeField] private float _deactivationDelay = .25f;
     private Animator _animator;
     private int _touching = 0;
@@ -31,14 +32,17 @@ public class ButtonBehavior : MonoBehaviour
         if (collision.attachedRigidbody.isKinematic) return;
         if (collision.TryGetComponent(out ScaleBehavior scale) && collision.isTrigger) return;
         //Debug.Log("triggered");
-
-        if (!IsActive)
-        {
-            _animator.SetBool("Press", true);
-            _targets.ForEach(t => t.Activate());
-
-        }
+        var active = IsActive;
         _touching++;
+        if (active) return;
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(_activationDelay);
+            _targets.ForEach(t => t.Activate());
+            Debug.Log("deez nuts");
+        }
+        _animator.SetBool("Press", true);
+        StartCoroutine(Delay());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -51,10 +55,9 @@ public class ButtonBehavior : MonoBehaviour
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(_deactivationDelay);
-            _animator.SetBool("Press", false);
             _targets.ForEach(t => t.Deactivate());
         }
-
+        _animator.SetBool("Press", false);
         StartCoroutine(Delay());
     }
 }

@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4820543296920061874}
-  - {fileID: 2874602335892886938}
+  - {fileID: 3024323636701085118}
   - {fileID: 1159979312997292149}
   - {fileID: 9029767317451747699}
   m_Father: {fileID: 0}
@@ -109,6 +109,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4118975630924712984}
     m_Modifications:
+    - target: {fileID: 112965929427543642, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3767193391704673733, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -149,18 +153,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4420703640441575564, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6541789684563193738, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
       propertyPath: m_Name
-      value: Compact Clock Expand Up
+      value: Compact Clock Grow Up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
---- !u!114 &2052568178492034211 stripped
+--- !u!114 &1614932554368704732 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6155224441789673493, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6881090648292285546, guid: d224ed50ad2ab3f428ef61530425ac18, type: 3}
   m_PrefabInstance: {fileID: 5266942063473409206}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -192,7 +200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8122189821208145769, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8122189821208145769, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_LocalPosition.z
@@ -236,7 +244,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8122189821208145769, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
   m_PrefabInstance: {fileID: 6966720704908031772}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &9167416982545775081
+--- !u!1001 &8152950078131392973
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -251,7 +259,7 @@ PrefabInstance:
     - target: {fileID: 1740756468303746980, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
       propertyPath: _targets.Array.data[0]
       value: 
-      objectReference: {fileID: 2052568178492034211}
+      objectReference: {fileID: 1614932554368704732}
     - target: {fileID: 6403439947946224755, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -296,21 +304,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Compact Clock Button
       objectReference: {fileID: 0}
-    - target: {fileID: 8838911066710632218, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
-      propertyPath: m_Size.y
-      value: 0.25235486
-      objectReference: {fileID: 0}
-    - target: {fileID: 8838911066710632218, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.22838032
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
---- !u!4 &2874602335892886938 stripped
+--- !u!4 &3024323636701085118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6403439947946224755, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
-  m_PrefabInstance: {fileID: 9167416982545775081}
+  m_PrefabInstance: {fileID: 8152950078131392973}
   m_PrefabAsset: {fileID: 0}

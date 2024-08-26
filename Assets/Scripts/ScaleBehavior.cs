@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -90,9 +91,12 @@ public class ScaleBehavior : MonoBehaviour
             // Die by being crushed
             Die("crushed by weight");
         }
-
-        down = mass_ontop > 0;
         HeldMass = mass_ontop;
+
+        var detectMassDistance = .5f;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, detectMassDistance);
+        var detectMass = hits.Any(hit => hit.collider.attachedRigidbody && hit.collider.attachedRigidbody != _rigidbody && hit.collider.attachedRigidbody.bodyType == RigidbodyType2D.Dynamic);
+        down = mass_ontop > 0 || detectMass;
         animator.SetBool("Down", down);
 
         Absorb();
@@ -168,7 +172,7 @@ public class ScaleBehavior : MonoBehaviour
         {
             var body = hit.collider.attachedRigidbody;
 
-            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Static) continue;
+            if (body == null || body == _rigidbody || body.bodyType == RigidbodyType2D.Kinematic || body.bodyType == RigidbodyType2D.Static) continue;
             if (body.CompareTag("dying")) continue;
 
             int mass = Mathf.Max(0, AbsorbableMass - Mass);
@@ -212,32 +216,32 @@ public class ScaleBehavior : MonoBehaviour
         
         if (collision.collider == capsuleCollider)
         {
-            if (collision?.otherRigidbody?.isKinematic == true || collision?.otherRigidbody?.TryGetComponent(out MassBehavior mass) != null)
-            {
-                // Change material to be frictionless on mass / arrow
-                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
-                Debug.Log("sitting on a mass or arrow");
-            }
-            else
+            if (collision?.otherRigidbody?.bodyType == RigidbodyType2D.Static)
             {
                 // Change material to have friction on ground/slope
                 _rigidbody.sharedMaterial = _groundPhysicsMaterial;
                 Debug.Log("found some ground");
+            }
+            else
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                Debug.Log("sitting on a mass or arrow");
             }
         }
         if (collision.otherCollider == capsuleCollider)
         {
-            if (collision?.rigidbody?.isKinematic == true || collision?.rigidbody?.TryGetComponent(out MassBehavior mass) != null)
-            {
-                // Change material to be frictionless on mass / arrow
-                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
-                Debug.Log("sitting on a mass or arrow");
-            }
-            else
+            if (collision?.otherRigidbody?.bodyType == RigidbodyType2D.Static)
             {
                 // Change material to have friction on ground/slope
                 _rigidbody.sharedMaterial = _groundPhysicsMaterial;
                 Debug.Log("found some ground");
+            }
+            else
+            {
+                // Change material to be frictionless on mass / arrow
+                _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
+                Debug.Log("sitting on a mass or arrow");
             }
         }
 
@@ -307,15 +311,13 @@ public class ScaleBehavior : MonoBehaviour
         {
             _rigidbody.velocity *= Vector2.up;
             Debug.Log("stopped 1");
-
         }
 
         // reset vertical velocity when pushed horizontally by arrow
-        if (collision?.rigidbody?.isKinematic == true || collision?.otherRigidbody?.isKinematic == true)
+        if (collision?.rigidbody?.bodyType == RigidbodyType2D.Kinematic || collision?.otherRigidbody?.bodyType == RigidbodyType2D.Kinematic)
         {
             _rigidbody.velocity *= Vector2.up;
             Debug.Log("stopped 2");
-
         }
 
         // reset horizontal velocity when pushed vertically by arrow
@@ -323,7 +325,6 @@ public class ScaleBehavior : MonoBehaviour
         {
             _rigidbody.velocity *= Vector2.right;
             Debug.Log("stopped 3");
-
         }
     }
 }
