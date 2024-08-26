@@ -62,11 +62,12 @@ public class MassBehavior : MonoBehaviour
                 }
                 
             }
-            //if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
-            //{
-            //    _rigidbody.velocity *= Vector2.up;
-            //}
+            
 
+        }
+        if (collision.collider.TryGetComponent(out MassBehavior mass1) && collision.otherCollider.TryGetComponent(out MassBehavior mass2))
+        {
+            _rigidbody.velocity *= Vector2.up;
         }
     }
 }
