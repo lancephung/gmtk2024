@@ -39,7 +39,6 @@ public class ButtonBehavior : MonoBehaviour
         {
             yield return new WaitForSeconds(_activationDelay);
             _targets.ForEach(t => t.Activate());
-            Debug.Log("deez nuts");
         }
         _animator.SetBool("Press", true);
         StartCoroutine(Delay());
