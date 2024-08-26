@@ -220,13 +220,13 @@ public class ScaleBehavior : MonoBehaviour
             {
                 // Change material to have friction on ground/slope
                 _rigidbody.sharedMaterial = _groundPhysicsMaterial;
-                Debug.Log("found some ground");
+                //Debug.Log("found some ground");
             }
             else
             {
                 // Change material to be frictionless on mass / arrow
                 _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
-                Debug.Log("sitting on a mass or arrow");
+                //Debug.Log("sitting on a mass or arrow");
             }
         }
         if (collision.otherCollider == capsuleCollider)
@@ -235,13 +235,13 @@ public class ScaleBehavior : MonoBehaviour
             {
                 // Change material to have friction on ground/slope
                 _rigidbody.sharedMaterial = _groundPhysicsMaterial;
-                Debug.Log("found some ground");
+                //Debug.Log("found some ground");
             }
             else
             {
                 // Change material to be frictionless on mass / arrow
                 _rigidbody.sharedMaterial = _frictionlessPhysicsMaterial;
-                Debug.Log("sitting on a mass or arrow");
+                //Debug.Log("sitting on a mass or arrow");
             }
         }
 
@@ -310,14 +310,14 @@ public class ScaleBehavior : MonoBehaviour
         if (collision?.rigidbody?.isKinematic != true || collision?.otherRigidbody?.isKinematic != true)
         {
             _rigidbody.velocity *= Vector2.up;
-            Debug.Log("stopped 1");
+            //Debug.Log("stopped 1");
         }
 
         // reset vertical velocity when pushed horizontally by arrow
         if (collision?.rigidbody?.bodyType == RigidbodyType2D.Kinematic || collision?.otherRigidbody?.bodyType == RigidbodyType2D.Kinematic)
         {
             _rigidbody.velocity *= Vector2.up;
-            Debug.Log("stopped 2");
+            //Debug.Log("stopped 2");
         }
 
         // reset vertical velocity when pushed upwards
@@ -330,7 +330,7 @@ public class ScaleBehavior : MonoBehaviour
             {
                 _rigidbody.velocity *= Vector2.right;
             }
-            Debug.Log("stopped 3");
+            //Debug.Log("stopped 3");
         }
     }
 }
