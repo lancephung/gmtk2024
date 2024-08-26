@@ -69,5 +69,16 @@ public class MassBehavior : MonoBehaviour
         {
             _rigidbody.velocity *= Vector2.up;
         }
+
+        // detect mass getting flung upwards
+        if (collision.rigidbody.bodyType == RigidbodyType2D.Dynamic && collision.otherRigidbody.bodyType == RigidbodyType2D.Dynamic)
+        {
+            // reset y velocity if being shot upwards up
+            if (_rigidbody.velocity.y > .1f)
+            {
+                _rigidbody.velocity *= Vector2.right;
+            }
+
+        }
     }
 }
