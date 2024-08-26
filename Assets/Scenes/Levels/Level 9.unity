@@ -532,7 +532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -4278,7 +4278,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
