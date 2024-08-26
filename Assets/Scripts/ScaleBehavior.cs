@@ -320,10 +320,16 @@ public class ScaleBehavior : MonoBehaviour
             Debug.Log("stopped 2");
         }
 
-        // reset horizontal velocity when pushed vertically by arrow
+        // reset vertical velocity when pushed upwards
         if (collision.collider == capsuleCollider || collision.otherCollider == capsuleCollider)
         {
-            _rigidbody.velocity *= Vector2.right;
+            // apparently this code also catches when a mass underneath the player starts falling and then the player starts falling
+            // also catches when a mass is pushed into the player from above or the side for the purpose of absorbing mass while falling
+            // fix these issues by only resetting y velocity if going upwards
+            if (_rigidbody.velocity.y > .05f)
+            {
+                _rigidbody.velocity *= Vector2.right;
+            }
             Debug.Log("stopped 3");
         }
     }
