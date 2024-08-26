@@ -50,12 +50,18 @@ public class ScaleBehavior : MonoBehaviour
             if (Dead) return;
             var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null && hit.collider.transform.parent.TryGetComponent(out Arrow arrow) && Mass > 0)
+            if (hit.collider != null && hit.collider.transform.parent.TryGetComponent(out Arrow arrow))
             {
                 //Debug.Log(hit.rigidbody.mass);
                 if (arrow.IsShrink && arrow.Size <= 1) return;
+                if (Mass <= 0)
+                {
+                    MoveCounter.Instance.IndicateMoves(0, true);
+                    return;
+                }
                 Mass--;
                 arrow.Activate();
+                MoveCounter.Instance.IndicateMoves(Mass);
             }
         };
 
@@ -182,6 +188,7 @@ public class ScaleBehavior : MonoBehaviour
             mass = Mathf.Min(mass, (int) body.mass);
             //Debug.Log("Mass");
             Mass += mass;
+            MoveCounter.Instance.IndicateMoves(Mass);
             down = false;
             if (body.mass - mass == 0)
             {
