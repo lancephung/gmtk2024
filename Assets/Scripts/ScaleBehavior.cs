@@ -93,7 +93,7 @@ public class ScaleBehavior : MonoBehaviour
         }
         HeldMass = mass_ontop;
 
-        var detectMassDistance = .5f;
+        var detectMassDistance = .75f;
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Vector2.up, detectMassDistance);
         var detectMass = hits.Any(hit => hit.collider.attachedRigidbody && hit.collider.attachedRigidbody != _rigidbody && hit.collider.attachedRigidbody.bodyType == RigidbodyType2D.Dynamic);
         down = mass_ontop > 0 || detectMass;
