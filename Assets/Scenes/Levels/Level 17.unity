@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -351,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -1102,7 +1102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -3234,7 +3234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.y
-      value: 0
+      value: 0.0054545454
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.width
@@ -3242,7 +3242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 335171612621116100, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 1
+      value: 0.98787886
       objectReference: {fileID: 0}
     - target: {fileID: 1201391312427586761, guid: 6a43de0730131cc438aa9b6422c3b581, type: 3}
       propertyPath: m_AnchorMax.y
@@ -3941,7 +3941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -4361,7 +4361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5243,7 +5243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5470,7 +5470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5606,7 +5606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5671,7 +5671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5832,7 +5832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5897,7 +5897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
@@ -5977,7 +5977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: _animationDuration
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
