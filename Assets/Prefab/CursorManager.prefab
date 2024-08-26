@@ -4859,3 +4859,4 @@ MonoBehaviour:
   _defaultCursor: {fileID: 2800000, guid: c11b5a0bd9a4f7d4c92b5699701aee66, type: 3}
   _hoverCursor: {fileID: 2800000, guid: 7e3da7a073f3b4c428b5798e6f1ab81c, type: 3}
   _attackCursor: {fileID: 2800000, guid: 5457e9e785e689d459cef5f1e8476e76, type: 3}
+  _cursorOffset: {x: 10, y: 0}
