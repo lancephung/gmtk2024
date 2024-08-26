@@ -530,6 +530,10 @@ PrefabInstance:
       propertyPath: _Size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
+      propertyPath: _animationDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
       value: Shrink Down
@@ -1728,6 +1732,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1740756468303746980, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
+      propertyPath: _deactivationDelay
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1740756468303746980, guid: c2c07f69735a66645bb9e9287a6b9327, type: 3}
       propertyPath: _targets.Array.size
       value: 2
@@ -4268,6 +4276,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1985693301371535046, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
+      propertyPath: _animationDuration
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2177782869459602726, guid: 5567ecc0e6296d84eb33843b0856dc42, type: 3}
       propertyPath: m_Name
       value: Shrink Down (1)
