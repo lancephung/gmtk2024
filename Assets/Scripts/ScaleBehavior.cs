@@ -103,7 +103,7 @@ public class ScaleBehavior : MonoBehaviour
         }
         else
         {
-            if (crushTime > 0.5f)
+            if (crushTime > 0.25f)
             {
                 //Debug.Log("crushed to death");
                 Die("crushed to death");
