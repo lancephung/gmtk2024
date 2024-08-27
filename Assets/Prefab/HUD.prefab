@@ -544,7 +544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/5
+  m_text: 0/3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
   m_sharedMaterial: {fileID: 8074957869198351286, guid: 90bded4422007074ab7dbc96238ac26d, type: 2}
@@ -1386,6 +1386,7 @@ GameObject:
   - component: {fileID: 4801553512729764930}
   - component: {fileID: 1467598683587482708}
   - component: {fileID: 876818302955438942}
+  - component: {fileID: 8634725077971024454}
   m_Layer: 0
   m_Name: Move Counter
   m_TagString: Untagged
@@ -1458,6 +1459,18 @@ MonoBehaviour:
   _activeColor: {r: 1, g: 1, b: 1, a: 0.39215687}
   _inactiveColor: {r: 0, g: 0, b: 0, a: 0.39215687}
   _warningColor: {r: 0.6132076, g: 0.18625464, b: 0.18222678, a: 0.39215687}
+--- !u!225 &8634725077971024454
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838538880350275327}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &8310760668705648664
 GameObject:
   m_ObjectHideFlags: 0

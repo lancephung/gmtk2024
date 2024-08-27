@@ -18,7 +18,15 @@ public class MassText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = ScaleBehavior.Mass + ScaleBehavior.HeldMass + " / 5";
+        //text.text = ScaleBehavior.Mass + ScaleBehavior.HeldMass + " / 5";
+        if (ScaleBehavior.HeldMass > 0)
+        {
+            text.text = ScaleBehavior.Mass + "+" + ScaleBehavior.HeldMass + " / 3";
+        }
+        else
+        {
+            text.text = ScaleBehavior.Mass + " / 3";
+        }
 
         if (ScaleBehavior.Dead && !DeathScreen.activeSelf)
         {
