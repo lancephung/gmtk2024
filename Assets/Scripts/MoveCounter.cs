@@ -22,29 +22,29 @@ public class MoveCounter : MonoBehaviour
 
     public void IndicateMoves(int moves, bool isWarning = false)
     {
-        if (_animation != null)
-        {
-            StopCoroutine(_animation);
-        }
-        if (moves == 0 && isWarning)
-        {
-            IEnumerator Delay()
-            {
-                for (int i = 0; i < 2; i++)
-                {
-                    _moveIndicators.ForEach(img => img.color = _warningColor);
-                    yield return new WaitForSeconds(.25f);
-                    _moveIndicators.ForEach(img => img.color = _inactiveColor);
-                    yield return new WaitForSeconds(.25f);
-                }
-            }
-            _animation = StartCoroutine(Delay());
-            return;
-        }
-        for (int i = 0; i < _moveIndicators.Count; i++)
-        {
-            _moveIndicators[i].color = moves > i ? _activeColor : _inactiveColor;
-        }
+        //if (_animation != null)
+        //{
+        //    StopCoroutine(_animation);
+        //}
+        //if (moves == 0 && isWarning)
+        //{
+        //    IEnumerator Delay()
+        //    {
+        //        for (int i = 0; i < 2; i++)
+        //        {
+        //            _moveIndicators.ForEach(img => img.color = _warningColor);
+        //            yield return new WaitForSeconds(.25f);
+        //            _moveIndicators.ForEach(img => img.color = _inactiveColor);
+        //            yield return new WaitForSeconds(.25f);
+        //        }
+        //    }
+        //    _animation = StartCoroutine(Delay());
+        //    return;
+        //}
+        //for (int i = 0; i < _moveIndicators.Count; i++)
+        //{
+        //    _moveIndicators[i].color = moves > i ? _activeColor : _inactiveColor;
+        //}
     }
 
 }

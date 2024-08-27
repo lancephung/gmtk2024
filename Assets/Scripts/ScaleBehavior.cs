@@ -56,12 +56,12 @@ public class ScaleBehavior : MonoBehaviour
                 if (arrow.IsShrink && arrow.Size <= 1) return;
                 if (Mass <= 0)
                 {
-                    MoveCounter.Instance.IndicateMoves(0, true);
+                    //MoveCounter.Instance.IndicateMoves(0, true);
                     return;
                 }
                 Mass--;
                 arrow.Activate();
-                MoveCounter.Instance.IndicateMoves(Mass);
+                //MoveCounter.Instance.IndicateMoves(Mass);
             }
         };
 
@@ -75,7 +75,7 @@ public class ScaleBehavior : MonoBehaviour
         //    Absorb();
         //};
 
-        MoveCounter.Instance.IndicateMoves(Mass);
+        //MoveCounter.Instance.IndicateMoves(Mass);
 
     }
 
@@ -191,7 +191,7 @@ public class ScaleBehavior : MonoBehaviour
             mass = Mathf.Min(mass, (int) body.mass);
             //Debug.Log("Mass");
             Mass += mass;
-            MoveCounter.Instance.IndicateMoves(Mass);
+            //MoveCounter.Instance.IndicateMoves(Mass);
             down = false;
             if (body.mass - mass == 0)
             {

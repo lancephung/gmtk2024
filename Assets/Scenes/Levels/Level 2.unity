@@ -2525,24 +2525,6 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 0
-    m_Data:
-      e00: 7.0684684e+28
-      e01: 0
-      e02: -2.98156e-19
-      e03: -2.98156e-19
-      e10: 2.7900757e+20
-      e11: 0
-      e12: 6.33e-43
-      e13: 6.33e-43
-      e20: -9.880648e+24
-      e21: -9.569248e+21
-      e22: 8.739567e-29
-      e23: -1.7015117e+29
-      e30: 4.5904e-41
-      e31: 6.36e-43
-      e32: 6.35e-43
-      e33: 6.36e-43
   m_TileColorArray:
   - m_RefCount: 56
     m_Data: {r: 1, g: 1, b: 1, a: 1}
@@ -2662,6 +2644,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6074805183115845841, guid: da4bb10954213fc48b9ee9161f7d7e6a, type: 3}
+      propertyPath: FreezeX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6403439947946224755, guid: da4bb10954213fc48b9ee9161f7d7e6a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5

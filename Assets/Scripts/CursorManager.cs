@@ -26,7 +26,7 @@ public class CursorManager : MonoBehaviour
         HoverCursor = _hoverCursor;
         AttackCursor = _attackCursor;
         CursorOffset = _cursorOffset;
-        Debug.Log(CursorOffset);
+        //Debug.Log(CursorOffset);
         ShowCursor(DefaultCursor);
         _particleSystem = GetComponent<ParticleSystem>();
 
