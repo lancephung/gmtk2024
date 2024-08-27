@@ -50,7 +50,7 @@ public class ScaleBehavior : MonoBehaviour
             if (Dead) return;
             var ray = Camera.main.ScreenPointToRay(InputSystem.actions.FindAction("MousePosition").ReadValue<Vector2>());
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
-            if (hit.collider != null && hit.collider.transform.parent.TryGetComponent(out Arrow arrow))
+            if (hit.collider?.transform?.parent?.TryGetComponent(out Arrow arrow) == true)
             {
                 //Debug.Log(hit.rigidbody.mass);
                 if (arrow.IsShrink && arrow.Size <= 1) return;
