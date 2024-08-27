@@ -17,6 +17,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] private Rigidbody2D _frontRB;
     [SerializeField] private Rigidbody2D _middleRB;
     [SerializeField] private BoxCollider2D _middleCollider;
+    [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private float _animationDuration = .2f;
     [SerializeField] private AnimationCurve _activationAnimationCurve;
 
@@ -87,7 +88,7 @@ public class Arrow : MonoBehaviour
         var endSpriteSize = ((Vector3)AbsoluteDirection * endSize) + (Direction.x == 0 ? new Vector3(1, 0) : new Vector3(0, 1));
 
         float animationProgress = 0.0f;
-        //push.Play();
+        _particleSystem.Play();
         while (animationProgress < 1.0f)
         {
             yield return new WaitForEndOfFrame();
@@ -101,13 +102,12 @@ public class Arrow : MonoBehaviour
             _spriteRenderer.size = startSpriteSize + (((Vector2)endSpriteSize - startSpriteSize) * progress);
             _middleCollider.size = (Direction.x == 0 ? new Vector2(_middleCollider.size.x, _spriteRenderer.size.y - .5f) : new Vector2(_spriteRenderer.size.x - .5f, _middleCollider.size.y));
 
-
-            //push.transform.localPosition += dist;
+            _particleSystem.transform.position = _frontRB.transform.position + .5f * (Vector3)Direction;
         }
         _frontRB.MovePosition(endPos);
         _middleRB.transform.position = endSpritePos;
 
-        //push.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        _particleSystem.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
     // Start is called before the first frame update
